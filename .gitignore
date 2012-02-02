@@ -1,0 +1,7 @@
+*.elc
+backups
+el-get
+url
+places
+auto-save-list
+.smex-items
