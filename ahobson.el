@@ -5,6 +5,7 @@
 ;; "global" requires
 ;;
 (require 'epa-file)
+(require 'grep)
 
 ;;
 ;; visuals
@@ -19,6 +20,7 @@
 (global-set-key (kbd "s-t") 'ffip)
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-c g") 'grep-in-project)
+(global-set-key (kbd "C-c a") 'ack)
 
 ;;
 ;; misc?
@@ -26,6 +28,14 @@
 (mapc (lambda (dir) (add-to-list 'exec-path dir))
       `("/usr/local/sbin" "/usr/local/bin" ,(expand-file-name "~/bin")))
 
+(setq ack-root-directory-function
+  (lambda ()
+    (or ffip-project-root
+        (ffip-project-root)
+        (error "No project root found"))))
+
+(add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
+(add-hook 'emacs-lisp-mode-hook 'esk-turn-on-paredit)
 ;;
 ;; my customization broken out by file
 ;;

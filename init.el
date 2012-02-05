@@ -32,6 +32,8 @@
         (:name starter-kit-ruby :type elpa)
 	(:name bookmark+ :type elpa)
 	(:name yasnippet :type git :url "git://github.com/capitaomorte/yasnippet.git")
+        (:name ack-mode :type git :url "git://github.com/sudish/ack-mode.el.git"
+               :load ("ack-mode.el"))
         (:name grep-in-project :type git :url "git://github.com/ahobson/grep-in-project.git"
                :features grep-in-project)
         (:name ruby-test-mode :type git :url "git://github.com/r0man/ruby-test-mode.git"
