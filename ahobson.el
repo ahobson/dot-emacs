@@ -36,6 +36,11 @@
 
 (add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
 (add-hook 'emacs-lisp-mode-hook 'esk-turn-on-paredit)
+
+(eval-after-load 'js-mode
+    '(progn
+       (setq js-indent-level 2)))
+
 ;;
 ;; my customization broken out by file
 ;;
