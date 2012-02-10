@@ -30,8 +30,8 @@
 (setq el-get-sources
       '((:name starter-kit :type elpa)
         (:name starter-kit-ruby :type elpa)
-	(:name bookmark+ :type elpa)
-	(:name yasnippet :type git :url "git://github.com/capitaomorte/yasnippet.git")
+        (:name bookmark+ :type elpa)
+        (:name yasnippet :type git :url "git://github.com/capitaomorte/yasnippet.git")
         (:name ack-mode :type git :url "git://github.com/sudish/ack-mode.el.git"
                :load ("ack-mode.el"))
         (:name grep-in-project :type git :url "git://github.com/ahobson/grep-in-project.git"
@@ -41,13 +41,13 @@
 
 (setq my:el-get-packages
       '(el-get
-	rvm))
+        rvm))
 
 ;; example of conditional packages
 (when (el-get-executable-find "svn")
-  (loop for p in '(psvn    		; M-x svn-status
-		   )
-	do (add-to-list 'my:el-get-packages p)))
+  (loop for p in '(psvn    ; M-x svn-status
+                   )
+        do (add-to-list 'my:el-get-packages p)))
 
 (setq my:el-get-packages
       (append
