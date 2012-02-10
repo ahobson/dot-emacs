@@ -41,6 +41,7 @@
     '(progn
        (setq js-indent-level 2)))
 
+(server-start)
 ;;
 ;; my customization broken out by file
 ;;
