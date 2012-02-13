@@ -1,38 +1,35 @@
 ;;
 ;; dir local customizations
 
-(setq rails-ignore-dirs (mapconcat 'identity '(
-                                               "-not -regex \".*/.git/.*\""
-                                               "-not -regex \".*/etc/.*\""
-                                               "-not -regex \".*/public/help/.*\""
-                                               "-not -regex \".*/public/images/.*\""
-                                               "-not -regex \".*/log/.*\""
-                                               "-not -regex \".*/solr/.*\""
-                                               "-not -regex \".*/tmp/.*\""
-                                               "-not -regex \".*/vendor/.*\""
-                                               ) " "))
+;; somewhat frustrating that find needs exclusions and ack needs inclusions
+;; find needs exclusions because -regex db matches things under .git
+;; ack needs inclusions because --ignore-dir doesn't work with subdirectories
+;; so --ignore-dir=help excludes paths other than public/help
+(setq rails-ignore-rpaths `(".git" "etc" "public/help" "public/images"
+                            "log" "solr" "test/fixtures" "tmp" "vendor"))
+(setq rails-ffip-find-options (mapconcat (lambda (p) (format "-not -regex \".*/%s/.*\"" p))
+                                         rails-ignore-rpaths " "))
+
+(setq rails-interesting-rpaths `("Gemfile" "README" "Rakefile" "app" "config" "db" "deploy"
+                                 "lib" "public/stylesheets" "public/javascripts" "script"
+                                 "spec" "test"))
+(setq rails-ack-arguments `("--group" "--nopager" "--nocolor" "--ignore-dir=fixtures"
+                            "-G"
+                            ,(format "^(%s)" (mapconcat 'identity rails-interesting-rpaths "|"))))
+
 (dir-locals-set-class-variables
  'rails-project
  `((nil . ((ffip-limit . 2048)
-           (ffip-find-options . ,rails-ignore-dirs)
-           (whitespace-line-column . 100)))))
+           (ffip-find-options . ,rails-ffip-find-options)
+           (ack-arguments . ,rails-ack-arguments)))))
 
-(dir-locals-set-class-variables
- 'emacs-init
- '((nil . ((ffip-limit . 512)
-           (ffip-find-options . "")
-           (whitespace-line-column . 100)))))
-     
 (dir-locals-set-directory-class
   (expand-file-name "~/src/damballa/git/argus") 'rails-project)
 
 (dir-locals-set-directory-class
   (expand-file-name "~/src/damballa/git/hadji") 'rails-project)
 
-(dir-locals-set-directory-class
-  (expand-file-name "~/src/git/dot-emacs") 'emacs-init)
-
-(add-to-list 'safe-local-variable-values `(ffip-find-options . ,rails-ignore-dirs))
-(add-to-list 'safe-local-variable-values '(whitespace-line-column . 100))
+(add-to-list 'safe-local-variable-values `(ffip-find-options . ,rails-ffip-find-options))
+(add-to-list 'safe-local-variable-values `(ack-arguments . ,rails-ack-arguments))
 
 (provide 'my-dir-local)

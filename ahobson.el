@@ -37,6 +37,10 @@
 (add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
 (add-hook 'emacs-lisp-mode-hook 'esk-turn-on-paredit)
 
+;; make these settings global and let dir local override
+(setq whitespace-line-column 100)
+(setq fill-column 100)
+
 (eval-after-load 'js-mode
     '(progn
        (setq js-indent-level 2)))
