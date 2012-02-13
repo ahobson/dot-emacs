@@ -18,7 +18,8 @@
 
 (defadvice switch-to-buffer (after my-rvm-switch-to-buffer nil activate)
   "When switching to a buffer in ruby mode, activate rvm."
-  (when (eq 'ruby-mode major-mode)
+  (when (and (eq 'ruby-mode major-mode)
+             (not (string-match tramp-file-name-regexp buffer-file-name)))
     (rvm-activate-corresponding-ruby)))
 (ad-activate 'switch-to-buffer)
 
