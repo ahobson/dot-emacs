@@ -40,10 +40,7 @@
 ;; make these settings global and let dir local override
 (setq whitespace-line-column 100)
 (setq fill-column 100)
-
-(eval-after-load 'js-mode
-    '(progn
-       (setq js-indent-level 2)))
+(setq js-indent-level 2)
 
 (server-start)
 ;;
