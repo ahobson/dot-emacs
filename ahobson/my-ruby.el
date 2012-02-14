@@ -16,6 +16,9 @@
     '(progn
        (define-key ruby-mode-map (kbd "#") 'ruby-interpolate)))
 
+(add-to-list 'interpreter-mode-alist
+             '("ruby1.9.1" . ruby-mode))
+
 (defadvice switch-to-buffer (after my-rvm-switch-to-buffer nil activate)
   "When switching to a buffer in ruby mode, activate rvm."
   (when (and (eq 'ruby-mode major-mode)
