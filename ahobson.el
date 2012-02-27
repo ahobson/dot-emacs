@@ -28,11 +28,7 @@
 (mapc (lambda (dir) (add-to-list 'exec-path dir))
       `("/usr/local/sbin" "/usr/local/bin" ,(expand-file-name "~/bin")))
 
-(setq ack-root-directory-function
-  (lambda ()
-    (or ffip-project-root
-        (ffip-project-root)
-        (error "No project root found"))))
+(setq ack-root-directory-function 'project-anchor-find-from-default-directory)
 
 (add-hook 'project-anchor-find-hook 'project-anchor-find-by-file)
 (add-hook 'project-anchor-find-hook 'project-anchor-find-with-mark)
