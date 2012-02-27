@@ -34,6 +34,10 @@
         (ffip-project-root)
         (error "No project root found"))))
 
+(add-hook 'project-anchor-find-hook 'project-anchor-find-by-file)
+(add-hook 'project-anchor-find-hook 'project-anchor-find-with-mark)
+(setq ffip-project-root-function 'project-anchor-find-from-default-directory)
+
 (add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
 (add-hook 'emacs-lisp-mode-hook 'esk-turn-on-paredit)
 

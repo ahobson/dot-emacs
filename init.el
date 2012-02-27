@@ -37,7 +37,9 @@
         (:name grep-in-project :type git :url "git://github.com/ahobson/grep-in-project.git"
                :features grep-in-project)
         (:name ruby-test-mode :type git :url "git://github.com/r0man/ruby-test-mode.git"
-               :features ruby-test-mode)))
+               :features ruby-test-mode)
+        (:name project-anchor :type git :url "git://github.com/ahobson/project-anchor.git"
+               :load ("project-anchor.el"))))
 
 (setq my:el-get-packages
       '(el-get
