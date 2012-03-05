@@ -21,7 +21,8 @@
  'rails-project
  `((nil . ((ffip-limit . 2048)
            (ffip-find-options . ,rails-ffip-find-options)
-           (ack-arguments . ,rails-ack-arguments)))))
+           (ack-arguments . ,rails-ack-arguments)
+           (fill-column . 100)))))
 
 (dir-locals-set-directory-class
   (expand-file-name "~/src/damballa/git/argus") 'rails-project)

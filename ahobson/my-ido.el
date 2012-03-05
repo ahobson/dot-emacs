@@ -3,6 +3,9 @@
 ;; http://scottfrazersblog.blogspot.com/2009/12/emacs-better-ido-flex-matching.html
 ;;
 
+(eval-when-compile
+  (require 'cl))
+
 (defun my-ido-make-index-hash-table (str)
   (let ((char-lookup (make-hash-table :test 'equal)))
     ;; Make hash table of all characters with their corresponding indexes
@@ -22,7 +25,7 @@
   (let ((char-lookup (my-ido-make-index-hash-table str))
         corr matches)
     (dolist (item items)
-      (setq corr (my-ido-match-get-correlation char-lookup (ido-name item)))
+      (setq corr (my-ido-match-get-correlation str char-lookup (ido-name item)))
       (when corr
         (push (cons item corr) matches)))
     matches))
@@ -46,21 +49,23 @@
 (defvar my-ido-separator-chars '("-" "_")
   "*Separator chars for extra weighting")
 
-(defun my-ido-match-get-correlation (search-hash item)
+(defun my-ido-match-get-correlation (str search-hash item)
   "Get the correlation for this item"
   (let ((item-chars (split-string (if ido-case-fold (downcase item) item) "" t))
+        (str-chars (split-string (if ido-case-fold (downcase str) str) "" t))
+        (abbrev-chars nil)
         (prev-char nil)
         (prev-match-idxs nil)
         (longest-match 0)
         (current-match 0)
         (corr 0))
-    ;; matching first char gets two points
+    ;; matching first char gets mega points
     (if (eq 0 (car (last (gethash (first item-chars) search-hash))))
         (setq corr (+ 5 corr)))
     (dolist (char item-chars)
+      (if (find prev-char my-ido-separator-chars :test 'equal)
+          (push char abbrev-chars))
       (let ((idxs (gethash char search-hash)))
-        (if (and idxs (find prev-char my-ido-separator-chars :test 'equal))
-            (setq corr (+ 2 corr)))
         (setq prev-match-idxs
               (if prev-match-idxs
                   (intersection idxs (mapcar '1+ prev-match-idxs))
@@ -70,10 +75,9 @@
           (setq current-match 0))
         (setq longest-match (max longest-match current-match)))
       (setq prev-char char))
-    (setq corr (+ corr longest-match))
-    corr))
+    (+ corr longest-match (* 5 (count t (mapcar* #'equal str-chars abbrev-chars))))))
 
-(defvar my-ido-use-fuzzy-match t
+(defvar my-ido-use-fuzzy-match nil
   "*Use my-ido-fuzzy-match for ido matching.")
 
 (defvar my-ido-max-fuzzy-match 1024

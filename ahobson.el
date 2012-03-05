@@ -13,6 +13,7 @@
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
 (setq browse-url-browser-function 'browse-default-macosx-browser)
 (add-to-list 'default-frame-alist (cons 'width 100))
+(add-to-list 'default-frame-alist (cons 'font "-*-menlo-medium-r-normal--12-*-*-*-*-*-iso10646-1"))
 
 ;;
 ;; keys
@@ -36,6 +37,8 @@
 
 (add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
 (add-hook 'emacs-lisp-mode-hook 'esk-turn-on-paredit)
+;; Inserting a paren messes up the formatting, so disable for now
+;;(add-hook 'ruby-mode-hook 'esk-turn-on-paredit) ;; I am CRAZY!
 
 ;; make these settings global and let dir local override
 (setq whitespace-line-column 100)

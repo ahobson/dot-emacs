@@ -31,12 +31,30 @@
       '((:name starter-kit :type elpa)
         (:name starter-kit-ruby :type elpa)
         (:name bookmark+ :type elpa)
-        (:name yasnippet :type git :url "git://github.com/capitaomorte/yasnippet.git")
+        (:name rhtml-mode :type elpa)
+        (:name yaml-mode :type elpa)
+        (:name scss-mode :type elpa)
+        (:name edit-server :type elpa
+               :after (lambda ()
+                        (require 'edit-server)
+                        (edit-server-start)))
+        ;; not ready for prime time yet
+        ;; (:name ruby-electric :type elpa)
+        ;; (:name emacs-rails :type git :url "git://github.com/remvee/emacs-rails.git"
+        ;;        :load ("rails.el"))
+        (:name ibuffer-vc :type git :url "git://github.com/purcell/ibuffer-vc.git")
+        (:name yasnippet :type git :url "git://github.com/capitaomorte/yasnippet.git"
+               :after (lambda ()
+                        (require 'yasnippet)
+                        (yas/initialize)
+                        (setq yas/snippet-dirs '("~/.emacs.d/el-get/yasnippet/snippets"
+                                                 "~/.emacs.d/el-get/yasnippet/extras/imported"))
+                        (yas/global-mode 1)))
         (:name ack-mode :type git :url "git://github.com/sudish/ack-mode.el.git"
                :load ("ack-mode.el"))
         (:name grep-in-project :type git :url "git://github.com/ahobson/grep-in-project.git"
                :features grep-in-project)
-        (:name ruby-test-mode :type git :url "git://github.com/r0man/ruby-test-mode.git"
+        (:name ruby-test-mode :type git :url "git://github.com/ahobson/ruby-test-mode.git"
                :features ruby-test-mode)
         (:name project-anchor :type git :url "git://github.com/ahobson/project-anchor.git"
                :load ("project-anchor.el"))))
