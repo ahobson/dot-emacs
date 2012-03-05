@@ -30,11 +30,11 @@
 (setq el-get-sources
       '((:name starter-kit :type elpa)
         (:name starter-kit-ruby :type elpa)
-        (:name bookmark+ :type elpa)
-        (:name rhtml-mode :type elpa)
-        (:name yaml-mode :type elpa)
-        (:name scss-mode :type elpa)
-        (:name edit-server :type elpa
+        (:name bookmark+)
+        (:name rhtml-mode)
+        (:name yaml-mode)
+        (:name scss-mode)
+        (:name edit-server
                :after (lambda ()
                         (require 'edit-server)
                         (edit-server-start)))
