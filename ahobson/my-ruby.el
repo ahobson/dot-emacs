@@ -2,6 +2,7 @@
 ;; ruby customizations
 (setq ruby-test-ruby-executables '("ruby"))
 (setq ruby-test-rspec-executables '("rspec"))
+;;(setq ruby-deep-indent-paren nil)
 
 (defadvice rvm-use (after my-rvm-use nil activate)
   "When activating rvm, also set LOCAL_VERSION env."

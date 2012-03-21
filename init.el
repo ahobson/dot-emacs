@@ -34,6 +34,7 @@
         (:name rhtml-mode)
         (:name yaml-mode)
         (:name scss-mode)
+        (:name rinari)
         (:name edit-server
                :after (lambda ()
                         (require 'edit-server)
@@ -42,21 +43,39 @@
         ;; (:name ruby-electric :type elpa)
         ;; (:name emacs-rails :type git :url "git://github.com/remvee/emacs-rails.git"
         ;;        :load ("rails.el"))
-        (:name ibuffer-vc :type git :url "git://github.com/purcell/ibuffer-vc.git")
-        (:name yasnippet :type git :url "git://github.com/capitaomorte/yasnippet.git"
+        (:name autopair)
+        ;; (:name ruby-mode-indent-fix
+        ;;        :type http
+        ;;        :url "https://raw.github.com/lewang/le_emacs_libs/master/ruby-mode-indent-fix.el"
+        ;;        :after (lambda ()
+        ;;                 (require 'ruby-mode-indent-fix)))
+        (:name ibuffer-vc
+               :type git
+               :url "git://github.com/purcell/ibuffer-vc.git")
+        (:name yasnippet
+               :type git
+               :url "git://github.com/capitaomorte/yasnippet.git"
                :after (lambda ()
                         (require 'yasnippet)
                         (yas/initialize)
                         (setq yas/snippet-dirs '("~/.emacs.d/el-get/yasnippet/snippets"
                                                  "~/.emacs.d/el-get/yasnippet/extras/imported"))
                         (yas/global-mode 1)))
-        (:name ack-mode :type git :url "git://github.com/sudish/ack-mode.el.git"
+        (:name ack-mode
+               :type git
+               :url "git://github.com/sudish/ack-mode.el.git"
                :load ("ack-mode.el"))
-        (:name grep-in-project :type git :url "git://github.com/ahobson/grep-in-project.git"
+        (:name grep-in-project
+               :type git
+               :url "git://github.com/ahobson/grep-in-project.git"
                :features grep-in-project)
-        (:name ruby-test-mode :type git :url "git://github.com/ahobson/ruby-test-mode.git"
+        (:name ruby-test-mode
+               :type git
+               :url "git://github.com/ahobson/ruby-test-mode.git"
                :features ruby-test-mode)
-        (:name project-anchor :type git :url "git://github.com/ahobson/project-anchor.git"
+        (:name project-anchor
+               :type git
+               :url "git://github.com/ahobson/project-anchor.git"
                :load ("project-anchor.el"))))
 
 (setq my:el-get-packages
