@@ -18,6 +18,16 @@
 ;;
 ;; keys
 ;;
+;; Distinguish between various Emacs ports to OS X
+(cond
+ ;; mac port
+ ((boundp 'mac-carbon-version-string)
+  (setq mac-command-modifier 'super
+        mac-option-modifier  'meta)
+  (global-set-key (kbd "s-s") 'save-buffer)
+  (global-set-key (kbd "s-c") 'kill-ring-save)
+  (global-set-key (kbd "s-v") 'yank)))
+
 (global-set-key (kbd "s-t") 'ffip)
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-c g") 'grep-in-project)

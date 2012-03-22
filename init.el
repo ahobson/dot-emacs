@@ -25,16 +25,20 @@
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
-
 ;; set local recipes
 (setq el-get-sources
       '((:name starter-kit :type elpa)
         (:name starter-kit-ruby :type elpa)
+        ;; (:name color-theme-mac-classic
+        ;;        :after (lambda ()
+        ;;                 (require 'color-theme-mac-classic)
+        ;;                 (color-theme-mac-classic)))
         (:name bookmark+)
         (:name rhtml-mode)
         (:name yaml-mode)
         (:name scss-mode)
         (:name rinari)
+        (:name rainbow-mode :type elpa)
         (:name edit-server
                :after (lambda ()
                         (require 'edit-server)
