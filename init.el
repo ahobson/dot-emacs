@@ -80,7 +80,13 @@
         (:name project-anchor
                :type git
                :url "git://github.com/ahobson/project-anchor.git"
-               :load ("project-anchor.el"))))
+               :load ("project-anchor.el"))
+        (:name mac-classic-theme
+               :type git
+               :url "git://github.com/ahobson/mac-classic-theme.git"
+               :after (lambda ()
+                        (add-to-list 'custom-theme-load-path "~/.emacs.d/el-get/mac-classic-theme")
+                        (load-theme 'mac-classic t)))))
 
 (setq my:el-get-packages
       '(el-get
