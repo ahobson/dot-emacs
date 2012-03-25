@@ -68,7 +68,7 @@
         (:name find-file-in-project
                :type git
                :url "git://github.com/ahobson/find-file-in-project.git"
-               :features find-file-in-project)
+               :load ("find-file-in-project.el"))
         (:name ruby-test-mode
                :type git
                :url "git://github.com/ahobson/ruby-test-mode.git"
