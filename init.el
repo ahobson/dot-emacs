@@ -29,11 +29,7 @@
 (setq el-get-sources
       '((:name starter-kit :type elpa)
         (:name starter-kit-ruby :type elpa)
-        ;; (:name color-theme-mac-classic
-        ;;        :after (lambda ()
-        ;;                 (require 'color-theme-mac-classic)
-        ;;                 (color-theme-mac-classic)))
-        (:name bookmark+)
+        ;;(:name bookmark+)
         (:name rhtml-mode)
         (:name yaml-mode)
         (:name scss-mode)
@@ -43,10 +39,6 @@
                :after (lambda ()
                         (require 'edit-server)
                         (edit-server-start)))
-        ;; not ready for prime time yet
-        ;; (:name ruby-electric :type elpa)
-        ;; (:name emacs-rails :type git :url "git://github.com/remvee/emacs-rails.git"
-        ;;        :load ("rails.el"))
         (:name autopair)
         ;; (:name ruby-mode-indent-fix
         ;;        :type http
@@ -73,6 +65,10 @@
                :type git
                :url "git://github.com/ahobson/grep-in-project.git"
                :features grep-in-project)
+        (:name find-file-in-project
+               :type git
+               :url "git://github.com/ahobson/find-file-in-project.git"
+               :features find-file-in-project)
         (:name ruby-test-mode
                :type git
                :url "git://github.com/ahobson/ruby-test-mode.git"
