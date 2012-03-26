@@ -20,8 +20,29 @@
     (insert "{}")
     (backward-char 1)))
 
+(defface ruby-string-variable-face
+  '((((class color) (background dark))
+     (:background "grey20"      :foreground "darkgray"))
+    (((class color) (background light))
+     (:background "LightYellow" :foreground "lightgray"))
+    (t (:inverse-video t)))
+  "Face used to visualize variable interpolation inside a string."
+  :group 'ruby)
+
+(defvar ruby-string-variable-face    'ruby-string-variable-face
+  "Face name to use for ruby interpolated strings.")
+
 (eval-after-load 'ruby-mode
     '(progn
+       (setq ruby-font-lock-keywords
+             (mapcar (lambda (entry)
+                       (if (and (sequencep (cdr entry))
+                                (equal ?# (string-to-char (car entry)))
+                                (equal 3 (length (cdr entry))))
+                           `(,(car entry) 0 ruby-string-variable-face t)
+                         entry)) ruby-font-lock-keywords))
+        ;; (font-lock-add-keywords 'ruby-mode
+        ;;                         '(("do\\|{\s*|\\(\\([\\w|_]+\\),?\\)+|" 1 font-lock-variable-name-face)))
        (define-key ruby-mode-map (kbd "#") 'ruby-interpolate)))
 
 (add-to-list 'interpreter-mode-alist
