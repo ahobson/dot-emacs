@@ -35,7 +35,7 @@
  'rails-project
  `((nil . ((ffip-limit . 2048)
            (ffip-find-options . ,rails-ffip-find-options)
-           (ffip-generate-files-function . 'ffip-generate-project-files-with-ack)
+           (ffip-generate-files-function . ffip-generate-project-files-with-ack)
            (ack-arguments . ,rails-ack-arguments)
            (fill-column . 100)))))
 
@@ -47,7 +47,7 @@
 
 (add-to-list 'safe-local-variable-values `(ffip-find-options . ,rails-ffip-find-options))
 (add-to-list 'safe-local-variable-values
-             '(ffip-generate-files-function . 'ffip-generate-project-files-with-ack))
+             '(ffip-generate-files-function . ffip-generate-project-files-with-ack))
 (add-to-list 'safe-local-variable-values `(ack-arguments . ,rails-ack-arguments))
 
 (provide 'my-dir-local)

@@ -22,9 +22,9 @@
 
 (defface ruby-string-variable-face
   '((((class color) (background dark))
-     (:background "grey20"      :foreground "darkgray"))
+     (:foreground "darkgray"))
     (((class color) (background light))
-     (:background "LightYellow" :foreground "lightgray"))
+     (:foreground "lightgray"))
     (t (:inverse-video t)))
   "Face used to visualize variable interpolation inside a string."
   :group 'ruby)
