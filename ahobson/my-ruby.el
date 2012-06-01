@@ -1,13 +1,14 @@
 ;;
 ;; ruby customizations
 (setq ruby-test-ruby-executables '("ruby"))
-(setq ruby-test-rspec-executables '("rspec"))
+(setq ruby-test-rspec-executables '("brspec"))
 ;;(setq ruby-deep-indent-paren nil)
 
 (defadvice rvm-use (after my-rvm-use nil activate)
   "When activating rvm, also set LOCAL_VERSION env."
   (if (and (fboundp 'vc-git-branches) (not (equal "master" (car (vc-git-branches)))))
-      (setenv "LOCAL_VERSION" (car (vc-git-branches)))))
+      (setenv "LOCAL_VERSION" (car (vc-git-branches)))
+    (setenv "LOCAL_VERSION" nil)))
 (ad-activate 'rvm-use)
 
 (defun ruby-interpolate ()
