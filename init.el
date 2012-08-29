@@ -35,6 +35,11 @@
         (:name scss-mode)
         (:name rinari)
         (:name rainbow-mode :type elpa)
+        (:name clojure-mode)
+        (:name nrepl
+               :type git
+               :url "git://github.com/kingtim/nrepl.el.git"
+               :features nrepl)
         (:name edit-server
                :after (lambda ()
                         (require 'edit-server)
