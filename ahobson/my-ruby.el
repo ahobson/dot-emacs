@@ -1,7 +1,7 @@
 ;;
 ;; ruby customizations
 (setq ruby-test-ruby-executables '("ruby"))
-(setq ruby-test-rspec-executables '("rspec"))
+(setq ruby-test-rspec-executables '("brspec"))
 ;;(setq ruby-deep-indent-paren nil)
 
 (defadvice rvm-use (after my-rvm-use nil activate)
