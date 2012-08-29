@@ -36,6 +36,7 @@
         (:name rinari)
         (:name rainbow-mode :type elpa)
         (:name clojure-mode)
+        (:name slime)
         (:name nrepl
                :type git
                :url "git://github.com/kingtim/nrepl.el.git"
