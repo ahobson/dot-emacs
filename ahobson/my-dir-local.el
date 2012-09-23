@@ -45,6 +45,9 @@
 (dir-locals-set-directory-class
   (expand-file-name "~/src/damballa/git/hadji") 'rails-project)
 
+(dir-locals-set-directory-class
+  (expand-file-name "~/src/damballa/git/dhq") 'rails-project)
+
 (add-to-list 'safe-local-variable-values `(ffip-find-options . ,rails-ffip-find-options))
 (add-to-list 'safe-local-variable-values
              '(ffip-generate-files-function . ffip-generate-project-files-with-ack))
