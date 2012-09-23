@@ -27,66 +27,60 @@
 (package-initialize)
 ;; set local recipes
 (setq el-get-sources
-      '((:name starter-kit :type elpa)
+      '((:name autopair)
+        (:name ido-ubiquitous)
+        (:name smex)
+        (:name starter-kit
+               :type elpa
+               :after (progn
+                        (require 'paredit)
+                        (require 'idle-highlight-mode)
+                        (require 'smex)))
         (:name starter-kit-ruby :type elpa)
-        ;;(:name bookmark+)
         (:name rhtml-mode)
         (:name yaml-mode)
         (:name scss-mode)
         (:name rinari)
         (:name rainbow-mode :type elpa)
         (:name clojure-mode)
-        (:name slime)
-        (:name nrepl
-               :type git
-               :url "git://github.com/kingtim/nrepl.el.git"
-               :features nrepl)
+        (:name nrepl)
         (:name edit-server
-               :after (lambda ()
+               :after (progn
                         (require 'edit-server)
                         (edit-server-start)))
-        (:name autopair)
         ;; (:name ruby-mode-indent-fix
         ;;        :type http
         ;;        :url "https://raw.github.com/lewang/le_emacs_libs/master/ruby-mode-indent-fix.el"
         ;;        :after (lambda ()
         ;;                 (require 'ruby-mode-indent-fix)))
         (:name ibuffer-vc
-               :type git
-               :url "git://github.com/purcell/ibuffer-vc.git")
-        (:name yasnippet
-               :type git
-               :url "git://github.com/capitaomorte/yasnippet.git"
-               :after (lambda ()
-                        (require 'yasnippet)
-                        (yas/initialize)
-                        (setq yas/snippet-dirs '("~/.emacs.d/el-get/yasnippet/snippets"
-                                                 "~/.emacs.d/el-get/yasnippet/extras/imported"))
-                        (yas/global-mode 1)))
+               :type github
+               :pkgname "purcell/ibuffer-vc")
+        (:name yasnippet)
         (:name ack-mode
-               :type git
-               :url "git://github.com/sudish/ack-mode.el.git"
+               :type github
+               :pkgname "sudish/ack-mode.el"
                :load ("ack-mode.el"))
         (:name grep-in-project
-               :type git
-               :url "git://github.com/ahobson/grep-in-project.git"
+               :type github
+               :pkgname "ahobson/grep-in-project"
                :features grep-in-project)
         (:name find-file-in-project
-               :type git
-               :url "git://github.com/ahobson/find-file-in-project.git"
+               :type github
+               :pkgname "ahobson/find-file-in-project"
                :load ("find-file-in-project.el"))
         (:name ruby-test-mode
-               :type git
-               :url "git://github.com/ahobson/ruby-test-mode.git"
+               :type github
+               :pkgname "ahobson/ruby-test-mode"
                :features ruby-test-mode)
         (:name project-anchor
-               :type git
-               :url "git://github.com/ahobson/project-anchor.git"
+               :type github
+               :pkgname "ahobson/project-anchor"
                :load ("project-anchor.el"))
         (:name mac-classic-theme
-               :type git
-               :url "git://github.com/ahobson/mac-classic-theme.git"
-               :after (lambda ()
+               :type github
+               :pkgname "ahobson/mac-classic-theme"
+               :after (progn
                         (add-to-list 'custom-theme-load-path "~/.emacs.d/el-get/mac-classic-theme")
                         (load-theme 'mac-classic t)))))
 
