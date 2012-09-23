@@ -31,11 +31,7 @@
         (:name ido-ubiquitous)
         (:name smex)
         (:name starter-kit
-               :type elpa
-               :after (progn
-                        (require 'paredit)
-                        (require 'idle-highlight-mode)
-                        (require 'smex)))
+               :type elpa)
         (:name starter-kit-ruby :type elpa)
         (:name rhtml-mode)
         (:name yaml-mode)
