@@ -61,6 +61,7 @@
 
 (add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
 (add-hook 'emacs-lisp-mode-hook 'esk-turn-on-paredit)
+(add-hook 'clojure-mode-hook 'esk-turn-on-paredit)
 ;; Inserting a paren messes up the formatting, so disable for now
 ;;(add-hook 'ruby-mode-hook 'esk-turn-on-paredit) ;; I am CRAZY!
 
