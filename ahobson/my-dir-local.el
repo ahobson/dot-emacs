@@ -53,4 +53,20 @@
              '(ffip-generate-files-function . ffip-generate-project-files-with-ack))
 (add-to-list 'safe-local-variable-values `(ack-arguments . ,rails-ack-arguments))
 
+;;
+;; puppet
+;;
+
+(setq puppet-ack-arguments `("--group" "--nopager" "--nocolor" "-a"))
+(dir-locals-set-class-variables
+ 'puppet-project
+ `((nil . ((ffip-limit . 2048)
+           (ffip-generate-files-function . ffip-generate-project-files-with-ack)
+           (ack-arguments . ,puppet-ack-arguments)))))
+
+
+(dir-locals-set-directory-class
+ (expand-file-name "~/src/damballa/git/inf") 'puppet-project)
+(add-to-list 'safe-local-variable-values `(ack-arguments . ,puppet-ack-arguments))
+
 (provide 'my-dir-local)

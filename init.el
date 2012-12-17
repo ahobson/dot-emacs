@@ -36,6 +36,7 @@
         (:name rhtml-mode)
         (:name yaml-mode)
         (:name scss-mode)
+        (:name puppet-mode)
         (:name rinari)
         (:name rainbow-mode :type elpa)
         (:name clojure-mode)
