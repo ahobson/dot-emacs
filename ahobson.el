@@ -22,6 +22,8 @@
 (cond
  ;; mac port
  ((boundp 'mac-carbon-version-string)
+  (set-face-attribute 'default nil :family "Source Code Pro" :height 120 :weight 'normal)
+  (set-face-attribute 'bold nil :family "Source Code Pro" :height 120 :weight 'semi-bold)
   (setq mac-command-modifier 'super
         mac-option-modifier  'meta)
   (global-set-key (kbd "s-a") 'mark-whole-buffer)
@@ -76,3 +78,4 @@
 ;;
 (require 'my-dir-local)
 (require 'my-ruby)
+(require 'my-clojure)
