@@ -39,6 +39,11 @@
         (:name puppet-mode)
         (:name rinari)
         (:name rainbow-mode :type elpa)
+        (:name octave
+               :type http
+               :url "http://repo.or.cz/w/emacs.git/blob_plain/HEAD:/lisp/progmodes/octave.el"
+               :after (progn
+			(require 'octave)))
         (:name clojure-mode)
         (:name nrepl)
         (:name edit-server
