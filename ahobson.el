@@ -61,6 +61,9 @@
 
 (setq ack-root-directory-function 'project-anchor-find-from-default-directory)
 
+(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+(setq inferior-octave-startup-args '("--no-init-file"))
+
 (add-hook 'project-anchor-find-hook 'project-anchor-find-by-file)
 (add-hook 'project-anchor-find-hook 'project-anchor-find-with-mark)
 (setq ffip-project-root-function 'project-anchor-find-from-default-directory)
