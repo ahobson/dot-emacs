@@ -51,6 +51,11 @@
 ;;
 ;; misc?
 ;;
+
+(add-hook 'kill-emacs-query-functions
+          (lambda () (y-or-n-p "Do you really want to exit Emacs? "))
+          'append)
+
 (mapc (lambda (dir) (add-to-list 'exec-path dir))
       `("/usr/local/sbin" "/usr/local/bin" ,(expand-file-name "~/bin")))
 
