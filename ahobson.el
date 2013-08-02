@@ -72,6 +72,7 @@
 (add-hook 'prog-mode-hook 'esk-turn-on-whitespace)
 (add-hook 'emacs-lisp-mode-hook 'esk-turn-on-paredit)
 (add-hook 'clojure-mode-hook 'esk-turn-on-paredit)
+
 ;; Inserting a paren messes up the formatting, so disable for now
 ;;(add-hook 'ruby-mode-hook 'esk-turn-on-paredit) ;; I am CRAZY!
 
@@ -81,9 +82,3 @@
 (setq js-indent-level 2)
 
 (server-start)
-;;
-;; my customization broken out by file
-;;
-(require 'my-dir-local)
-(require 'my-ruby)
-(require 'my-clojure)
