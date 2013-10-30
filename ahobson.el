@@ -11,7 +11,6 @@
 ;; visuals
 ;;
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
-(setq browse-url-browser-function 'browse-default-macosx-browser)
 (add-to-list 'default-frame-alist (cons 'width 100))
 ;(add-to-list 'default-frame-alist (cons 'font "-*-menlo-medium-r-normal--12-*-*-*-*-*-iso10646-1"))
 
