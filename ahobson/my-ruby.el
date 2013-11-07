@@ -1,4 +1,47 @@
 ;;
+
+(setq enh-ruby-program
+      (let ((ruby-bin-dir (expand-file-name "~/.rvm/bin")))
+        (concat (file-name-as-directory ruby-bin-dir)
+                (car (reverse
+                      (sort
+                       (delq nil
+                             (mapcar (lambda (f)
+                                       (when (string-match "^ruby-1.9[^@]*$" f) f))
+                                     (directory-files ruby-bin-dir))) 'string<))))))
+;; begin from starter-kit-ruby
+;; Rake files are ruby, too, as are gemspecs, rackup files, etc.
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.thor$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Thorfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+
+;; We never want to edit Rubinius bytecode or MacRuby binaries
+(add-to-list 'completion-ignored-extensions ".rbc")
+(add-to-list 'completion-ignored-extensions ".rbo")
+
+;; Clear the compilation buffer between test runs.
+(eval-after-load 'ruby-compilation
+  '(progn
+     (defadvice ruby-do-run-w/compilation (before kill-buffer (name cmdlist))
+       (let ((comp-buffer-name (format "*%s*" name)))
+         (when (get-buffer comp-buffer-name)
+           (with-current-buffer comp-buffer-name
+             (delete-region (point-min) (point-max))))))
+     (ad-activate 'ruby-do-run-w/compilation)))
+
+;; Rinari (Minor Mode for Ruby On Rails)
+(setq rinari-major-modes
+      (list 'mumamo-after-change-major-mode-hook 'dired-mode-hook 'ruby-mode-hook
+            'css-mode-hook 'yaml-mode-hook 'javascript-mode-hook))
+
+;; end from starter-kit-ruby
+
 ;; ruby customizations
 (setq ruby-test-ruby-executables '("ruby"))
 (setq ruby-test-rspec-executables '("brspec"))
@@ -21,30 +64,29 @@
     (insert "{}")
     (backward-char 1)))
 
-(defface ruby-string-variable-face
-  '((((class color) (background dark))
-     (:foreground "darkgray"))
-    (((class color) (background light))
-     (:foreground "lightgray"))
-    (t (:inverse-video t)))
-  "Face used to visualize variable interpolation inside a string."
-  :group 'ruby)
+(define-key ruby-mode-map (kbd "#") 'ruby-interpolate)
 
-(defvar ruby-string-variable-face    'ruby-string-variable-face
-  "Face name to use for ruby interpolated strings.")
+;; (defface ruby-string-variable-face
+;;   '((((class color) (background dark))
+;;      (:foreground "darkgray"))
+;;     (((class color) (background light))
+;;      (:foreground "lightgray"))
+;;     (t (:inverse-video t)))
+;;   "Face used to visualize variable interpolation inside a string."
+;;   :group 'ruby)
 
-;; (eval-after-load 'ruby-mode
-;;     '(progn
-;;        (setq ruby-font-lock-keywords
-;;              (mapcar (lambda (entry)
-;;                        (if (and (sequencep (cdr entry))
-;;                                 (equal ?# (string-to-char (car entry)))
-;;                                 (equal 3 (length (cdr entry))))
-;;                            `(,(car entry) 0 ruby-string-variable-face t)
-;;                          entry)) ruby-font-lock-keywords))
-;;         ;; (font-lock-add-keywords 'ruby-mode
-;;         ;;                         '(("do\\|{\s*|\\(\\([\\w|_]+\\),?\\)+|" 1 font-lock-variable-name-face)))
-;;        (define-key ruby-mode-map (kbd "#") 'ruby-interpolate)))
+;; (defvar ruby-string-variable-face    'ruby-string-variable-face
+;;   "Face name to use for ruby interpolated strings.")
+
+(remove-hook 'enh-ruby-mode-hook 'erm-define-faces)
+
+(require 'smartparens-config)
+(require 'smartparens-ruby)
+
+(defun my-turn-on-smartparens ()
+  (smartparens-mode t))
+
+(add-hook 'enh-ruby-mode-hook 'my-turn-on-smartparens)
 
 (add-to-list 'interpreter-mode-alist
              '("ruby1.9.1" . ruby-mode))

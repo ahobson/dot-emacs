@@ -1,0 +1,4 @@
+(:name grep-in-project
+       :type github
+       :pkgname "ahobson/grep-in-project"
+       :features grep-in-project)

@@ -1,0 +1,4 @@
+(:name ack-mode
+       :type github
+       :pkgname "sudish/ack-mode.el"
+       :load ("ack-mode.el"))

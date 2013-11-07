@@ -1,0 +1,3 @@
+(:name git-rebase-mode
+       :type http
+       :url "https://raw.github.com/magit/git-modes/master/git-rebase-mode.el")

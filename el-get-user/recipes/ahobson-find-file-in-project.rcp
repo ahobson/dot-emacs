@@ -1,0 +1,4 @@
+(:name ahobson-find-file-in-project
+       :type github
+       :pkgname "ahobson/find-file-in-project"
+       :load ("find-file-in-project.el"))
