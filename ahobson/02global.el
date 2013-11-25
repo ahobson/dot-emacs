@@ -58,7 +58,7 @@
 (add-hook 'emacs-lisp-mode-hook 'my-turn-on-paredit)
 
 (setq js-indent-level 2)
-
+(add-hook 'java-mode-hook 'my-c-basic-offset)
 ;; ido-mode is like magic pixie dust!
 (ido-mode t)
 (ido-ubiquitous t)
