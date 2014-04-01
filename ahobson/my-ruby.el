@@ -86,7 +86,8 @@
 (defun my-turn-on-smartparens ()
   (smartparens-mode t))
 
-(add-hook 'enh-ruby-mode-hook 'my-turn-on-smartparens)
+(add-hook 'ruby-mode-hook 'my-turn-on-smartparens)
+(add-hook 'ruby-mode-hook 'my-turn-on-whitespace)
 
 (add-to-list 'interpreter-mode-alist
              '("ruby1.9.1" . ruby-mode))
