@@ -1,14 +1,4 @@
 ;;
-
-(setq enh-ruby-program
-      (let ((ruby-bin-dir (expand-file-name "~/.rvm/bin")))
-        (concat (file-name-as-directory ruby-bin-dir)
-                (car (reverse
-                      (sort
-                       (delq nil
-                             (mapcar (lambda (f)
-                                       (when (string-match "^ruby-1.9[^@]*$" f) f))
-                                     (directory-files ruby-bin-dir))) 'string<))))))
 ;; begin from starter-kit-ruby
 ;; Rake files are ruby, too, as are gemspecs, rackup files, etc.
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
@@ -54,6 +44,9 @@
     (setenv "LOCAL_VERSION" nil)))
 (ad-activate 'rvm-use)
 
+(defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+  (rvm-activate-corresponding-ruby))
+
 (defun ruby-interpolate ()
   "In a double quoted string, interpolate."
   (interactive)
@@ -65,20 +58,6 @@
     (backward-char 1)))
 
 (define-key ruby-mode-map (kbd "#") 'ruby-interpolate)
-
-;; (defface ruby-string-variable-face
-;;   '((((class color) (background dark))
-;;      (:foreground "darkgray"))
-;;     (((class color) (background light))
-;;      (:foreground "lightgray"))
-;;     (t (:inverse-video t)))
-;;   "Face used to visualize variable interpolation inside a string."
-;;   :group 'ruby)
-
-;; (defvar ruby-string-variable-face    'ruby-string-variable-face
-;;   "Face name to use for ruby interpolated strings.")
-
-(remove-hook 'enh-ruby-mode-hook 'erm-define-faces)
 
 (require 'smartparens-config)
 (require 'smartparens-ruby)

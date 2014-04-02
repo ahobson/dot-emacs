@@ -5,6 +5,9 @@
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
+(setq el-get-git-install-url
+      "https://github.com/dimitri/el-get.git")
+
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
@@ -17,31 +20,34 @@
 
 ;; set local recipes
 (setq el-get-sources
-      '((:name Enhanced-Ruby-Mode)
+      '(
+        (:name auto-complete)
         (:name smartparens)
         (:name autopair)
         (:name ido-ubiquitous)
         (:name smex)
-	(:name idle-highlight-mode)
-	(:name git-modes)
-	(:name magit
+        (:name idle-highlight-mode)
+        (:name git-modes)
+        (:name magit
                ;; the lastest magit needs some recipe modifications
-	       :depends (git-modes)
-	       :autoloads nil
-	       :build (if (version<= "24.3" emacs-version)
-			  `(("make" ,(format "EMACS=%s" el-get-emacs) "all"))
-			`(("make" ,(format "EMACS=%s" el-get-emacs) "docs")))
-	       :build/berkeley-unix (("touch" "`find . -name Makefile`") ("gmake")))
-	(:name paredit)
+               :depends (git-modes)
+               :autoloads nil
+               :build (if (version<= "24.3" emacs-version)
+                          `(("make" ,(format "EMACS=%s" el-get-emacs) "all"))
+                        `(("make" ,(format "EMACS=%s" el-get-emacs) "docs")))
+               :build/berkeley-unix (("touch" "`find . -name Makefile`") ("gmake")))
+        (:name paredit)
         (:name rhtml-mode)
         (:name yaml-mode)
         (:name scss-mode)
         (:name puppet-mode)
         (:name rinari)
+        (:name robe-mode)
         (:name rainbow-mode :type elpa)
         (:name octave)
         (:name clojure-mode)
         (:name cider)
+        (:name ac-nrepl)
         (:name edit-server)
         (:name ibuffer-vc)
         (:name yasnippet)
