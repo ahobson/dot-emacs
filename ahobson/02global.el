@@ -59,6 +59,9 @@
 
 (setq js-indent-level 2)
 (add-hook 'java-mode-hook 'my-c-basic-offset)
+
+(setq sh-basic-offset 2)
+
 ;; ido-mode is like magic pixie dust!
 (ido-mode t)
 (ido-ubiquitous t)

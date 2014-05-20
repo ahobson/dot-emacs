@@ -56,6 +56,7 @@
         (:name ahobson-find-file-in-project)
         (:name ahobson-ruby-test-mode)
         (:name project-anchor)
+        (:name markdown-mode)
         (:name mac-classic-theme)))
 
 (setq my:el-get-packages
