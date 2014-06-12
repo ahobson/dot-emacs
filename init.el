@@ -21,7 +21,7 @@
 ;; set local recipes
 (setq el-get-sources
       '(
-        (:name auto-complete)
+        (:name company-mode)
         (:name smartparens)
         (:name autopair)
         (:name ido-ubiquitous)
@@ -47,7 +47,6 @@
         (:name octave)
         (:name clojure-mode)
         (:name cider)
-        (:name ac-nrepl)
         (:name edit-server)
         (:name ibuffer-vc)
         (:name yasnippet)

@@ -62,6 +62,8 @@
 
 (setq sh-basic-offset 2)
 
+(company-mode)
+
 ;; ido-mode is like magic pixie dust!
 (ido-mode t)
 (ido-ubiquitous t)
