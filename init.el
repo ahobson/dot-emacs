@@ -1,5 +1,4 @@
-
-
+(add-to-list 'exec-path "/usr/local/bin")
 (require 'package)
 (package-initialize)
 
@@ -21,7 +20,7 @@
 ;; set local recipes
 (setq el-get-sources
       '(
-        (:name company-mode)
+        (:name company)
         (:name smartparens)
         (:name autopair)
         (:name ido-ubiquitous)
