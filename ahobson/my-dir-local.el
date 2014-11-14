@@ -66,7 +66,7 @@
 
 
 (dir-locals-set-directory-class
- (expand-file-name "~/src/damballa/git/inf") 'puppet-project)
+ (expand-file-name "~/src/damballa/git/puppet-config") 'puppet-project)
 (add-to-list 'safe-local-variable-values `(ack-arguments . ,puppet-ack-arguments))
 
 (provide 'my-dir-local)

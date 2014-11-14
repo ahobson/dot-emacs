@@ -55,6 +55,7 @@
 (setq ack-mode-root-directory-function 'project-anchor-find-from-default-directory)
 
 (add-hook 'prog-mode-hook 'my-turn-on-whitespace)
+(add-hook 'puppet-mode-hook 'my-turn-on-whitespace)
 (add-hook 'emacs-lisp-mode-hook 'my-turn-on-paredit)
 
 (setq js-indent-level 2)
