@@ -26,6 +26,7 @@
 
 ;; useful navigation packages
 (el-get-bundle elpa:ido-ubiquitous)
+(el-get-bundle elpa:flx-ido)
 (el-get-bundle elpa:smex)
 (el-get-bundle elpa:idle-highlight-mode)
 
