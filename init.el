@@ -1,11 +1,13 @@
-(add-to-list 'exec-path "/usr/local/bin")
-(require 'package)
-(package-initialize)
+(mapc (lambda (dir) (add-to-list 'exec-path dir))
+      `("/usr/local/sbin" "/usr/local/bin" ,(expand-file-name "~/bin")))
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-(setq el-get-git-install-url
-      "https://github.com/dimitri/el-get.git")
+(require 'package)
+(add-to-list 'package-archives
+               '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(package-refresh-contents)
+(package-initialize)
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -14,67 +16,61 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
+(setq el-get-user-package-directory "~/.emacs.d/el-get-user-package")
 
-;; set local recipes
-(setq el-get-sources
-      '(
-        (:name company)
-        (:name smartparens)
-        (:name autopair)
-        (:name ido-ubiquitous)
-        (:name smex)
-        (:name idle-highlight-mode)
-        (:name git-modes)
-        (:name magit
-               ;; the lastest magit needs some recipe modifications
-               :depends (git-modes)
-               :autoloads nil
-               :build (if (version<= "24.3" emacs-version)
-                          `(("make" ,(format "EMACS=%s" el-get-emacs) "all"))
-                        `(("make" ,(format "EMACS=%s" el-get-emacs) "docs")))
-               :build/berkeley-unix (("touch" "`find . -name Makefile`") ("gmake")))
-        (:name paredit)
-        (:name rhtml-mode)
-        (:name yaml-mode)
-        (:name scss-mode)
-        (:name puppet-mode)
-        (:name rinari)
-        (:name robe-mode)
-        (:name rainbow-mode :type elpa)
-        (:name octave)
-        (:name clojure-mode)
-        (:name cider)
-        (:name edit-server)
-        (:name ibuffer-vc)
-        (:name yasnippet)
-        (:name ack-mode)
-        (:name grep-in-project)
-        (:name ahobson-find-file-in-project)
-        (:name ahobson-ruby-test-mode)
-        (:name project-anchor)
-        (:name markdown-mode)
-        (:name mac-classic-theme)))
+;; clojure editing
+(el-get-bundle elpa:paredit)
+(el-get-bundle elpa:clojure-mode)
+(el-get-bundle elpa:cider)
+(el-get-bundle elpa:company)
 
-(setq my:el-get-packages
-      '(el-get
-        rvm))
+;; useful navigation packages
+(el-get-bundle elpa:ido-ubiquitous)
+(el-get-bundle elpa:smex)
+(el-get-bundle elpa:idle-highlight-mode)
 
-;; example of conditional packages
-(when (el-get-executable-find "svn")
-  (loop for p in '(psvn    ; M-x svn-status
-                   )
-        do (add-to-list 'my:el-get-packages p)))
+;; in case puppet changes are needed
+(el-get-bundle elpa:autopair)
+(el-get-bundle elpa:puppet-mode)
 
-(setq my:el-get-packages
-      (append
-       my:el-get-packages
-       (loop for src in el-get-sources collect (el-get-source-name src))))
+;; Useful for git
+(el-get-bundle elpa:ibuffer-vc)
+(el-get-bundle elpa:git-commit-mode)
 
-;; I'm seeing something weird in Emacs 24 where el-get pauses fetching
-;; files until I hit a key.  I'm not sure what is going on.
-(el-get 'sync my:el-get-packages)
+;; Use ack for searching
+(el-get-bundle ack-mode
+  :url "https://github.com/sudish/ack-mode.el.git"
+  (load "ack-mode.el"))
+(el-get-bundle project-anchor
+  :url "https://github.com/ahobson/project-anchor.git"
+  :features project-anchor)
+
+;; sometimes grep is what we want
+(el-get-bundle grep-in-project
+  :url "https://github.com/ahobson/grep-in-project.git"
+  :features grep-in-project)
+
+(el-get-bundle find-file-in-project
+  :url "https://github.com/ahobson/find-file-in-project.git"
+  :features find-file-in-project)
+
+;; git
+(el-get-bundle elpa:magit)
+
+;; handy development modes
+(el-get-bundle elpa:smartparens)
+(el-get-bundle elpa:yaml-mode)
+(el-get-bundle elpa:scss-mode)
+(el-get-bundle robe-mode)
+(el-get-bundle rainbow-mode)
+(el-get-bundle elpa:yasnippet)
+
+;; editing server
+(el-get-bundle elpa:edit-server)
+(el-get-bundle elpa:markdown-mode)
+
+;; visual themes
+(el-get-bundle mac-classic-theme)
 
 ;; mostly stolen from the old emacs starter kit
 (setq my-system-config (concat user-emacs-directory system-name ".el")
@@ -82,12 +78,6 @@
       my-user-dir (concat user-emacs-directory user-login-name))
 
 (add-to-list 'load-path my-user-dir)
-
-(setq smex-save-file (concat user-emacs-directory ".smex-items"))
-
-(smex-initialize)
-
-(global-set-key (kbd "M-x") 'smex)
 
 (when (file-exists-p my-system-config) (load my-system-config))
 

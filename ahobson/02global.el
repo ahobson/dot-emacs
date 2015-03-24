@@ -1,24 +1,18 @@
-;;
-;; "global" requires
-;;
-(require 'epa-file)
+;; ensure buffers are named uniquely
 (require 'grep)
 (require 'uniquify)
 
-(add-hook 'kill-emacs-query-functions
-          (lambda () (y-or-n-p "Do you really want to exit Emacs? "))
-          'append)
+;; make it easier to type
+(defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'auto-tail-revert-mode 'tail-mode)
 
-(add-to-list 'default-frame-alist (cons 'width 100))
-
+;; options for when emacs is not in a terminal
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
   (mouse-wheel-mode t)
-  (blink-cursor-mode -1))
-
-;; can't do it at launch or emacsclient won't always honor it
-(add-hook 'before-make-frame-hook 'my-turn-off-tool-bar)
+  (blink-cursor-mode -1)
+  (tool-bar-mode -1))
 
 (setq visible-bell t
       inhibit-startup-message t
@@ -28,65 +22,44 @@
       mouse-yank-at-point t
       uniquify-buffer-name-style 'forward
       whitespace-style '(face trailing lines-tail tabs)
-      whitespace-line-column 100
-      fill-column 100
       ediff-window-setup-function 'ediff-setup-windows-plain
-      oddmuse-directory "~/.emacs.d/oddmuse"
       save-place-file "~/.emacs.d/places"
       backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups")))
       diff-switches "-u")
 
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
-(add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
 
+;; show matching parens
 (show-paren-mode 1)
 
-(mapc (lambda (dir) (add-to-list 'exec-path dir))
-      `("/usr/local/sbin" "/usr/local/bin" ,(expand-file-name "~/bin")))
-
+;; set up ack mode to use the project-anchor project to find the root
+;; of the project
 (setq ack-root-directory-function 'project-anchor-find-from-default-directory)
+(setq ack-mode-root-directory-function 'project-anchor-find-from-default-directory)
 
-(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
-(setq inferior-octave-startup-args '("--no-init-file"))
-
+;; let the project anchor be defined by file or by dired mark
 (add-hook 'project-anchor-find-hook 'project-anchor-find-by-file)
 (add-hook 'project-anchor-find-hook 'project-anchor-find-with-mark)
+
+;; let the project anchor be defined by file or by dired mark
 (setq ffip-project-root-function 'project-anchor-find-from-default-directory)
 (setq ack-mode-root-directory-function 'project-anchor-find-from-default-directory)
 
-(add-hook 'prog-mode-hook 'my-turn-on-whitespace)
-(add-hook 'puppet-mode-hook 'my-turn-on-whitespace)
-(add-hook 'emacs-lisp-mode-hook 'my-turn-on-paredit)
-
-(setq js-indent-level 2)
-(add-hook 'java-mode-hook 'my-c-basic-offset)
-
-(setq sh-basic-offset 2)
-
-(company-mode)
-
-;; ido-mode is like magic pixie dust!
-(ido-mode t)
-(ido-ubiquitous t)
-(setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length nil
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-use-virtual-buffers t
-      ido-handle-duplicate-virtual-buffers 2
-      ido-max-prospects 10)
-
+;; auto indent by pressing tab
 (set-default 'indent-tabs-mode nil)
-
+;; point out empty lines
 (set-default 'indicate-empty-lines t)
-(set-default 'imenu-auto-rescan t)
 
+;; in text mode, add some help
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'turn-on-flyspell)
 
-(defalias 'yes-or-no-p 'y-or-n-p)
-(defalias 'auto-tail-revert-mode 'tail-mode)
+;; Show whitespace problems
+(add-hook 'prog-mode-hook 'my-turn-on-whitespace)
+(add-hook 'puppet-mode-hook 'my-turn-on-whitespace)
+
+;; Use paredit for emacs lisp
+(add-hook 'emacs-lisp-mode-hook 'my-turn-on-paredit)
 
 (random t) ;; Seed the random-number generator
 
@@ -96,6 +69,13 @@
 
 ;; Add this back in at the end of the list.
 (add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)
+
+;; java/javascript
+(setq js-indent-level 2)
+(add-hook 'java-mode-hook 'my-c-basic-offset)
+
+;; shell
+(setq sh-basic-offset 2)
 
 (eval-after-load 'grep
   '(when (boundp 'grep-find-ignored-files)
@@ -110,11 +90,3 @@
   '(progn
      (set-face-foreground 'magit-diff-add "green4")
      (set-face-foreground 'magit-diff-del "red3")))
-
-;; Get around the emacswiki spam protection
-(eval-after-load 'oddmuse
-  (add-hook 'oddmuse-mode-hook
-            (lambda ()
-              (unless (string-match "question" oddmuse-post)
-                (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post))))))
-

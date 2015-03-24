@@ -1,4 +1,0 @@
-(:name ahobson-ruby-test-mode
-       :type github
-       :pkgname "ahobson/ruby-test-mode"
-       :features ruby-test-mode)

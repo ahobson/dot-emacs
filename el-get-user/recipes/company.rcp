@@ -1,4 +1,0 @@
-(:name company
-       :description "Modular in-buffer completion framework for Emacs"
-       :type elpa
-       :repo ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))

@@ -1,4 +1,0 @@
-(:name dash
-       :description "A modern list api for Emacs. No 'cl required."
-       :type elpa
-       :repo ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))

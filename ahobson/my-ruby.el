@@ -1,3 +1,4 @@
+(require 'ruby-mode)
 ;; begin from starter-kit-ruby
 ;; Rake files are ruby, too, as are gemspecs, rackup files, etc.
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))

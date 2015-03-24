@@ -1,5 +1,0 @@
-(:name cider
-       :description "CIDER is a Clojure IDE and REPL."
-       :type elpa
-       :repo ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
-       :depends (dash clojure-mode pkg-info))
