@@ -69,4 +69,15 @@
  (expand-file-name "~/src/damballa/git/puppet-config") 'puppet-project)
 (add-to-list 'safe-local-variable-values `(ack-arguments . ,puppet-ack-arguments))
 
+(defun my-dir-project ()
+  "Switch to project in project dir"
+  (interactive)
+  (let ((default-directory
+          (concat (file-name-as-directory "~/src/damballa/git")
+                  (ido-completing-read "project: "
+                                       (directory-files "~/src/damballa/git" nil "^[^.].*")))))
+    (ido-find-file)))
+
+(global-set-key (kbd "C-c :") 'my-dir-project)
+
 (provide 'my-dir-local)

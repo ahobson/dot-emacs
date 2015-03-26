@@ -62,6 +62,7 @@
 (add-hook 'java-mode-hook 'my-c-basic-offset)
 
 (setq sh-basic-offset 2)
+(setq sh-indentation 2)
 
 (company-mode)
 
