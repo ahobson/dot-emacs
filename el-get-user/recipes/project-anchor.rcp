@@ -1,4 +1,0 @@
-(:name project-anchor
-       :type github
-       :pkgname "ahobson/project-anchor"
-       :load ("project-anchor.el"))

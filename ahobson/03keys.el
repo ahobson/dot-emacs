@@ -23,7 +23,14 @@
   (setq mouse-wheel-progressive-speed nil)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))))
 
+;; Search using ack
+(global-set-key (kbd "C-c a") 'ack)
+;; or grep
+(global-set-key (kbd "C-c g") 'grep-in-project)
+
+;; Use smex
+(global-set-key (kbd "M-x") 'smex)
+
+;; finding files
 (global-set-key (kbd "s-t") 'ffip)
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region)
-(global-set-key (kbd "C-c g") 'grep-in-project)
-(global-set-key (kbd "C-c a") 'ack)

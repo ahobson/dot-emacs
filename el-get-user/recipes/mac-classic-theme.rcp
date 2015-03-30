@@ -1,9 +1,0 @@
-(:name mac-classic-theme
-       :type github
-       :pkgname "ahobson/mac-classic-theme"
-       :after (progn
-                (add-to-list 'custom-theme-load-path
-                             (concat (file-name-as-directory
-                                      (expand-file-name el-get-dir))
-                                     "mac-classic-theme"))
-                (load-theme 'mac-classic t)))
