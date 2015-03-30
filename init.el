@@ -65,6 +65,7 @@
 (el-get-bundle robe-mode)
 (el-get-bundle rainbow-mode)
 (el-get-bundle elpa:yasnippet)
+(el-get-bundle elpa:go-mode)
 
 ;; editing server
 (el-get-bundle elpa:edit-server)
