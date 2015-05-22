@@ -66,6 +66,7 @@
 (el-get-bundle rainbow-mode)
 (el-get-bundle elpa:yasnippet)
 (el-get-bundle elpa:go-mode)
+(el-get-bundle elpa:pyvenv)
 
 ;; editing server
 (el-get-bundle elpa:edit-server)
