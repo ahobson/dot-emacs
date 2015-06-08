@@ -75,6 +75,10 @@
 ;; visual themes
 (el-get-bundle mac-classic-theme)
 
+(el-get-bundle windmove
+  :url "https://github.com/ahobson/windmove.el.git"
+  :features windmove)
+
 ;; mostly stolen from the old emacs starter kit
 (setq my-system-config (concat user-emacs-directory system-name ".el")
       my-user-config (concat user-emacs-directory user-login-name ".el")
