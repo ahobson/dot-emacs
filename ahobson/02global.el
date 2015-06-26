@@ -8,6 +8,8 @@
 
 ;; options for when emacs is not in a terminal
 (when window-system
+  (add-to-list 'initial-frame-alist '(height . 64))
+  (add-to-list 'initial-frame-alist '(width . 162))
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
   (mouse-wheel-mode t)
