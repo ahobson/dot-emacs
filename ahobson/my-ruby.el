@@ -37,15 +37,19 @@
 (setq ruby-test-rspec-executables '("brspec"))
 ;;(setq ruby-deep-indent-paren nil)
 
-(defadvice rvm-use (after my-rvm-use nil activate)
-  "When activating rvm, also set LOCAL_VERSION env."
-  (if (and (fboundp 'vc-git-branches) (not (equal "master" (car (vc-git-branches)))))
+(setq redenv-global-env-prefix
+      (expand-file-name (concat "~/.redenv/" my-os-version)))
+
+(defadvice redenv-use (after my-redenv-use nil activate)
+  "When activating redenv, also set LOCAL_VERSION env."
+  (if (and (fboundp 'vc-git-branches)
+           (not (equal "master" (car (vc-git-branches)))))
       (setenv "LOCAL_VERSION" (car (vc-git-branches)))
     (setenv "LOCAL_VERSION" nil)))
-(ad-activate 'rvm-use)
+(ad-activate 'redenv-use)
 
-(defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
-  (rvm-activate-corresponding-ruby))
+(defadvice inf-ruby-console-auto (before activate-redenv-for-robe activate)
+  (redenv-activate-corresponding-ruby))
 
 (defun ruby-interpolate ()
   "In a double quoted string, interpolate."
@@ -71,11 +75,11 @@
 (add-to-list 'interpreter-mode-alist
              '("ruby1.9.1" . ruby-mode))
 
-(defadvice switch-to-buffer (after my-rvm-switch-to-buffer nil activate)
-  "When switching to a buffer in ruby mode, activate rvm."
+(defadvice switch-to-buffer (after my-redenv-switch-to-buffer nil activate)
+  "When switching to a buffer in ruby mode, activate redenv."
   (when (and (eq 'ruby-mode major-mode)
              (not (string-match tramp-file-name-regexp buffer-file-name)))
-    (rvm-activate-corresponding-ruby)))
+    (redenv-activate-corresponding-ruby)))
 (ad-activate 'switch-to-buffer)
 
 (provide 'my-ruby)

@@ -67,6 +67,9 @@
 (el-get-bundle elpa:yasnippet)
 (el-get-bundle elpa:go-mode)
 (el-get-bundle elpa:pyvenv)
+(el-get-bundle redenv
+  :url "https://github.com/ahobson/redenv.el.git"
+  :features redenv)
 
 ;; editing server
 (el-get-bundle elpa:edit-server)

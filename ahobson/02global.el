@@ -92,3 +92,23 @@
   '(progn
      (set-face-foreground 'magit-diff-add "green4")
      (set-face-foreground 'magit-diff-del "red3")))
+
+(defun my-osx-version ()
+  (let ((sw-ver (shell-command-to-string "sw_vers -productVersion")))
+    (cond ((string-match "^10\.9" sw-ver)
+           "mavericks")
+
+          ((string-match "^10\.10" sw-ver)
+           "yosemite"))))
+
+(defun my-linux-version ()
+  (let ((debian-version (with-temp-buffer
+                          (insert-file-contents "/etc/debian_version")
+                          (buffer-string))))
+    (cond ((string-match "^7\." debian-version)
+           "wheezy"))))
+
+(setq my-os-version
+      (case system-type
+        ('darwin (my-osx-version))
+        ('gnu/linux (my-linux-version))))
