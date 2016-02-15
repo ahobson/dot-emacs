@@ -16,6 +16,8 @@
   (blink-cursor-mode -1)
   (tool-bar-mode -1))
 
+(setq custom-file "~/.emacs.d/custom.el")
+
 (setq visible-bell t
       inhibit-startup-message t
       color-theme-is-global t
