@@ -88,11 +88,6 @@
      (set-face-foreground 'diff-added "green4")
      (set-face-foreground 'diff-removed "red3")))
 
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green4")
-     (set-face-foreground 'magit-diff-del "red3")))
-
 (defun my-osx-version ()
   (let ((sw-ver (shell-command-to-string "sw_vers -productVersion")))
     (cond ((string-match "^10\.9" sw-ver)

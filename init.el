@@ -36,7 +36,7 @@
 
 ;; Useful for git
 (el-get-bundle elpa:ibuffer-vc)
-(el-get-bundle elpa:git-commit-mode)
+(el-get-bundle elpa:git-commit)
 
 ;; Use ack for searching
 (el-get-bundle ack-mode
