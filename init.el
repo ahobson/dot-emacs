@@ -24,6 +24,10 @@
 (el-get-bundle elpa:cider)
 (el-get-bundle elpa:company)
 
+;; scala
+(el-get-bundle elpa:scala-mode2)
+(el-get-bundle ensime)
+
 ;; useful navigation packages
 (el-get-bundle elpa:ido-ubiquitous)
 (el-get-bundle elpa:flx-ido)
@@ -67,6 +71,7 @@
 (el-get-bundle elpa:yasnippet)
 (el-get-bundle elpa:go-mode)
 (el-get-bundle elpa:pyvenv)
+(el-get-bundle elpa:lua-mode)
 (el-get-bundle redenv
   :url "https://github.com/ahobson/redenv.el.git"
   :features redenv)

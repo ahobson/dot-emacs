@@ -39,12 +39,6 @@
            (ack-arguments . ,rails-ack-arguments)
            (fill-column . 100)))))
 
-(dir-locals-set-directory-class
-  (expand-file-name "~/src/damballa/git/argus") 'rails-project)
-
-(dir-locals-set-directory-class
-  (expand-file-name "~/src/damballa/git/mimir") 'rails-project)
-
 (add-to-list 'safe-local-variable-values `(ffip-find-options . ,rails-ffip-find-options))
 (add-to-list 'safe-local-variable-values
              '(ffip-generate-files-function . ffip-generate-project-files-with-ack))
@@ -62,19 +56,15 @@
            (ack-arguments . ,puppet-ack-arguments)))))
 
 
-(dir-locals-set-directory-class
- (expand-file-name "~/src/damballa/git/puppet-config") 'puppet-project)
-(add-to-list 'safe-local-variable-values `(ack-arguments . ,puppet-ack-arguments))
-
 (defun my-dir-project ()
   "Switch to project in project dir"
   (interactive)
   (let ((default-directory
-          (concat (file-name-as-directory "~/src/damballa/git")
+          (concat (file-name-as-directory "~/src/cyb/git")
                   (ido-completing-read "project: "
-                                       (directory-files "~/src/damballa/git" nil "^[^.].*")))))
+                                       (directory-files "~/src/cyb/git" nil "^[^.].*")))))
     (ido-find-file)))
 
-(global-set-key (kbd "C-c :") 'my-dir-project)
+(global-set-key (kbd "C-c 8") 'my-dir-project)
 
 (provide 'my-dir-local)
