@@ -26,7 +26,7 @@
 
 ;; scala
 (el-get-bundle elpa:scala-mode2)
-(el-get-bundle ensime)
+(el-get-bundle elpa:ensime)
 
 ;; useful navigation packages
 (el-get-bundle elpa:ido-ubiquitous)
