@@ -57,3 +57,10 @@
 ;;       (process-put server-proc :ensime-config config)
 ;;       (push server-proc ensime-server-processes)
 ;;       (ensime--retry-connect server-proc host port-fn config cache-dir))))
+
+
+(setq ensime-default-java-flags
+      (list
+       "-Xss2m" "-Xms4G" "-Xmx4G"
+       "-XX:ReservedCodeCacheSize=256m"
+       "-XX:MaxMetaspaceSize=512m"))
