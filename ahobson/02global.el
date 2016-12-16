@@ -79,7 +79,7 @@
 (add-hook 'java-mode-hook 'my-c-basic-offset)
 
 ;; shell
-(setq sh-basic-offset 2)
+(setq sh-basic-offset 4)
 
 (eval-after-load 'grep
   '(when (boundp 'grep-find-ignored-files)
