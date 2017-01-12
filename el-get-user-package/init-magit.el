@@ -1,0 +1,1 @@
+(global-git-commit-mode)
