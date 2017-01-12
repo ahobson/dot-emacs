@@ -28,6 +28,9 @@
 (el-get-bundle elpa:scala-mode2)
 (el-get-bundle elpa:ensime)
 
+;; python
+(el-get-bundle elpa:jedi) ;; also do M-x jedi:install-server
+
 ;; useful navigation packages
 (el-get-bundle elpa:ido-ubiquitous)
 (el-get-bundle elpa:flx-ido)

@@ -13,3 +13,6 @@
 
       (advice-add 'python-shell--save-temp-file
                   :around #'my-python-shell-temp-file)))
+
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
