@@ -18,6 +18,7 @@
   (global-set-key (kbd "s-x") 'kill-region)
   (global-set-key (kbd "s-z") 'undo)
   (global-set-key (kbd "s-n") 'make-frame-command)
+  (global-unset-key (kbd "C-z"))
   (global-unset-key [swipe-left])
   (global-unset-key [swipe-right])
   (setq mouse-wheel-progressive-speed nil)
@@ -34,3 +35,6 @@
 ;; finding files
 (global-set-key (kbd "s-t") 'ffip)
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region)
+
+;; flyspell mouse
+(define-key flyspell-mouse-map [s-mouse-1] #'flyspell-correct-word)
