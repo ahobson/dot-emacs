@@ -37,4 +37,5 @@
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region)
 
 ;; flyspell mouse
+(require 'flyspell)
 (define-key flyspell-mouse-map [s-mouse-1] #'flyspell-correct-word)
