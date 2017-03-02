@@ -18,7 +18,8 @@
   (setq save-place t))
 
 (defun my-turn-on-whitespace ()
-  (whitespace-mode t))
+  (whitespace-mode t)
+  (setq whitespace-line-column 100))
 
 (defun my-turn-on-paredit ()
   (paredit-mode t))
