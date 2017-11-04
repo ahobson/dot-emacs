@@ -103,7 +103,10 @@
            "mavericks")
 
           ((string-match "^10\.10" sw-ver)
-           "yosemite"))))
+           "yosemite")
+
+          ((string-match "^10\.11" sw-ver)
+           "el_capitan"))))
 
 (defun my-linux-version ()
   (let ((debian-version (with-temp-buffer
