@@ -31,6 +31,9 @@
 ;; python
 (el-get-bundle elpa:jedi) ;; also do M-x jedi:install-server
 
+;; ruby
+(el-get-bundle elpa:enh-ruby-mode)
+
 ;; useful navigation packages
 (el-get-bundle elpa:ido-ubiquitous)
 (el-get-bundle elpa:flx-ido)

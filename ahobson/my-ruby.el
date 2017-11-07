@@ -1,16 +1,9 @@
 (require 'ruby-mode)
-;; begin from starter-kit-ruby
-;; Rake files are ruby, too, as are gemspecs, rackup files, etc.
-(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.thor$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Thorfile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+(require 'enh-ruby-mode)
+(add-to-list 'auto-mode-alist
+             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
 
+;; begin from starter-kit-ruby
 ;; We never want to edit Rubinius bytecode or MacRuby binaries
 (add-to-list 'completion-ignored-extensions ".rbc")
 (add-to-list 'completion-ignored-extensions ".rbo")
@@ -34,8 +27,16 @@
 
 ;; ruby customizations
 (setq ruby-test-ruby-executables '("ruby"))
-(setq ruby-test-rspec-executables '("brspec"))
+(setq ruby-test-rspec-executables '("rspec"))
 ;;(setq ruby-deep-indent-paren nil)
+
+(setq enh-ruby-bounce-deep-indent t)
+(setq enh-ruby-deep-indent-paren t)
+(setq enh-ruby-hanging-brace-deep-indent-level 1)
+(setq enh-ruby-hanging-brace-indent-level 2)
+(setq enh-ruby-hanging-indent-level 2)
+(setq enh-ruby-hanging-paren-deep-indent-level 0)
+(setq enh-ruby-hanging-paren-indent-level 0)
 
 (setq redenv-global-env-prefix
       (expand-file-name (concat "~/.redenv/" my-os-version)))
@@ -62,6 +63,7 @@
     (backward-char 1)))
 
 (define-key ruby-mode-map (kbd "#") 'ruby-interpolate)
+(define-key enh-ruby-mode-map (kbd "#") 'ruby-interpolate)
 
 (require 'smartparens-config)
 (require 'smartparens-ruby)
@@ -72,14 +74,22 @@
 (add-hook 'ruby-mode-hook 'my-turn-on-smartparens)
 (add-hook 'ruby-mode-hook 'my-turn-on-whitespace)
 
+(add-hook 'enh-ruby-mode-hook 'my-turn-on-smartparens)
+(add-hook 'enh-ruby-mode-hook 'my-turn-on-whitespace)
+
 (add-to-list 'interpreter-mode-alist
              '("ruby1.9.1" . ruby-mode))
 
 (defadvice switch-to-buffer (after my-redenv-switch-to-buffer nil activate)
   "When switching to a buffer in ruby mode, activate redenv."
-  (when (and (eq 'ruby-mode major-mode)
+  (when (and (or (eq 'ruby-mode major-mode)
+                 (eq 'enh-ruby-mode major-mode))
              (not (string-match tramp-file-name-regexp buffer-file-name)))
-    (redenv-activate-corresponding-ruby)))
+    (redenv-activate-corresponding-ruby)
+    (when (and (eq 'enh-ruby-mode major-mode)
+               (first redenv--current-ruby-binary-path))
+      (setq enh-ruby-program
+            (concat (first redenv--current-ruby-binary-path) "ruby")))))
 (ad-activate 'switch-to-buffer)
 
 (provide 'my-ruby)
