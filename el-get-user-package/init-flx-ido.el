@@ -1,1 +1,0 @@
-(flx-ido-mode t)

@@ -7,7 +7,17 @@
 (add-to-list 'package-archives
                '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (package-refresh-contents)
+;; (setq package-archives
+;;       '(("melpa-stable" . "http://stable.melpa.org/packages/")
+;;         ("gnu" . "http://elpa.gnu.org/packages/")
+;;         ("melpa" . "http://melpa.org/packages/")
+;;         ("marmalade" . "https://marmalade-repo.org/packages/")))
+;; (setq package-archive-priorities '(("melpa-stable" . 10)
+;;                                    ("gnu" . 5)
+;;                                    ("marmalade" . 4)
+;;                                    ("melpa" . 0)))
 (package-initialize)
+(package-refresh-contents)
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -16,37 +26,74 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
+
+;; (unless (require 'el-get nil 'noerror)
+;;   (require 'package)
+;;   (setq package-archives
+;; 	'(("melpa-stable" . "http://stable.melpa.org/packages/")
+;; 	  ("gnu" . "http://elpa.gnu.org/packages/")
+;; 	  ("melpa" . "http://melpa.org/packages/")
+;; 	  ("marmalade" . "https://marmalade-repo.org/packages/")))
+;;   (setq package-archive-priorities '(("melpa-stable" . 10)
+;; 				     ("gnu" . 5)
+;; 				     ("marmalade" . 4)
+;; 				     ("melpa" . 0)))
+;;   (package-refresh-contents)
+;;   (package-initialize)
+;;   (package-install 'el-get)
+;;   (require 'el-get))
+
 (setq el-get-user-package-directory "~/.emacs.d/el-get-user-package")
 
 ;; clojure editing
-(el-get-bundle elpa:paredit)
-(el-get-bundle elpa:clojure-mode)
-(el-get-bundle elpa:cider)
-(el-get-bundle elpa:company)
+(package-install 'paredit)
+(package-install 'clojure-mode)
+(package-install 'company)
+(company-mode)
 
 ;; scala
-(el-get-bundle elpa:scala-mode2)
-(el-get-bundle elpa:ensime)
+;; ;(el-get-bundle elpa:scala-mode2)
+;; (el-get-bundle elpa:ensime)
+(package-install 'ensime)
+(setq ensime-default-java-flags
+      (list
+       "-Xss2m" "-Xms4G" "-Xmx4G"
+       "-XX:ReservedCodeCacheSize=256m"
+       "-XX:MaxMetaspaceSize=512m"))
 
 ;; python
-(el-get-bundle elpa:jedi) ;; also do M-x jedi:install-server
+(package-install 'jedi)
 
 ;; ruby
-(el-get-bundle elpa:enh-ruby-mode)
+(package-install 'enh-ruby-mode)
 
 ;; useful navigation packages
-(el-get-bundle elpa:ido-ubiquitous)
-(el-get-bundle elpa:flx-ido)
-(el-get-bundle elpa:smex)
-(el-get-bundle elpa:idle-highlight-mode)
+(package-install 'ido-completing-read+)
+(package-install 'flx-ido)
+(flx-ido-mode t)
+;; ido-mode is like magic pixie dust!
+(ido-mode t)
+;(ido-ubiquitous t)
+(setq ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-auto-merge-work-directories-length nil
+      ido-create-new-buffer 'always
+      ido-use-filename-at-point 'guess
+      ido-use-virtual-buffers t
+      ido-handle-duplicate-virtual-buffers 2
+      ido-max-prospects 10)
+(package-install 'smex)
+(setq smex-save-file (concat user-emacs-directory ".smex-items"))
+(smex-initialize)
+(package-install 'idle-highlight-mode)
 
 ;; in case puppet changes are needed
-(el-get-bundle elpa:autopair)
-(el-get-bundle elpa:puppet-mode)
+(package-install 'autopair)
+(package-install 'puppet-mode)
 
-;; Useful for git
-(el-get-bundle elpa:ibuffer-vc)
-(el-get-bundle elpa:git-commit)
+;; ;; Useful for git
+(package-install 'ibuffer-vc)
+(package-install 'git-commit)
 
 ;; Use ack for searching
 (el-get-bundle ack-mode
@@ -66,25 +113,27 @@
   :features find-file-in-project)
 
 ;; git
-(el-get-bundle elpa:magit)
+(package-install 'magit-popup)
+(package-install 'magit)
+(global-git-commit-mode)
 
 ;; handy development modes
-(el-get-bundle elpa:smartparens)
-(el-get-bundle elpa:yaml-mode)
-(el-get-bundle elpa:scss-mode)
+(package-install 'smartparens)
+(package-install 'yaml-mode)
+(package-install 'scss-mode)
 (el-get-bundle robe-mode)
-(el-get-bundle rainbow-mode)
-(el-get-bundle elpa:yasnippet)
-(el-get-bundle elpa:go-mode)
-(el-get-bundle elpa:pyvenv)
-(el-get-bundle elpa:lua-mode)
+(package-install 'rainbow-mode)
+(package-install 'yasnippet)
+(package-install 'go-mode)
+(package-install 'pyvenv)
+(package-install 'lua-mode)
 (el-get-bundle redenv
   :url "https://github.com/ahobson/redenv.el.git"
   :features redenv)
 
 ;; editing server
-(el-get-bundle elpa:edit-server)
-(el-get-bundle elpa:markdown-mode)
+(package-install 'edit-server)
+(package-install 'markdown-mode)
 
 ;; visual themes
 (el-get-bundle mac-classic-theme)
