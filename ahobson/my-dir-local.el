@@ -12,24 +12,34 @@
 
 (setq rails-interesting-rpaths `("Gemfile" "README" "Rakefile"
                                  "app" "config" "db" "deploy"
-                                 "lib" "script" "spec" "test"))
-(setq rails-ack-arguments `("--group" "--nopager" "--nocolor"
-                            "--ignore-dir=tmp" "-G"
-                            ,(format "^(%s)" (mapconcat 'identity rails-interesting-rpaths "|"))))
+                                 "lib" "script" "spec"))
+(setq rails-ack-arguments `("--nocolor" "-l"
+                            "--ignore-dir=tmp"
+                            "-g"
+                            ,(format "(%s)" (mapconcat 'identity rails-interesting-rpaths "|"))))
 
-(defun ffip-generate-project-files-with-ack (project-root)
+(setq ffip-ack "ag")
+
+(defun ffip-files-from-ack (project-root ack-cmd ack-args limit)
   (let ((old-default-directory default-directory)
         (file-list nil))
     (setq default-directory project-root)
+    (setq ack-shell-command
+          (format "%s %s . | head -n %s"
+                  ack-cmd
+                  (mapconcat (lambda (arg) (format "'%s'" arg)) ack-args " ")
+                  limit))
     (setq file-list
-          (mapcar (lambda (rpath) (concat (file-name-as-directory project-root) rpath))
-                  (split-string
-                   (shell-command-to-string
-                    (format "ack -f %s . | head -n %s"
-                            (mapconcat (lambda (arg) (format "'%s'" arg)) ack-arguments " ")
-                            ffip-limit)))))
+          (mapcar
+           (lambda (rpath) (concat (file-name-as-directory project-root) rpath))
+           (split-string
+            (shell-command-to-string ack-shell-command))))
     (setq default-directory old-default-directory)
     file-list))
+
+(defun ffip-generate-project-files-with-ack (project-root)
+  (ffip-files-from-ack project-root ffip-ack ack-arguments
+                       ffip-limit))
 
 (dir-locals-set-class-variables
  'rails-project
