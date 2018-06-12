@@ -118,6 +118,7 @@
 (global-git-commit-mode)
 
 ;; handy development modes
+(package-install 'dockerfile-mode)
 (package-install 'smartparens)
 (package-install 'yaml-mode)
 (package-install 'scss-mode)
