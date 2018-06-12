@@ -10,11 +10,11 @@
 (setq rails-ffip-find-options (mapconcat (lambda (p) (format "-not -regex \".*/%s/.*\"" p))
                                          rails-ignore-rpaths " "))
 
-(setq rails-interesting-rpaths `("Gemfile" "README" "Rakefile" "app" "config" "db" "deploy"
-                                 "lib" "public/stylesheets" "public/javascripts" "script"
-                                 "spec" "test"))
-(setq rails-ack-arguments `("--group" "--nopager" "--nocolor" "--ignore-dir=fixtures"
-                            "-G"
+(setq rails-interesting-rpaths `("Gemfile" "README" "Rakefile"
+                                 "app" "config" "db" "deploy"
+                                 "lib" "script" "spec" "test"))
+(setq rails-ack-arguments `("--group" "--nopager" "--nocolor"
+                            "--ignore-dir=tmp" "-G"
                             ,(format "^(%s)" (mapconcat 'identity rails-interesting-rpaths "|"))))
 
 (defun ffip-generate-project-files-with-ack (project-root)
@@ -39,7 +39,13 @@
            (ack-arguments . ,rails-ack-arguments)
            (fill-column . 100)))))
 
-(add-to-list 'safe-local-variable-values `(ffip-find-options . ,rails-ffip-find-options))
+(dir-locals-set-directory-class
+ (expand-file-name "~/src/cyb/git/deerstand") 'rails-project)
+
+(add-to-list 'safe-local-variable-values
+             `(ffip-limit . 2048))
+(add-to-list 'safe-local-variable-values
+             `(ffip-find-options . ,rails-ffip-find-options))
 (add-to-list 'safe-local-variable-values
              '(ffip-generate-files-function . ffip-generate-project-files-with-ack))
 (add-to-list 'safe-local-variable-values `(ack-arguments . ,rails-ack-arguments))
