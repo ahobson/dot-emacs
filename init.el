@@ -128,6 +128,7 @@
 (package-install 'go-mode)
 (package-install 'pyvenv)
 (package-install 'lua-mode)
+(package-install 'vue-mode)
 (el-get-bundle redenv
   :url "https://github.com/ahobson/redenv.el.git"
   :features redenv)
