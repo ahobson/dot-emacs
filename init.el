@@ -95,6 +95,8 @@
 (package-install 'ibuffer-vc)
 (package-install 'git-commit)
 
+(package-install 'terraform-mode)
+
 ;; Use ack for searching
 (el-get-bundle ack-mode
   :url "https://github.com/sudish/ack-mode.el.git"
