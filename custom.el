@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yasnippet magit-popup git-commit ido-completing-read+ company clojure-mode yaml-mode vue-mode smex smartparens scss-mode scala-mode2 rainbow-mode pyvenv puppet-mode paredit markdown-mode magit lua-mode jedi ido-ubiquitous idle-highlight-mode ibuffer-vc go-mode flx-ido ensime enh-ruby-mode edit-server dockerfile-mode cider autopair))))
+    (autopair cider-clojure company-completing dockerfile commit-company completing-dockerfile-edit+ ensime-flx git-go highlight-ibuffer idle ido ido-ido jedi-lua magit-magit markdown mode-mode mode mode-mode mode mode-mode mode mode-mode mode-mode2-paredit popup-puppet pyvenv-rainbow read-ruby scala scss-server-smartparens smex-ubiquitous vc-vue yaml yasnippet))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
