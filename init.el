@@ -45,6 +45,12 @@
 
 (setq el-get-user-package-directory "~/.emacs.d/el-get-user-package")
 
+;; lsp
+(package-install 'lsp-mode)
+
+(require 'lsp-mode)
+(add-hook 'programming-mode-hook 'lsp)
+
 ;; clojure editing
 (package-install 'cider)
 (package-install 'paredit)
@@ -66,7 +72,10 @@
 (package-install 'jedi)
 
 ;; ruby
-(package-install 'enh-ruby-mode)
+;;(package-install 'enh-ruby-mode)
+(el-get-bundle lsp-ruby
+  :url "https://github.com/emacs-lsp/lsp-ruby.git"
+  :features lsp-ruby)
 
 ;; useful navigation packages
 (package-install 'ido-completing-read+)

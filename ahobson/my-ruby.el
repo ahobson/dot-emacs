@@ -1,7 +1,21 @@
 (require 'ruby-mode)
-(require 'enh-ruby-mode)
-(add-to-list 'auto-mode-alist
-             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+;;(require 'enh-ruby-mode)
+(when (fboundp 'lsp-mode)
+  (add-hook 'ruby-mode-hook #'lsp-ruby-solargraph-tcp-enable))
+
+(when (fboundp 'enh-ruby-mode)
+  (add-to-list 'auto-mode-alist
+               '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+  (setq enh-ruby-bounce-deep-indent t)
+  (setq enh-ruby-deep-indent-paren t)
+  (setq enh-ruby-hanging-brace-deep-indent-level 1)
+  (setq enh-ruby-hanging-brace-indent-level 2)
+  (setq enh-ruby-hanging-indent-level 2)
+  (setq enh-ruby-hanging-paren-deep-indent-level 0)
+  (setq enh-ruby-hanging-paren-indent-level 0)
+  (define-key enh-ruby-mode-map (kbd "#") 'ruby-interpolate)
+  (add-hook 'enh-ruby-mode-hook 'my-turn-on-smartparens)
+  (add-hook 'enh-ruby-mode-hook 'my-turn-on-whitespace))
 
 ;; begin from starter-kit-ruby
 ;; We never want to edit Rubinius bytecode or MacRuby binaries
@@ -30,13 +44,6 @@
 (setq ruby-test-rspec-executables '("rspec"))
 ;;(setq ruby-deep-indent-paren nil)
 
-(setq enh-ruby-bounce-deep-indent t)
-(setq enh-ruby-deep-indent-paren t)
-(setq enh-ruby-hanging-brace-deep-indent-level 1)
-(setq enh-ruby-hanging-brace-indent-level 2)
-(setq enh-ruby-hanging-indent-level 2)
-(setq enh-ruby-hanging-paren-deep-indent-level 0)
-(setq enh-ruby-hanging-paren-indent-level 0)
 
 (setq redenv-global-env-prefix
       (expand-file-name (concat "~/.redenv/" my-os-version)))
@@ -63,7 +70,7 @@
     (backward-char 1)))
 
 (define-key ruby-mode-map (kbd "#") 'ruby-interpolate)
-(define-key enh-ruby-mode-map (kbd "#") 'ruby-interpolate)
+(define-key ruby-mode-map (kbd "s-.") 'xref-find-definitions)
 
 (require 'smartparens-config)
 (require 'smartparens-ruby)
@@ -73,9 +80,6 @@
 
 (add-hook 'ruby-mode-hook 'my-turn-on-smartparens)
 (add-hook 'ruby-mode-hook 'my-turn-on-whitespace)
-
-(add-hook 'enh-ruby-mode-hook 'my-turn-on-smartparens)
-(add-hook 'enh-ruby-mode-hook 'my-turn-on-whitespace)
 
 (add-to-list 'interpreter-mode-alist
              '("ruby1.9.1" . ruby-mode))
