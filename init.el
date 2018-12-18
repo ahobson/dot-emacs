@@ -56,7 +56,6 @@
 ;; ;(el-get-bundle elpa:scala-mode2)
 ;; (el-get-bundle elpa:ensime)
 (package-install 'ensime)
-(package-install 'scala-mode2)
 (setq ensime-default-java-flags
       (list
        "-Xss2m" "-Xms4G" "-Xmx4G"
@@ -72,7 +71,6 @@
 ;; useful navigation packages
 (package-install 'ido-completing-read+)
 (package-install 'flx-ido)
-(package-install 'ido-ubiquitous)
 (flx-ido-mode t)
 ;; ido-mode is like magic pixie dust!
 (ido-mode t)
