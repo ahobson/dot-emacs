@@ -90,7 +90,8 @@
                  (eq 'enh-ruby-mode major-mode))
              (not (string-match tramp-file-name-regexp buffer-file-name)))
     (redenv-activate-corresponding-ruby)
-    (when (and (eq 'enh-ruby-mode major-mode)
+    (when (and (fboundp 'enh-ruby-mode)
+               (eq 'enh-ruby-mode major-mode)
                (first redenv--current-ruby-binary-path))
       (setq enh-ruby-program
             (concat (first redenv--current-ruby-binary-path) "ruby")))))
