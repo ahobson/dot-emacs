@@ -1,5 +1,6 @@
 (setq org-directory "~/Dropbox/org")
 (setq org-catch-invisible-edits 'smart)
+(setq org-agenda-files "~/Dropbox/org/agenda-files")
 
 (eval-after-load "org"
   '(require 'ox-md nil t))
@@ -9,8 +10,16 @@
   (interactive)
   (let ((default-directory
           (concat (file-name-as-directory org-directory)
-                  (ido-completing-read "org: "
-                                       (directory-files org-directory nil "^[^.].*")))))
+                  (ido-completing-read
+                   "org: "
+                   (mapcar 'car
+                           (seq-filter (lambda (x) (nth 1 x))
+                                       (directory-files-and-attributes
+                                        org-directory nil "^[^.].*")))))))
     (ido-find-file)))
 
-(global-set-key (kbd "C-c C-0") 'my-org-file)
+(define-prefix-command 'my-org-map)
+(global-set-key (kbd "C-c C-0") 'my-org-map)
+(define-key my-org-map (kbd "f") 'my-org-file)
+(define-key my-org-map (kbd "t") 'org-todo-list)
+(define-key my-org-map (kbd "a") 'org-agenda-list)
