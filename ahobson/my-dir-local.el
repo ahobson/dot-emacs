@@ -49,8 +49,8 @@
            (ack-arguments . ,rails-ack-arguments)
            (fill-column . 100)))))
 
-(dir-locals-set-directory-class
- (expand-file-name "~/src/cyb/git/deerstand") 'rails-project)
+;; (dir-locals-set-directory-class
+;;  (expand-file-name "~/src/cyb/git/deerstand") 'rails-project)
 
 (add-to-list 'safe-local-variable-values
              `(ffip-limit . 2048))
@@ -76,9 +76,9 @@
   "Switch to project in project dir"
   (interactive)
   (let ((default-directory
-          (concat (file-name-as-directory "~/src/cyb/git")
+          (concat (file-name-as-directory "~/src/truss/git")
                   (ido-completing-read "project: "
-                                       (directory-files "~/src/cyb/git" nil "^[^.].*")))))
+                                       (directory-files "~/src/truss/git" nil "^[^.].*")))))
     (ido-find-file)))
 
 (global-set-key (kbd "C-c 8") 'my-dir-project)
