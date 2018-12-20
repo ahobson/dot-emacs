@@ -81,9 +81,6 @@
 (add-hook 'ruby-mode-hook 'my-turn-on-smartparens)
 (add-hook 'ruby-mode-hook 'my-turn-on-whitespace)
 
-(add-to-list 'interpreter-mode-alist
-             '("ruby1.9.1" . ruby-mode))
-
 (defadvice switch-to-buffer (after my-redenv-switch-to-buffer nil activate)
   "When switching to a buffer in ruby mode, activate redenv."
   (when (and (or (eq 'ruby-mode major-mode)

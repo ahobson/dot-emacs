@@ -1,8 +1,0 @@
-(global-set-key (kbd "<C-s-left>")
-                (lambda () (interactive) (windmove-left -1)))
-(global-set-key (kbd "<C-s-up>")
-                (lambda () (interactive) (windmove-up -1)))
-(global-set-key (kbd "<C-s-right>")
-                (lambda () (interactive) (windmove-right -1)))
-(global-set-key (kbd "<C-s-down>")
-                (lambda () (interactive) (windmove-down -1)))

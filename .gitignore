@@ -12,3 +12,7 @@ tramp
 /ac-comphist.dat
 ensime
 /.python-environments
+.lsp-session*
+straight/build
+straight/repos
+straight/build-cache.el

@@ -1,169 +1,181 @@
 (mapc (lambda (dir) (add-to-list 'exec-path dir))
       `("/usr/local/sbin" "/usr/local/bin" ,(expand-file-name "~/bin")))
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(require 'package)
-(add-to-list 'package-archives
-               '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(package-refresh-contents)
-;; (setq package-archives
-;;       '(("melpa-stable" . "http://stable.melpa.org/packages/")
-;;         ("gnu" . "http://elpa.gnu.org/packages/")
-;;         ("melpa" . "http://melpa.org/packages/")
-;;         ("marmalade" . "https://marmalade-repo.org/packages/")))
-;; (setq package-archive-priorities '(("melpa-stable" . 10)
-;;                                    ("gnu" . 5)
-;;                                    ("marmalade" . 4)
-;;                                    ("melpa" . 0)))
-(package-initialize)
-(package-refresh-contents)
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-
-;; (unless (require 'el-get nil 'noerror)
-;;   (require 'package)
-;;   (setq package-archives
-;; 	'(("melpa-stable" . "http://stable.melpa.org/packages/")
-;; 	  ("gnu" . "http://elpa.gnu.org/packages/")
-;; 	  ("melpa" . "http://melpa.org/packages/")
-;; 	  ("marmalade" . "https://marmalade-repo.org/packages/")))
-;;   (setq package-archive-priorities '(("melpa-stable" . 10)
-;; 				     ("gnu" . 5)
-;; 				     ("marmalade" . 4)
-;; 				     ("melpa" . 0)))
-;;   (package-refresh-contents)
-;;   (package-initialize)
-;;   (package-install 'el-get)
-;;   (require 'el-get))
-
-(setq el-get-user-package-directory "~/.emacs.d/el-get-user-package")
-
-;; lsp
-(package-install 'lsp-mode)
-
-(require 'lsp-mode)
-(add-hook 'programming-mode-hook 'lsp)
-
-;; clojure editing
-(package-install 'cider)
-(package-install 'paredit)
-(package-install 'clojure-mode)
-(package-install 'company)
-(company-mode)
-
-;; scala
-;; ;(el-get-bundle elpa:scala-mode2)
-;; (el-get-bundle elpa:ensime)
-(package-install 'ensime)
-(package-install 'scala-mode2)
-(setq ensime-default-java-flags
-      (list
-       "-Xss2m" "-Xms4G" "-Xmx4G"
-       "-XX:ReservedCodeCacheSize=256m"
-       "-XX:MaxMetaspaceSize=512m"))
-
-;; python
-(package-install 'jedi)
-
-;; ruby
-;;(package-install 'enh-ruby-mode)
-(el-get-bundle lsp-ruby
-  :url "https://github.com/emacs-lsp/lsp-ruby.git"
-  :features lsp-ruby)
+;; use-package + straight
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
 ;; useful navigation packages
-(package-install 'ido-completing-read+)
-(package-install 'flx-ido)
-(package-install 'ido-ubiquitous)
-(flx-ido-mode t)
-;; ido-mode is like magic pixie dust!
-(ido-mode t)
-;(ido-ubiquitous t)
-(setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length nil
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-use-virtual-buffers t
-      ido-handle-duplicate-virtual-buffers 2
-      ido-max-prospects 10)
-(package-install 'smex)
-(setq smex-save-file (concat user-emacs-directory ".smex-items"))
-(smex-initialize)
-(package-install 'idle-highlight-mode)
+(use-package ido-completing-read+
+  :config
+  ;; ido-mode is like magic pixie dust!
+  (ido-mode t)
+  (setq ido-enable-prefix nil
+        ido-enable-flex-matching t
+        ido-auto-merge-work-directories-length nil
+        ido-create-new-buffer 'always
+        ido-use-filename-at-point 'guess
+        ido-use-virtual-buffers t
+        ido-handle-duplicate-virtual-buffers 2
+        ido-max-prospects 10))
+
+(use-package flx-ido
+  :config
+  (flx-ido-mode t))
+
+(use-package smex
+  :config
+  (setq smex-save-file
+        (concat user-emacs-directory ".smex-items"))
+  (smex-initialize))
+
+(use-package company)
+
+;; lsp
+(use-package lsp-mode
+  :disabled
+  :config (require 'lsp-clients)
+  :hook (programming-mode . lsp))
+(use-package company-lsp
+  :disabled
+  :config
+  (push 'company-lsp company-backends))
+(use-package lsp-ui
+  :disabled
+  :hook (lsp-mode . lsp-ui-mode))
+
+;; clojure editing
+(use-package cider)
+(use-package paredit)
+(use-package clojure-mode)
+
+;; scala
+(use-package ensime
+  :config
+  (setq ensime-default-java-flags
+        (list
+         "-Xss2m" "-Xms4G" "-Xmx4G"
+         "-XX:ReservedCodeCacheSize=256m"
+         "-XX:MaxMetaspaceSize=512m")))
+
+;; python
+(use-package jedi)
+
+;; ruby
+(use-package enh-ruby-mode)
+(use-package lsp-ruby
+  :disabled)
+
+(use-package idle-highlight-mode)
 
 ;; in case puppet changes are needed
-(package-install 'autopair)
-(package-install 'puppet-mode)
+;;(use-package auto-pair)
 
-;; ;; Useful for git
-(package-install 'ibuffer-vc)
-(package-install 'git-commit)
+(use-package puppet-mode)
 
-(package-install 'terraform-mode)
+;; terraform
+(use-package terraform-mode)
+
+;; Useful for git
+(use-package ibuffer-vc)
+(use-package git-commit)
 
 ;; Use ack for searching
-(el-get-bundle ack-mode
-  :url "https://github.com/sudish/ack-mode.el.git"
-  (load "ack-mode.el"))
-(el-get-bundle project-anchor
-  :url "https://github.com/ahobson/project-anchor.git"
-  :features project-anchor)
+(use-package ack-mode
+  :straight (ack-mode
+             :type git :host github
+             :repo "sudish/ack-mode.el")
+  :no-require t
+  :config
+  (load "ack-mode.el")
+  :custom
+  (ack-mode-program-name (or (executable-find "ag")
+                             (executable-find "ack-grep")
+                             (executable-find "ack"))))
+
+(use-package project-anchor
+  :straight (project-anchor
+             :type git :host github
+             :repo "ahobson/project-anchor"))
+
 
 ;; sometimes grep is what we want
-(el-get-bundle grep-in-project
-  :url "https://github.com/ahobson/grep-in-project.git"
-  :features grep-in-project)
+(use-package grep-in-project
+  :straight (grep-in-project
+             :type git :host github
+             :repo "ahobson/grep-in-project"))
 
-(el-get-bundle find-file-in-project
-  :url "https://github.com/ahobson/find-file-in-project.git"
-  :features find-file-in-project)
+(use-package find-file-in-project
+  :straight (find-file-in-project
+             :type git :host github
+             :repo "ahobson/find-file-in-project"))
 
 ;; git
-(package-install 'magit-popup)
-(package-install 'magit)
-(global-git-commit-mode)
+(use-package magit-popup)
+(use-package magit
+  :config (global-git-commit-mode))
 
 ;; golang
-(package-install 'go-mode)
-(el-get-bundle lsp-go
-  :url "https://github.com/emacs-lsp/lsp-go.git"
-  :features lsp-go)
-(add-hook 'go-mode-hook #'lsp-go-enable)
+(use-package go-mode)
+(use-package lsp-go
+  :disabled
+  :hook (go-mode . lsp))
 
+;; octave
+(use-package octave-mode
+  :disabled
+  :mode ("\\.m$" . octave-mode)
+  :config (setq inferior-octave-startup-args '("--no-init-file")))
 
 ;; handy development modes
-(package-install 'dockerfile-mode)
-(package-install 'smartparens)
-(package-install 'yaml-mode)
-(package-install 'scss-mode)
-(el-get-bundle robe-mode)
-(package-install 'rainbow-mode)
-(package-install 'yasnippet)
-(package-install 'pyvenv)
-(package-install 'lua-mode)
-(package-install 'vue-mode)
-(el-get-bundle redenv
-  :url "https://github.com/ahobson/redenv.el.git"
-  :features redenv)
-
+(use-package dockerfile-mode)
+(use-package smartparens)
+(use-package yaml-mode)
+(use-package scss-mode)
+(use-package robe-mode
+  :disabled)
+(use-package rainbow-mode)
+(use-package yasnippet)
+(use-package pyvenv)
+(use-package lua-mode)
+(use-package vue-mode)
+(use-package redenv
+  :straight (redenv
+             :type git :host github
+             :repo "ahobson/redenv.el"))
 ;; editing server
-(package-install 'edit-server)
-(package-install 'markdown-mode)
+(use-package edit-server)
+(use-package markdown-mode)
 
 ;; visual themes
-(el-get-bundle mac-classic-theme)
+(use-package mac-classic-theme
+  :straight (mac-classic-theme
+             :type git :host github
+             :repo "ahobson/mac-classic-theme")
+  :disabled
+  :config (require 'mac-classic-theme))
 
-(el-get-bundle windmove
-  :url "https://github.com/ahobson/windmove.el.git"
-  :features windmove)
+(use-package windmove
+  :straight (windmove
+             :type git :host github
+             :repo "ahobson/windmove.el")
+  :bind (([C-s-left] . (lambda () (interactive) (windmove-left -1)))
+         ([C-s-up] . (lambda () (interactive) (windmove-up -1)))
+         ([C-s-right] . (lambda () (interactive) (windmove-right -1)))
+         ([C-s-down] . (lambda () (interactive) (windmove-down -1)))))
 
 ;; mostly stolen from the old emacs starter kit
 (setq my-system-config (concat user-emacs-directory system-name ".el")
