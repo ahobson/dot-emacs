@@ -131,6 +131,14 @@
 (package-install 'magit)
 (global-git-commit-mode)
 
+;; golang
+(package-install 'go-mode)
+(el-get-bundle lsp-go
+  :url "https://github.com/emacs-lsp/lsp-go.git"
+  :features lsp-go)
+(add-hook 'go-mode-hook #'lsp-go-enable)
+
+
 ;; handy development modes
 (package-install 'dockerfile-mode)
 (package-install 'smartparens)
@@ -139,7 +147,6 @@
 (el-get-bundle robe-mode)
 (package-install 'rainbow-mode)
 (package-install 'yasnippet)
-(package-install 'go-mode)
 (package-install 'pyvenv)
 (package-install 'lua-mode)
 (package-install 'vue-mode)
