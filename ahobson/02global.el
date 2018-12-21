@@ -97,6 +97,9 @@
      (set-face-foreground 'diff-added "green4")
      (set-face-foreground 'diff-removed "red3")))
 
+(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+(setq inferior-octave-startup-args '("--no-init-file"))
+
 (defun my-osx-version ()
   (let ((sw-ver (shell-command-to-string "sw_vers -productVersion")))
     (cond ((string-match "^10\.9" sw-ver)

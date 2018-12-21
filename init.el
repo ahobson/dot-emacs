@@ -134,12 +134,6 @@
   :disabled
   :hook (go-mode . lsp))
 
-;; octave
-(use-package octave-mode
-  :disabled
-  :mode ("\\.m$" . octave-mode)
-  :config (setq inferior-octave-startup-args '("--no-init-file")))
-
 ;; handy development modes
 (use-package dockerfile-mode)
 (use-package smartparens)
@@ -162,11 +156,12 @@
 
 ;; visual themes
 (use-package mac-classic-theme
+  :disabled
   :straight (mac-classic-theme
              :type git :host github
              :repo "ahobson/mac-classic-theme")
-  :disabled
-  :config (require 'mac-classic-theme))
+  :config
+  (load-theme 'mac-classic))
 
 (use-package windmove
   :straight (windmove
