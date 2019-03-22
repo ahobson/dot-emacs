@@ -44,6 +44,8 @@
 
 (use-package company)
 
+(use-package graphql-mode)
+
 ;; lsp
 (use-package lsp-mode
   :commands lsp
