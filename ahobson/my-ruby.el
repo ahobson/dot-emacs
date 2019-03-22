@@ -1,6 +1,6 @@
 (require 'ruby-mode)
 ;;(require 'enh-ruby-mode)
-(when (fboundp 'lsp-mode)
+(when (fboundp 'lsp)
   (add-hook 'ruby-mode-hook #'lsp))
 
 (when (fboundp 'enh-ruby-mode)
@@ -90,6 +90,9 @@
     (when (and (fboundp 'enh-ruby-mode)
                (eq 'enh-ruby-mode major-mode)
                (first redenv--current-ruby-binary-path))
+      ;; to get rid of bytecomp warning
+      (eval-when-compile
+        (defvar enh-ruby-program))
       (setq enh-ruby-program
             (concat (first redenv--current-ruby-binary-path) "ruby")))))
 (ad-activate 'switch-to-buffer)
