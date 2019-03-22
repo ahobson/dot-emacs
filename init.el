@@ -46,16 +46,12 @@
 
 ;; lsp
 (use-package lsp-mode
-  :disabled
-  :config (require 'lsp-clients)
+  :commands lsp
   :hook (programming-mode . lsp))
-(use-package company-lsp
-  :disabled
-  :config
-  (push 'company-lsp company-backends))
 (use-package lsp-ui
-  :disabled
-  :hook (lsp-mode . lsp-ui-mode))
+  :commands lsp-ui-mode)
+(use-package company-lsp
+  :commands company-lsp)
 
 ;; clojure editing
 (use-package cider)
@@ -75,9 +71,8 @@
 (use-package jedi)
 
 ;; ruby
-(use-package enh-ruby-mode)
-(use-package lsp-ruby
-  :disabled)
+(use-package enh-ruby-mode :disabled)
+(use-package lsp-ruby :disabled)
 
 (use-package idle-highlight-mode)
 

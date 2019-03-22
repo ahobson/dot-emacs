@@ -1,7 +1,7 @@
 (require 'ruby-mode)
 ;;(require 'enh-ruby-mode)
 (when (fboundp 'lsp-mode)
-  (add-hook 'ruby-mode-hook #'lsp-ruby-solargraph-tcp-enable))
+  (add-hook 'ruby-mode-hook #'lsp))
 
 (when (fboundp 'enh-ruby-mode)
   (add-to-list 'auto-mode-alist
