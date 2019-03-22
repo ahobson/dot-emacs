@@ -1,5 +1,5 @@
-(setq python-shell-interpreter "denv")
-(setq python-shell-interpreter-args "sdocker python -i")
+(setq python-shell-interpreter "dpython")
+(setq python-shell-interpreter-args "python -i")
 
 (if (eq 'darwin system-type)
     (progn
