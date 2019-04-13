@@ -62,12 +62,26 @@
 
 ;; scala
 (use-package ensime
+  :straight (ensime-emacs :type git
+                          :host github
+                          :repo "ensime/ensime-emacs"
+                          :branch "2.0")
   :config
   (setq ensime-default-java-flags
         (list
          "-Xss2m" "-Xms4G" "-Xmx4G"
          "-XX:ReservedCodeCacheSize=256m"
          "-XX:MaxMetaspaceSize=512m")))
+
+;; typescript
+(use-package tide
+  :config
+  (setq tide-node-executable (expand-file-name "~/bin/tide-node"))
+  (setq tide-tsserver-executable "../node_modules/typescript/bin/tsserver")
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
 
 ;; python
 (use-package jedi)
@@ -138,6 +152,9 @@
 (use-package scss-mode)
 (use-package robe-mode
   :disabled)
+(use-package editorconfig
+  :config
+  (editorconfig-mode 1))
 (use-package rainbow-mode)
 (use-package yasnippet)
 (use-package pyvenv)
