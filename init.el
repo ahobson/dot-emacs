@@ -71,7 +71,8 @@
         (list
          "-Xss2m" "-Xms4G" "-Xmx4G"
          "-XX:ReservedCodeCacheSize=256m"
-         "-XX:MaxMetaspaceSize=512m")))
+         "-XX:MaxMetaspaceSize=512m"))
+  :after (scala-mode))
 
 ;; typescript
 (use-package tide
