@@ -62,7 +62,7 @@
 (defun ruby-interpolate ()
   "In a double quoted string, interpolate."
   (interactive)
-  (insert "#")
+  (insert-char (string-to-char "#") (or current-prefix-arg 1))
   (when (and
          (looking-back "\".*")
          (looking-at ".*\""))
