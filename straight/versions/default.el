@@ -58,6 +58,7 @@
  ("queue" . "52206c0f78afc0dfb9a287cb928c1e725103336d")
  ("rainbow-mode" . "8059f1cb756d2b211af962f07c5e6aff958094d7")
  ("redenv.el" . "2fbce4ee6eee75a52fb07951a6b2fe34651ed6a6")
+ ("rspec-mode" . "bc2618a71e0bbef60258cf59bad0796f469a2685")
  ("s.el" . "03410e6a7a2b11e47e1fea3b7d9899c7df26435e")
  ("scss-mode" . "cf58dbec5394280503eb5502938f3b5445d1b53d")
  ("seq" . "095fb15a3baa082079799dd36b6caccdb062cb90")

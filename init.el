@@ -90,7 +90,7 @@
 ;; ruby
 
 (use-package inf-ruby)
-(use-package enh-ruby-mode :disabled)
+(use-package rspec-mode)
 
 (use-package idle-highlight-mode)
 
