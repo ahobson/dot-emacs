@@ -88,8 +88,9 @@
 (use-package jedi)
 
 ;; ruby
+
+(use-package inf-ruby)
 (use-package enh-ruby-mode :disabled)
-(use-package lsp-ruby :disabled)
 
 (use-package idle-highlight-mode)
 

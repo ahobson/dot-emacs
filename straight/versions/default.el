@@ -37,6 +37,7 @@
  ("ibuffer-vc" . "64cb03887bcae6127e80f0d9342c33206e21d2d2")
  ("idle-highlight-mode" . "c466f2a9e291f9da1167dc879577b2e1a7880482")
  ("ido-completing-read-plus" . "719201643984decb48b6eb9f276b3e9a4791aca6")
+ ("inf-ruby" . "928b1dd2c24c62be1900476cb4b7219eb2350856")
  ("let-alist" . "33e71829e8814cf5f28b6e4291192aafef61b69e")
  ("lsp-mode" . "ca3abb2f5503a378fc2acf6dd5bafa21165a99ff")
  ("lsp-ui" . "3ccc3e3386732c3ee22c151e6b5215a0e4c99173")
