@@ -95,7 +95,10 @@
 ;; ruby
 
 (use-package inf-ruby)
-(use-package rspec-mode)
+(use-package rspec-mode
+  :config
+  (defun rspec-docker-p ()
+    t))
 
 (use-package idle-highlight-mode)
 
