@@ -44,6 +44,11 @@
 
 (use-package company)
 
+(use-package flycheck
+  :config
+  (setq flycheck-typescript-tslint-executable "~/bin/tslint")
+  :init (global-flycheck-mode))
+
 (use-package graphql-mode)
 
 ;; lsp
