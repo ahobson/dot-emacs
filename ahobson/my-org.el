@@ -1,6 +1,6 @@
-(setq org-directory "~/Dropbox/org")
+(setq org-directory "~/Library/Mobile Documents/com~apple~CloudDocs/org")
 (setq org-catch-invisible-edits 'smart)
-(setq org-agenda-files "~/Dropbox/org/agenda-files")
+(setq org-agenda-files (concat (file-name-as-directory org-directory) "agenda-files"))
 
 (eval-after-load "org"
   '(require 'ox-md nil t))

@@ -13,7 +13,9 @@
   (when  (eq system-type 'darwin)
     ;; (set-face-attribute 'default nil :family "Source Code Pro" :height 110
     ;;                     :weight 'normal :width 'normal)
-    (set-face-attribute 'default nil :font "PT Mono" :height 120))
+    (if (x-list-fonts "SF Mono")
+        (set-face-attribute 'default nil :font "SF Mono" :height 120)
+      (set-face-attribute 'default nil :font "PT Mono" :height 120)))
   (add-to-list 'initial-frame-alist '(height . 60))
   (add-to-list 'initial-frame-alist '(width . 162))
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
