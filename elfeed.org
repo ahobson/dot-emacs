@@ -1,3 +1,4 @@
-* Imported Feeds            :elfeed:
-** Truss
+* Blogs                                                              :elfeed:
+** Truss                                                             :truss:
 *** [[https://github.com/trussworks/Engineering-Playbook/commits/master.atom][Engineering Playbook]]
+*** [[https://github.com/trussworks/truss-infra/commits/master.atom][truss-infra]]
