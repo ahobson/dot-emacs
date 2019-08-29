@@ -52,9 +52,7 @@
 (use-package graphql-mode)
 
 ;; lsp
-(use-package lsp-mode
-  :commands lsp
-  :hook (programming-mode . lsp))
+(use-package lsp-mode)
 (use-package lsp-ui
   :commands lsp-ui-mode)
 (use-package company-lsp
@@ -91,6 +89,7 @@
 
 ;; python
 (use-package jedi)
+(use-package python-pytest)
 
 ;; ruby
 

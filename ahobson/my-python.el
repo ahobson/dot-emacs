@@ -1,4 +1,4 @@
-(setq python-shell-interpreter "dpython")
+(setq python-shell-interpreter "docker-python")
 (setq python-shell-interpreter-args "python -i")
 
 (if (eq 'darwin system-type)
@@ -14,5 +14,7 @@
       (advice-add 'python-shell--save-temp-file
                   :around #'my-python-shell-temp-file)))
 
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)
+(when (fboundp 'lsp-mode)
+  (add-hook 'python-mode-hook #'lsp-deferred))
