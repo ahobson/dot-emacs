@@ -77,25 +77,33 @@
   :after (scala-mode))
 
 ;; typescript
-(defun setup-tide-mode ()
-  (interactive)
+(defun my/ts-mode-hook ()
   (tide-setup)
+
   (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+
   (eldoc-mode +1)
+
   (tide-hl-identifier-mode +1)
-  (company-mode +1))
+
+  (company-mode +1)
+
+  (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled)
+        flycheck-auto-change-delay          1.5))
+
+(use-package typescript-mode
+  :after (tide company flycheck)
+  :hook (typescript-mode . my/ts-mode-hook))
 
 (use-package tide
+  :delight
   :config
   (setq tide-node-executable (expand-file-name "~/bin/tide-node"))
-  (setq tide-tsserver-executable "../node_modules/typescript/bin/tsserver")
-  :after (typescript-mode company flycheck)
-  :hook ((before-save . tide-format-before-save)
-         (typescript-mode . setup-tide-mode)))
+  :commands (tide-setup))
 
 (use-package prettier-js
-  :hook ((typescript-mode . prettier-js-mode)))
+  :after (typescript-mode)
+  :hook (typescript-mode . prettier-js-mode))
 
 ;; python
 (use-package jedi)
