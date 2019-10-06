@@ -46,7 +46,6 @@
 
 (use-package flycheck
   :config
-  (setq flycheck-typescript-tslint-executable "~/bin/tslint")
   :init (global-flycheck-mode))
 
 (use-package graphql-mode)
@@ -78,14 +77,25 @@
   :after (scala-mode))
 
 ;; typescript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+
 (use-package tide
   :config
   (setq tide-node-executable (expand-file-name "~/bin/tide-node"))
   (setq tide-tsserver-executable "../node_modules/typescript/bin/tsserver")
   :after (typescript-mode company flycheck)
-  :hook ((typescript-mode . tide-setup)
-         (typescript-mode . tide-hl-identifier-mode)
-         (before-save . tide-format-before-save)))
+  :hook ((before-save . tide-format-before-save)
+         (typescript-mode . setup-tide-mode)))
+
+(use-package prettier-js
+  :hook ((typescript-mode . prettier-js-mode)))
 
 ;; python
 (use-package jedi)

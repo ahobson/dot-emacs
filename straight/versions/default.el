@@ -70,7 +70,7 @@
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
  ("ssass-mode" . "c2c610abd85fecd171466bf5a9a4943bd62ffda5")
  ("straight.el" . "3305fe95b6161afc9747f83e8eac7cf4329b69b9")
- ("tide" . "dd90f5ad6c537d38b5f56599687c3bc9b21072a6")
+ ("tide" . "13f64933c19590ebd02a4b141bb6be88d7aaf2b0")
  ("transient" . "9fb3f797f10fd069c2bffa7a3ead746aa53d1a25")
  ("typescript.el" . "32146510b8ebb031e468c6c0898a9b253c73617e")
  ("use-package" . "1d5ffb2e0d1427066ced58febbba68c1328bf001")
