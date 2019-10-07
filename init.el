@@ -51,7 +51,9 @@
 (use-package graphql-mode)
 
 ;; lsp
-(use-package lsp-mode)
+(use-package lsp-mode
+  :hook (typescript-mode . lsp-deferred)
+  :commands lsp lsp-deferred)
 (use-package lsp-ui
   :commands lsp-ui-mode)
 (use-package company-lsp
@@ -77,29 +79,9 @@
   :after (scala-mode))
 
 ;; typescript
-(defun my/ts-mode-hook ()
-  (tide-setup)
-
-  (flycheck-mode +1)
-
-  (eldoc-mode +1)
-
-  (tide-hl-identifier-mode +1)
-
-  (company-mode +1)
-
-  (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled)
-        flycheck-auto-change-delay          1.5))
 
 (use-package typescript-mode
-  :after (tide company flycheck)
-  :hook (typescript-mode . my/ts-mode-hook))
-
-(use-package tide
-  :delight
-  :config
-  (setq tide-node-executable (expand-file-name "~/bin/tide-node"))
-  :commands (tide-setup))
+  :after (company flycheck))
 
 (use-package prettier-js
   :after (typescript-mode)
