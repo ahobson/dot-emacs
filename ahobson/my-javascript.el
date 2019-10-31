@@ -1,1 +1,1 @@
-(setq js-indent-level 4)
+(setq js-indent-level 2)
