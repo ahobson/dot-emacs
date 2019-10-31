@@ -53,6 +53,7 @@
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
+         (python-node . lsp-deferred)
          (go-mode . lsp-deferred))
   :commands lsp lsp-deferred)
 (use-package lsp-ui
