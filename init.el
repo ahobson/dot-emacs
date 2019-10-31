@@ -52,7 +52,8 @@
 
 ;; lsp
 (use-package lsp-mode
-  :hook (typescript-mode . lsp-deferred)
+  :hook ((typescript-mode . lsp-deferred)
+         (go-mode . lsp-deferred))
   :commands lsp lsp-deferred)
 (use-package lsp-ui
   :commands lsp-ui-mode)
@@ -90,6 +91,7 @@
 ;; python
 (use-package jedi)
 (use-package python-pytest)
+(use-package python-black)
 
 ;; ruby
 
@@ -150,9 +152,6 @@
 
 ;; golang
 (use-package go-mode)
-(use-package lsp-go
-  :disabled
-  :hook (go-mode . lsp))
 
 ;; handy development modes
 (use-package dockerfile-mode)
