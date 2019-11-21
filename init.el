@@ -42,7 +42,9 @@
         (concat user-emacs-directory ".smex-items"))
   (smex-initialize))
 
-(use-package company)
+(use-package company
+  :config
+  (setq company-tooltip-align-annotations t))
 
 (use-package flycheck
   :config
