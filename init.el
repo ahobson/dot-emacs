@@ -47,6 +47,7 @@
 (use-package flycheck
   :config
   :init (global-flycheck-mode))
+(flymake-mode -1)
 
 (use-package graphql-mode)
 
