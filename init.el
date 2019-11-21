@@ -81,6 +81,9 @@
          "-XX:MaxMetaspaceSize=512m"))
   :after (scala-mode))
 
+;; json
+(use-package json-mode)
+
 ;; typescript
 
 (use-package typescript-mode
@@ -89,6 +92,12 @@
 (use-package prettier-js
   :after (typescript-mode)
   :hook (typescript-mode . prettier-js-mode))
+
+;; react
+(use-package rjsx-mode
+  :after (typescript-mode)
+  :config
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode)))
 
 ;; python
 (use-package jedi)
