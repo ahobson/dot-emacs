@@ -53,11 +53,20 @@
 
 (use-package graphql-mode)
 
+;; typescript-language-server checks to see if the client process id
+;; is still alive, and that doesn't work inside a docker container
+(defun my-emacs-pid (orig-emacs-pid &rest args)
+  (if lsp--cur-workspace
+      1
+    (apply orig-emacs-pid args)))
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
+         (rjsx-mode . lsp-deferred)
          (python-node . lsp-deferred)
          (go-mode . lsp-deferred))
+  :config
+  (advice-add 'emacs-pid :around #'my-emacs-pid)
   :commands lsp lsp-deferred)
 (use-package lsp-ui
   :commands lsp-ui-mode)
