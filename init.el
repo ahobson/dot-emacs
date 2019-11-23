@@ -101,8 +101,9 @@
   :after (company flycheck))
 
 (use-package prettier-js
-  :after (typescript-mode)
-  :hook (typescript-mode . prettier-js-mode))
+  :after (typescript-mode rjsx-mode)
+  :hook ((typescript-mode . prettier-js-mode)
+         (rjsx-mode . prettier-js-mode)))
 
 ;; react
 (use-package rjsx-mode
