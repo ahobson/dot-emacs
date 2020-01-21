@@ -47,7 +47,7 @@
  ("let-alist" . "57561d7d9267da48e8b7ab1f3bd45c9d05951289")
  ("lsp-mode" . "39fca2d9ef944f56b86d1ad761370064ed5ff2fd")
  ("lsp-ui" . "46f4d7d2c0b953b25c2d6414e842239d1bb3a71c")
- ("lua-mode" . "95c64bb5634035630e8c59d10d4a1d1003265743")
+ ("lua-mode" . "1f596a93b3f1caadd7bba01030f8c179b029600b")
  ("magit" . "bcd161d8ad3fcd80cbf69e7720c1d75a79415021")
  ("magit-popup" . "4250c3a606011e3ff2477e3b5bbde2b493f3c85c")
  ("markdown-mode" . "f3c54e34cc5228001af36a5301883325319f21d4")
