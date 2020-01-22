@@ -4,6 +4,7 @@
  ("cider" . "f350c7431330ca7cd2f01a1fddefbb637d3e3493")
  ("cl-lib" . "e79686c4a26959c0ecba0951a7e335ed28035386")
  ("clojure-mode" . "f23eb209a8bedec95e0ad0542762bd13998ba048")
+ ("company-emoji" . "fc45b56f3e2081d794f243bce705e77d4e29fc06")
  ("company-lsp" . "f921ffa0cdc542c21dc3dd85f2c93df4288e83bd")
  ("company-mode" . "d943198e26baccbbae7fa1cdebcd9fcb89c525d0")
  ("dash.el" . "e85ed7aa93ef0959b630607bca17af90c74b34be")

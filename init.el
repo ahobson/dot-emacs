@@ -42,9 +42,13 @@
         (concat user-emacs-directory ".smex-items"))
   (smex-initialize))
 
+(use-package company-emoji)
+
 (use-package company
   :config
+  (add-to-list 'company-backends 'company-emoji)
   (setq company-tooltip-align-annotations t))
+
 
 (use-package flycheck
   :config

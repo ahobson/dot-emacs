@@ -13,6 +13,9 @@
   (when  (eq system-type 'darwin)
     ;; (set-face-attribute 'default nil :family "Source Code Pro" :height 110
     ;;                     :weight 'normal :width 'normal)
+    (if (version< "27.0" emacs-version)
+        (set-fontset-font "fontset-default" 'unicode
+                          "Apple Color Emoji" nil 'prepend))
     (if (x-list-fonts "SF Mono")
         (set-face-attribute 'default nil :font "SF Mono" :height 120)
       (set-face-attribute 'default nil :font "PT Mono" :height 120)))
