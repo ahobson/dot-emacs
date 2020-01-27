@@ -22,7 +22,7 @@
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))))
 
 ;; Search using ack
-(global-set-key (kbd "C-c a") 'ack)
+(global-set-key (kbd "C-c a") 'projectile-ag)
 ;; or grep
 (global-set-key (kbd "C-c g") 'grep-in-project)
 
@@ -30,7 +30,8 @@
 (global-set-key (kbd "M-x") 'smex)
 
 ;; finding files
-(global-set-key (kbd "s-t") 'ffip)
+(define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
+(global-set-key (kbd "s-t") 'projectile-find-file)
 (global-set-key (kbd "s-/") 'comment-or-uncomment-region)
 
 ;; flyspell mouse

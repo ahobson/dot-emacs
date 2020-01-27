@@ -142,6 +142,16 @@
 (use-package ibuffer-vc)
 (use-package git-commit)
 
+(use-package ag
+  :custom
+  (ag-executable (or (executable-find "ag")
+                             (executable-find "ack-grep")
+                             (executable-find "ack"))))
+
+(use-package projectile
+  :config
+  (projectile-mode +1))
+
 ;; Use ack for searching
 (use-package ack-mode
   :straight (ack-mode

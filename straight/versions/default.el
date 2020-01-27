@@ -1,5 +1,6 @@
 (("a.el" . "18966975db7110d0aac726be95b593e2fc3d44ed")
  ("ack-mode.el" . "50481452f00693e90799fe330a173296e3999d7a")
+ ("ag.el" . "bd81d68466e44301505629454dfc689b6c17d94b")
  ("auto-complete" . "2e83566ddfa758c69afe50b8a1c62a66f47471e3")
  ("cider" . "f350c7431330ca7cd2f01a1fddefbb637d3e3493")
  ("cl-lib" . "e79686c4a26959c0ecba0951a7e335ed28035386")
