@@ -63,6 +63,12 @@
   (if lsp--cur-workspace
       1
     (apply orig-emacs-pid args)))
+
+;; lsp now tries to find the tsserver, which we have in docker
+(defun my-tsserver-path (path)
+  (let ((default-directory (projectile-project-root)))
+    (file-truename path)))
+
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
@@ -71,6 +77,10 @@
          (go-mode . lsp-deferred))
   :config
   (advice-add 'emacs-pid :around #'my-emacs-pid)
+  (eval-after-load 'lsp-clients
+    '(progn
+       (plist-put lsp-deps-providers :docker (list :path #'my-tsserver-path))
+       (lsp-dependency 'typescript `(:docker "./node_modules/typescript/bin/tsserver"))))
   :commands lsp lsp-deferred)
 (use-package lsp-ui
   :commands lsp-ui-mode)
