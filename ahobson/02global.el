@@ -48,19 +48,6 @@
 ;; show matching parens
 (show-paren-mode 1)
 
-;; set up ack mode to use the project-anchor project to find the root
-;; of the project
-(setq ack-root-directory-function 'project-anchor-find-from-default-directory)
-(setq ack-mode-root-directory-function 'project-anchor-find-from-default-directory)
-
-;; let the project anchor be defined by file or by dired mark
-(add-hook 'project-anchor-find-hook 'project-anchor-find-by-file)
-(add-hook 'project-anchor-find-hook 'project-anchor-find-with-mark)
-
-;; let the project anchor be defined by file or by dired mark
-(setq ffip-project-root-function 'project-anchor-find-from-default-directory)
-(setq ack-mode-root-directory-function 'project-anchor-find-from-default-directory)
-
 ;; auto indent by pressing tab
 (set-default 'indent-tabs-mode nil)
 ;; point out empty lines

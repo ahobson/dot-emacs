@@ -152,36 +152,6 @@
   :config
   (projectile-mode +1))
 
-;; Use ack for searching
-(use-package ack-mode
-  :straight (ack-mode
-             :type git :host github
-             :repo "sudish/ack-mode.el")
-  :no-require t
-  :config
-  (load "ack-mode.el")
-  :custom
-  (ack-mode-program-name (or (executable-find "ag")
-                             (executable-find "ack-grep")
-                             (executable-find "ack"))))
-
-(use-package project-anchor
-  :straight (project-anchor
-             :type git :host github
-             :repo "ahobson/project-anchor"))
-
-
-;; sometimes grep is what we want
-(use-package grep-in-project
-  :straight (grep-in-project
-             :type git :host github
-             :repo "ahobson/grep-in-project"))
-
-(use-package find-file-in-project
-  :straight (find-file-in-project
-             :type git :host github
-             :repo "ahobson/find-file-in-project"))
-
 ;; git
 (use-package magit-popup)
 (use-package magit
