@@ -7,6 +7,7 @@
 (defalias 'auto-tail-revert-mode 'tail-mode)
 
 (setq confirm-kill-emacs 'y-or-n-p)
+(setq create-lockfiles nil)
 
 ;; options for when emacs is not in a terminal
 (when window-system
