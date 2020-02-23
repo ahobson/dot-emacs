@@ -76,7 +76,10 @@
          (python-node . lsp-deferred)
          (go-mode . lsp-deferred))
   :config
+  (setq read-process-output-max (* 1024 1024))
+  (setq gc-cons-threshold 1600000)
   (advice-add 'emacs-pid :around #'my-emacs-pid)
+  (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.pre-commit-cache$")
   (eval-after-load 'lsp-clients
     '(progn
        (plist-put lsp-deps-providers :docker (list :path #'my-tsserver-path))
