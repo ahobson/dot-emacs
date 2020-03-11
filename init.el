@@ -188,6 +188,7 @@
 (use-package yasnippet)
 (use-package pyvenv)
 (use-package lua-mode)
+(use-package fennel-mode)
 (use-package vue-mode)
 (use-package redenv
   :straight (redenv
