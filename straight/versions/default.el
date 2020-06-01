@@ -29,7 +29,7 @@
  ("epkgs" . "c05ec2e55326f80a6dc30d78f9e94c611f412b31")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
  ("f.el" . "1814209e2ff43cf2e6d38c4cd476218915f550fb")
- ("fennel-mode" . "c02f4a9ed1b9c26f9cfc3237906c2844f5937622")
+ ("fennel-mode" . "7fadf2580c3afcae3f6ebc54dad0e519b7600f1d")
  ("flx" . "46040d0b096a0340d91235561f27a959a61d0fef")
  ("flycheck" . "a6768d609dee9afec1e085e55d3854b4d6b12824")
  ("gnu-elpa-mirror" . "01001b660cd3677228e25a6f544d579b56845c37")
