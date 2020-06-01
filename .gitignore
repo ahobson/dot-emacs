@@ -18,3 +18,4 @@ straight/repos
 straight/build-cache.el
 eshell
 transient
+/projectile.cache

@@ -178,6 +178,7 @@
 (use-package smartparens)
 (use-package yaml-mode)
 (use-package scss-mode)
+(use-package sass-mode)
 (use-package robe-mode
   :disabled)
 (use-package editorconfig
