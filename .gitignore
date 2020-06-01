@@ -19,3 +19,4 @@ straight/build-cache.el
 eshell
 transient
 /projectile.cache
+/projectile-bookmarks.eld
