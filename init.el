@@ -76,6 +76,7 @@
          (python-node . lsp-deferred)
          (go-mode . lsp-deferred))
   :config
+  (setq lsp-prefer-flymake nil)
   (setq read-process-output-max (* 1024 1024))
   (setq gc-cons-threshold 1600000)
   (advice-add 'emacs-pid :around #'my-emacs-pid)
