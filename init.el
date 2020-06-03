@@ -1,3 +1,7 @@
+;;; package -- ahobson init file
+;;; Commentary:
+;;; Trying out config
+;;; Code:
 (mapc (lambda (dir) (add-to-list 'exec-path dir))
       `("/usr/local/sbin" "/usr/local/bin" ,(expand-file-name "~/bin")))
 
@@ -60,12 +64,14 @@
 ;; typescript-language-server checks to see if the client process id
 ;; is still alive, and that doesn't work inside a docker container
 (defun my-emacs-pid (orig-emacs-pid &rest args)
+  "Hack for lsp typescript-language-server inside docker or returning ORIG-EMACS-PID (as ARGS)."
   (if lsp--cur-workspace
       1
     (apply orig-emacs-pid args)))
 
 ;; lsp now tries to find the tsserver, which we have in docker
 (defun my-tsserver-path (path)
+  "Hack for lsp tsserver inside docker using PATH."
   (let ((default-directory (projectile-project-root)))
     (file-truename path)))
 
@@ -239,3 +245,4 @@
 (when (file-exists-p my-user-dir)
   (mapc 'load (directory-files my-user-dir nil "^[^#].*el$")))
 
+;;; init.el ends here
