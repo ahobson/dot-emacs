@@ -1,12 +1,18 @@
+;;; package -- ahobson init file
+;;; Commentary:
+;;; my-org
+;;; Code:
 (setq org-directory "~/Library/Mobile Documents/com~apple~CloudDocs/org")
 (setq org-catch-invisible-edits 'smart)
 (setq org-agenda-files (concat (file-name-as-directory org-directory) "agenda-files"))
+(setq org-agenda-window-setup 'current-window)
+(setq org-todo-keywords '("TODO(t)" "FOLLOWUP(f)" "ICEBOX(i)" "DONE(d)"))
 
 (eval-after-load "org"
   '(require 'ox-md nil t))
 
 (defun my-org-file ()
-  "Switch to org file"
+  "Switch to org file."
   (interactive)
   (let ((default-directory
           (concat (file-name-as-directory org-directory)
@@ -23,3 +29,5 @@
 (define-key my-org-map (kbd "f") 'my-org-file)
 (define-key my-org-map (kbd "t") 'org-todo-list)
 (define-key my-org-map (kbd "a") 'org-agenda-list)
+
+;;; my-org.el ends here

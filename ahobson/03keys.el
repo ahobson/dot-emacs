@@ -1,3 +1,8 @@
+;;; package -- ahobson init file
+;;; Commentary:
+;;; 03keys
+;;; Code:
+
 ;; Distinguish between various Emacs ports to OS X
 (cond
  ;; mac port
@@ -37,3 +42,5 @@
 ;; flyspell mouse
 (require 'flyspell)
 (define-key flyspell-mouse-map [s-mouse-1] #'flyspell-correct-word)
+
+;;; 03keys.el ends here
