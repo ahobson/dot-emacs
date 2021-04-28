@@ -53,6 +53,9 @@
   (add-to-list 'company-backends 'company-emoji)
   (setq company-tooltip-align-annotations t))
 
+(use-package direnv
+ :config
+ (direnv-mode))
 
 (use-package flycheck
   :config
@@ -65,7 +68,7 @@
 ;; is still alive, and that doesn't work inside a docker container
 (defun my-emacs-pid (orig-emacs-pid &rest args)
   "Hack for lsp typescript-language-server inside docker or returning ORIG-EMACS-PID (as ARGS)."
-  (if lsp--cur-workspace
+  (if (and lsp--cur-workspace (not (file-exists-p "nix")))
       1
     (apply orig-emacs-pid args)))
 
@@ -78,8 +81,8 @@
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
-         (rjsx-mode . lsp-deferred)
-         (python-node . lsp-deferred)
+         (web-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
          (go-mode . lsp-deferred))
   :config
   (setq lsp-prefer-flymake nil)
@@ -87,10 +90,11 @@
   (setq gc-cons-threshold 1600000)
   (advice-add 'emacs-pid :around #'my-emacs-pid)
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.pre-commit-cache$")
-  (eval-after-load 'lsp-clients
-    '(progn
-       (plist-put lsp-deps-providers :docker (list :path #'my-tsserver-path))
-       (lsp-dependency 'typescript `(:docker "./node_modules/typescript/bin/tsserver"))))
+  (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.gopath$")
+  ;; (eval-after-load 'lsp-clients
+  ;;   '(progn
+  ;;      (plist-put lsp-deps-providers :docker (list :path #'my-tsserver-path))
+  ;;      (lsp-dependency 'typescript `(:docker "./node_modules/typescript/bin/tsserver"))))
   :commands lsp lsp-deferred)
 (use-package lsp-ui
   :commands lsp-ui-mode)
@@ -125,15 +129,21 @@
   :after (company flycheck))
 
 (use-package prettier-js
-  :after (typescript-mode rjsx-mode)
-  :hook ((typescript-mode . prettier-js-mode)
-         (rjsx-mode . prettier-js-mode)))
+  :after (typescript-mode)
+  :hook ((typescript-mode . prettier-js-mode)))
 
 ;; react
-(use-package rjsx-mode
-  :after (typescript-mode)
-  :config
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode)))
+
+(defun setup-web-tsx ()
+  "Setup web for tsx."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (when (string-equal "tsx" (file-name-extension buffer-file-name))
+    (prettier-js-mode)))
+
+(use-package web-mode
+  :hook (web-mode . setup-web-tsx)
+  :mode "\\.tsx\\'")
 
 ;; python
 (use-package jedi)
@@ -154,6 +164,8 @@
 ;;(use-package auto-pair)
 
 (use-package puppet-mode)
+
+(use-package nix-mode)
 
 ;; terraform
 (use-package terraform-mode)
