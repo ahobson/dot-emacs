@@ -174,11 +174,8 @@
 (use-package ibuffer-vc)
 (use-package git-commit)
 
-(use-package ag
-  :custom
-  (ag-executable (or (executable-find "ag")
-                             (executable-find "ack-grep")
-                             (executable-find "ack"))))
+(use-package deadgrep
+  :bind ("C-c a" . 'deadgrep))
 
 (use-package projectile
   :config
@@ -191,6 +188,7 @@
 
 ;; golang
 (use-package go-mode)
+(use-package gotest)
 
 ;; handy development modes
 (use-package dockerfile-mode)

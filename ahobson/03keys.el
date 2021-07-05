@@ -26,8 +26,6 @@
   (setq mouse-wheel-progressive-speed nil)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))))
 
-;; Search using ack
-(global-set-key (kbd "C-c a") 'projectile-ag)
 ;; or grep
 (global-set-key (kbd "C-c g") 'grep-in-project)
 
