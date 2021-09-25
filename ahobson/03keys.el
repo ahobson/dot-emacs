@@ -14,6 +14,7 @@
   (global-set-key (kbd "s-f") 'isearch-repeat-forward)
   (global-set-key (kbd "s-k") 'kill-this-buffer)
   (global-set-key (kbd "s-l") 'goto-line)
+  (global-set-key (kbd "s-i") 'goto-line)
   (global-set-key (kbd "s-s") 'save-buffer)
   (global-set-key (kbd "s-u") 'revert-buffer)
   (global-set-key (kbd "s-v") 'yank)

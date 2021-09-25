@@ -1,3 +1,6 @@
+;;; my-golang.el --- Summary
+;;; Commentary:
+;;; Code:
 (when (fboundp 'lsp)
   (add-hook 'go-mode-hook #'lsp))
 
@@ -5,3 +8,4 @@
                            (setq whitespace-line-column 400)))
 
 (provide 'my-golang)
+;;; my-golang.el ends here

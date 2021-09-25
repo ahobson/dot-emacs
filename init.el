@@ -81,6 +81,7 @@
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
+         (javascript-mode . lsp-deferred)
          (web-mode . lsp-deferred)
          (python-mode . lsp-deferred)
          (go-mode . lsp-deferred))
@@ -129,8 +130,9 @@
   :after (company flycheck))
 
 (use-package prettier-js
-  :after (typescript-mode)
-  :hook ((typescript-mode . prettier-js-mode)))
+  :after (typescript-mode javascript-mode)
+  :hook ((typescript-mode . prettier-js-mode)
+         (javascript-mode . prettier-js-mode)))
 
 ;; react
 
@@ -187,7 +189,14 @@
   :config (global-git-commit-mode))
 
 ;; golang
-(use-package go-mode)
+
+(defun setup-go-mode ()
+  "Setup go mode."
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save))
+
+(use-package go-mode
+  :hook (go-mode . setup-go-mode))
 (use-package gotest)
 
 ;; handy development modes
