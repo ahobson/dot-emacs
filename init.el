@@ -5,6 +5,9 @@
 (mapc (lambda (dir) (add-to-list 'exec-path dir))
       `("/usr/local/sbin" "/usr/local/bin" ,(expand-file-name "~/bin")))
 
+(if (file-exists-p (expand-file-name "~/.nix-profile/bin"))
+    (add-to-list 'exec-path (expand-file-name "~/.nix-profile/bin")))
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
