@@ -20,3 +20,5 @@ eshell
 transient
 /projectile.cache
 /projectile-bookmarks.eld
+/.cache/
+/straight/modified/
