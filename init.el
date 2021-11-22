@@ -95,15 +95,17 @@
   (advice-add 'emacs-pid :around #'my-emacs-pid)
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.pre-commit-cache$")
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.gopath$")
+  (setq lsp-completion-provider :capf)
+
   ;; (eval-after-load 'lsp-clients
   ;;   '(progn
   ;;      (plist-put lsp-deps-providers :docker (list :path #'my-tsserver-path))
-  ;;      (lsp-dependency 'typescript `(:docker "./node_modules/typescript/bin/tsserver"))))
+  ;;      (lsp-dependency 'typescript `(:docker
+  ;;   "./node_modules/typescript/bin/tsserver"))))
+
   :commands lsp lsp-deferred)
 (use-package lsp-ui
   :commands lsp-ui-mode)
-(use-package company-lsp
-  :commands company-lsp)
 
 ;; clojure editing
 (use-package cider)
@@ -214,7 +216,9 @@
   :config
   (editorconfig-mode 1))
 (use-package rainbow-mode)
-(use-package yasnippet)
+
+(use-package yasnippet
+  :config (yas-global-mode))
 (use-package pyvenv)
 (use-package lua-mode)
 (use-package fennel-mode)
