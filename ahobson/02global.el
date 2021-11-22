@@ -93,15 +93,10 @@
 (setq inferior-octave-startup-args '("--no-init-file"))
 
 (defun my-osx-version ()
-  (let ((sw-ver (shell-command-to-string "sw_vers -productVersion")))
-    (cond ((string-match "^10\.9" sw-ver)
-           "mavericks")
-
-          ((string-match "^10\.10" sw-ver)
-           "yosemite")
-
-          ((string-match "^10\.11" sw-ver)
-           "el_capitan"))))
+  (let* ((sw-ver (shell-command-to-string "sw_vers -productVersion"))
+         (m (string-match "[0-9]+\.[0-9]+" sw-ver))
+         (majmin (substring sw-ver m (match-end 0))))
+    (concat "v" majmin)))
 
 (defun my-linux-version ()
   (let ((debian-version (with-temp-buffer
@@ -111,6 +106,8 @@
            "wheezy"))))
 
 (setq my-os-version
-      (case system-type
-        ('darwin (my-osx-version))
-        ('gnu/linux (my-linux-version))))
+      (pcase system-type
+        (darwin (my-osx-version))
+        (gnu/linux (my-linux-version))))
+
+;;; 02global.el ends here
