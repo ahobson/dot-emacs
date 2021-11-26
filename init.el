@@ -141,16 +141,17 @@
 
 ;; react
 
-(defun setup-web-tsx ()
+(defun setup-web-jtsx ()
   "Setup web for tsx."
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
-  (when (string-equal "tsx" (file-name-extension buffer-file-name))
+  (when (or (string-equal "jsx" (file-name-extension buffer-file-name))
+            (string-equal "tsx" (file-name-extension buffer-file-name)))
     (prettier-js-mode)))
 
 (use-package web-mode
-  :hook (web-mode . setup-web-tsx)
-  :mode "\\.tsx\\'")
+  :hook (web-mode . setup-web-jtsx)
+  :mode "\\.[jt]sx\\'")
 
 ;; python
 (use-package jedi)
