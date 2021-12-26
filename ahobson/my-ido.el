@@ -3,9 +3,6 @@
 ;; http://scottfrazersblog.blogspot.com/2009/12/emacs-better-ido-flex-matching.html
 ;;
 
-(eval-when-compile
-  (require 'cl))
-
 (defun my-ido-make-index-hash-table (str)
   (let ((char-lookup (make-hash-table :test 'equal)))
     ;; Make hash table of all characters with their corresponding indexes
@@ -31,7 +28,7 @@
     matches))
 
 (defun my-ido-fuzzy-match (str items)
-  "Better ido fuzzy matching"
+  "Better ido fuzzy matching."
   (let ((str-len (length str)))
     (if (= 0 str-len)
         (reverse items)
@@ -47,10 +44,10 @@
                                            (> (cdr x) (cdr y))))))))))))
 
 (defvar my-ido-separator-chars '("-" "_")
-  "*Separator chars for extra weighting")
+  "Separator chars for extra weighting.")
 
 (defun my-ido-match-get-correlation (str search-hash item)
-  "Get the correlation for this item"
+  "Get the correlation for this item."
   (let ((item-chars (split-string (if ido-case-fold (downcase item) item) "" t))
         (str-chars (split-string (if ido-case-fold (downcase str) str) "" t))
         (abbrev-chars nil)
