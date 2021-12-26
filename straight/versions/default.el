@@ -78,7 +78,7 @@
  ("straight.el" . "af5437f2afd00936c883124d6d3098721c2d306c")
  ("terraform-mode" . "e560caaa9d9a11b0868adf6d9dcae5ebb5055730")
  ("transient" . "349116159f707a474926b47e5f6b6240e8997a4d")
- ("typescript.el" . "13e6da6c5746187842d8ebb5323bf2d88d5759c2")
+ ("typescript.el" . "e82416205158d4b21d42d6b60c4385f68f0ae1b1")
  ("use-package" . "a7422fb8ab1baee19adb2717b5b47b9c3812a84c")
  ("vue-html-mode" . "1514939804bad558584feeb6298b38d22eadf64e")
  ("vue-mode" . "031edd1f97db6e7d8d6c295c0e6d58dd128b9e71")
