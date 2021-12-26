@@ -31,7 +31,7 @@
  ("flx" . "e3b3f0533e44c5250ce73d728b59a7e96c692b5d")
  ("flycheck" . "784f184cdd9f9cb4e3dbb997c09d93e954142842")
  ("gnu-elpa-mirror" . "870aae430e9eb6afb9097492cbd4076e87a677f5")
- ("go-mode.el" . "5bd8efab64352dccf31dbc99c4fc96d3b985ef27")
+ ("go-mode.el" . "32cbd78c0af29837ace3db04a224d6d01ec6851e")
  ("gotest.el" . "9b1dc4eba1b22d751cb2f0a12e29912e010fac60")
  ("graphql-mode" . "80e9ac8020f7a4a8a963136698eb97a9fca28f7d")
  ("haml-mode" . "bf5b6c11b1206759d2b28af48765e04882dd1fc4")
