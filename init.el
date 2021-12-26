@@ -112,20 +112,6 @@
 (use-package paredit)
 (use-package clojure-mode)
 
-;; scala
-(use-package ensime
-  :straight (ensime-emacs :type git
-                          :host github
-                          :repo "ensime/ensime-emacs"
-                          :branch "2.0")
-  :config
-  (setq ensime-default-java-flags
-        (list
-         "-Xss2m" "-Xms4G" "-Xmx4G"
-         "-XX:ReservedCodeCacheSize=256m"
-         "-XX:MaxMetaspaceSize=512m"))
-  :after (scala-mode))
-
 ;; json
 (use-package json-mode)
 

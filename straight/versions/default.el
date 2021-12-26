@@ -25,7 +25,6 @@
  ("emacs-reformatter" . "b57f5d480003ab7b0880e0059dcc51747fb2e088")
  ("emacs_chrome" . "1632acab5624637031326bd902e2ad7ccb6b4c90")
  ("emacsmirror-mirror" . "5bcbacbecf32c7615f53c9d5d5d4d3e8bf4070e5")
- ("ensime-emacs" . "34eb11dac3ec9d1c554c2e55bf056ece6983add7")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
  ("f.el" . "50af874cd19042f17c8686813d52569b1025c76a")
  ("fennel-mode" . "2900e3c2d5554b115a0a3b181e74a27c76489f4d")
