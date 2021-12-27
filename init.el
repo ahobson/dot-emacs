@@ -221,7 +221,11 @@
   :config (yas-global-mode))
 (use-package pyvenv)
 (use-package lua-mode)
-(use-package fennel-mode)
+(use-package fennel-mode
+  :straight (fennel-mode
+             :repo "technomancy/fennel-mode"
+             :fetcher gitlab
+             :branch "main"))
 (use-package vue-mode)
 (use-package redenv
   :straight (redenv
