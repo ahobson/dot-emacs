@@ -87,7 +87,9 @@
          (javascript-mode . lsp-deferred)
          (web-mode . lsp-deferred)
          (python-mode . lsp-deferred)
-         (go-mode . lsp-deferred))
+         (go-mode . lsp-deferred)
+         (sql-mode .lsp-deferred)
+         (sql-interactive-mode . lsp-deferred))
   :config
   (setq lsp-prefer-flymake nil)
   (setq read-process-output-max (* 1024 1024))
@@ -96,6 +98,12 @@
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.pre-commit-cache$")
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.gopath$")
   (setq lsp-completion-provider :capf)
+
+  ;; trying out sql
+  (setq sql-backend 'lsp)
+  (setq sql-lsp-sqls-workspace-config-path 'workspace)
+  (setq lsp-sqls-connections
+    '(((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5432 user=postgres dbname=dev_db sslmode=disable"))))
 
   ;; (eval-after-load 'lsp-clients
   ;;   '(progn
@@ -204,6 +212,7 @@
   (editorconfig-mode 1))
 (use-package rainbow-mode)
 
+(use-package restclient)
 (use-package yasnippet
   :config (yas-global-mode))
 (use-package pyvenv)
