@@ -95,8 +95,11 @@
   (setq read-process-output-max (* 1024 1024))
   (setq gc-cons-threshold 1600000)
   (advice-add 'emacs-pid :around #'my-emacs-pid)
-  (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.pre-commit-cache$")
-  (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.gopath$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pre-commit-cache$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.gopath$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.npmglobal$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.log$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\tmp$")
   (setq lsp-completion-provider :capf)
 
   ;; trying out sql
@@ -146,6 +149,8 @@
 (use-package web-mode
   :hook (web-mode . setup-web-jtsx)
   :mode "\\.[jt]sx\\'")
+
+(use-package jest)
 
 ;; python
 (use-package jedi)
