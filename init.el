@@ -84,7 +84,7 @@
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
-         (javascript-mode . lsp-deferred)
+         (js-mode . lsp-deferred)
          (web-mode . lsp-deferred)
          (python-mode . lsp-deferred)
          (go-mode . lsp-deferred)
@@ -132,9 +132,8 @@
   :after (company flycheck))
 
 (use-package prettier-js
-  :after (typescript-mode javascript-mode)
   :hook ((typescript-mode . prettier-js-mode)
-         (javascript-mode . prettier-js-mode)))
+         (js-mode . prettier-js-mode)))
 
 ;; react
 
