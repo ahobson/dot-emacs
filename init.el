@@ -81,12 +81,18 @@
   (let ((default-directory (projectile-project-root)))
     (file-truename path)))
 
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp-deferred))))
+
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
          (js-mode . lsp-deferred)
          (web-mode . lsp-deferred)
-         (python-mode . lsp-deferred)
+;         (python-mode . lsp-deferred)
          (go-mode . lsp-deferred)
          (sql-mode .lsp-deferred)
          (sql-interactive-mode . lsp-deferred))
