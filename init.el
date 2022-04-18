@@ -126,7 +126,9 @@
 
 ;; clojure editing
 (use-package cider)
-(use-package paredit)
+(use-package paredit
+  :config
+  (add-hook 'fennel-mode-hook #'paredit-mode))
 (use-package clojure-mode)
 
 ;; json
@@ -242,13 +244,27 @@
 (use-package markdown-mode)
 
 ;; visual themes
-(use-package mac-classic-theme
-  :disabled
-  :straight (mac-classic-theme
-             :type git :host github
-             :repo "ahobson/mac-classic-theme")
+;; (use-package mac-classic-theme
+;;   :disabled
+;;   :straight (mac-classic-theme
+;;              :type git :host github
+;;              :repo "ahobson/mac-classic-theme")
+;;   :config
+;;   (load-theme 'mac-classic))
+
+(use-package modus-themes
+  :init
+  ;; Add all your customizations prior to loading the themes
+  (setq modus-themes-lang-checkers '(intense)
+        modus-themes-syntax '(yellow-comments green-strings alt-syntax)
+        modus-themes-paren-match '(bold)
+        modus-themes-links '(neutral-underline))
+
+  ;; Load the theme files before enabling a theme
+  (modus-themes-load-themes)
   :config
-  (load-theme 'mac-classic))
+  ;; Load the theme of your choice:
+  (modus-themes-load-operandi))
 
 (use-package windmove
   :straight (windmove
