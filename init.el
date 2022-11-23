@@ -57,8 +57,12 @@
   (setq company-tooltip-align-annotations t))
 
 (use-package direnv
- :config
- (direnv-mode))
+  ;; :straight (direnv
+  ;;            :repo "siddharthverma314/emacs-direnv"
+  ;;            :fetcher git
+  ;;            :branch "master")
+  :config
+  (direnv-mode))
 
 (use-package flycheck
   :config
@@ -105,6 +109,8 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.gopath$")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.npmglobal$")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.log$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\build$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\coverage$")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\tmp$")
   (setq lsp-completion-provider :capf)
 
@@ -229,11 +235,7 @@
   :config (yas-global-mode))
 (use-package pyvenv)
 (use-package lua-mode)
-(use-package fennel-mode
-  :straight (fennel-mode
-             :repo "technomancy/fennel-mode"
-             :fetcher gitlab
-             :branch "main"))
+(use-package fennel-mode)
 (use-package vue-mode)
 (use-package redenv
   :straight (redenv
