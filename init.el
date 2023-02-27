@@ -43,6 +43,8 @@
   :config
   (flx-ido-mode t))
 
+(use-package vterm)
+
 (use-package smex
   :config
   (setq smex-save-file
@@ -112,6 +114,7 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\build$")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\coverage$")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\tmp$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\playwright-report$")
   (setq lsp-completion-provider :capf)
 
   ;; trying out sql
