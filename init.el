@@ -115,6 +115,8 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\coverage$")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\tmp$")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\playwright-report$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\playwright/html-report$")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\playwright/results$")
   (setq lsp-completion-provider :capf)
 
   ;; trying out sql
