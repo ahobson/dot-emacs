@@ -173,7 +173,8 @@
 
 ;; python
 (use-package jedi)
-(use-package python-pytest)
+;; not working in emacs 29 nightly
+;;(use-package python-pytest)
 (use-package python-black)
 
 ;; ruby
