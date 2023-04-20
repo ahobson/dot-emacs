@@ -1,3 +1,7 @@
+;;; package -- ahobson init file
+;;; Commentary:
+;;; 01defuns
+;;; Code:
 ;; stolen from the original emacs-starter-kit
 
 ;; We have a number of turn-on-* functions since it's advised that lambda
@@ -115,3 +119,21 @@
     See `sort-regexp-fields'."
   (interactive "*P\nr")
   (sort-regexp-fields reverse "[^[:space:]]+" "\\&" beg end))
+
+(defun my-visit-pull-request-url ()
+  "Visit the current branch's PR on Github."
+  (interactive)
+  (browse-url
+   (format "https://github.com/%s/pull/new/%s"
+           (replace-regexp-in-string
+            "\\`.+github\\.com:\\(.+\\)\\.git\\'" "\\1"
+            (magit-get "remote"
+                       (magit-get-push-remote)
+                       "url"))
+           (magit-get-current-branch))))
+
+(eval-after-load 'magit
+  '(define-key magit-mode-map (kbd "C-c v")
+     #'my-visit-pull-request-url))
+
+;;; 01defuns.el ends here
