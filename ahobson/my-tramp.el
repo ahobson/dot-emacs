@@ -3,23 +3,17 @@
 ;;; Code:
 
 
-;; from https://github.com/emacs-lsp/lsp-mode/issues/2709#issuecomment-860753973
+;; from
+;; https://github.com/emacs-lsp/lsp-mode/issues/2709#issuecomment-1475039310
 
-(defun lsp-tramp-connection-over-ssh-port-forwarding (command &optional test-command)
-  "Like lsp-tcp-connection, but uses SSH portforwarding."
-  (cl-check-type command (or string
-                             function
-                             (and list
-                                  (satisfies (lambda (l)
-                                               (seq-every-p (lambda (el)
-                                                              (stringp el))
-                                                            l))))))
+(defun lsp-tramp-connection-over-ssh-port-forwarding (command)
+  "Like lsp-tcp-connection, but use SSH portforwarding to run COMMAND."
   (list
    :connect (lambda (filter sentinel name environment-fn _workspace)
               (let* ((host "localhost")
                      (lsp-port (lsp--find-available-port host (cl-incf lsp--tcp-port)))
                      (command (with-parsed-tramp-file-name buffer-file-name nil
-                                (lsp-message "[tcp/ssh hack] running LSP %s on %s / %s" command host localname)
+                                (message "[tcp/ssh hack] running LSP %s on %s / %s" command host localname)
                                 (let* ((unix-socket (format "/tmp/lsp-ssh-portforward-%s.sock" lsp-port))
                                        (command (list
                                                  "ssh"
@@ -28,10 +22,10 @@
                                                  host
                                                  "socat"
                                                  (format "unix-listen:%s" unix-socket)
-                                                 (format "system:'\"cd %s && %s\"'" (file-name-directory localname) command)
+                                                 (format "system:'\"tramp-lsp %s %s\"'" (file-name-directory localname) command)
                                                  )))
-                                  (lsp-message "using local command %s" command)
-                               command)))
+                                  (message "using local command %s" command)
+                                  command)))
                      (final-command (if (consp command) command (list command)))
                      (_ (unless (executable-find (cl-first final-command))
                           (user-error (format "Couldn't find executable %s" (cl-first final-command)))))
@@ -50,12 +44,17 @@
                 (cons tcp-proc proc)))
    :test? (lambda () t)))
 
-
 (lsp-register-client
- (make-lsp-client :new-connection (lsp-tramp-connection-over-ssh-port-forwarding "tramp-gopls")
+ (make-lsp-client :new-connection (lsp-tramp-connection-over-ssh-port-forwarding "gopls")
                   :major-modes '(go-mode)
                   :remote? t
                   :server-id 'gopls-remote))
+
+(lsp-register-client
+ (make-lsp-client :new-connection (lsp-tramp-connection-over-ssh-port-forwarding "typescript-language-server --stdio")
+                  :major-modes '(js-mode typescript-mode web-mode)
+                  :remote? t
+                  :server-id 'tsls-remote))
 
 (with-eval-after-load "tramp"
   (add-to-list 'tramp-remote-path (expand-file-name "~/.nix-profile/bin"))
