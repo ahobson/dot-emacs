@@ -29,7 +29,7 @@
         (go-test-current-test))))
 
 (eval-after-load 'go-mode
-  (define-key go-mode-map (kbd "C-c C-c") 'my-gotest-current-test))
+  '(define-key go-mode-map (kbd "C-c C-c") 'my-gotest-current-test))
 
 (provide 'my-golang)
 ;;; my-golang.el ends here
