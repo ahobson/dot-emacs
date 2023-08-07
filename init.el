@@ -269,11 +269,9 @@
         modus-themes-paren-match '(bold)
         modus-themes-links '(neutral-underline))
 
-  ;; Load the theme files before enabling a theme
-  (modus-themes-load-themes)
   :config
   ;; Load the theme of your choice:
-  (modus-themes-load-operandi))
+  (load-theme 'modus-operandi))
 
 (use-package windmove
   :straight (windmove
