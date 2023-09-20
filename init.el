@@ -43,6 +43,10 @@
   :config
   (flx-ido-mode t))
 
+;;
+;; devbox global add cmake libtool mktemp
+;; ln -s =libtool bin/glibtool
+;; sudo ln -s =mktemp /usr/local/bin
 (use-package vterm)
 
 (use-package smex
