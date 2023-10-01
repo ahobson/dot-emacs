@@ -286,14 +286,6 @@
          ([C-s-right] . (lambda () (interactive) (windmove-right -1)))
          ([C-s-down] . (lambda () (interactive) (windmove-down -1)))))
 
-(use-package elfeed
-  :config
-  (setq elfeed-sort-order 'ascending))
-(use-package elfeed-org
-  :after elfeed
-  :config
-  (elfeed-org))
-
 ;; mostly stolen from the old emacs starter kit
 (setq my-system-config (concat user-emacs-directory system-name ".el")
       my-user-config (concat user-emacs-directory user-login-name ".el")
