@@ -286,6 +286,24 @@
          ([C-s-right] . (lambda () (interactive) (windmove-right -1)))
          ([C-s-down] . (lambda () (interactive) (windmove-down -1)))))
 
+(use-package shell-maker
+  :straight (:host github :repo "xenodium/chatgpt-shell" :files ("shell-maker.el")))
+
+(use-package chatgpt-shell
+  :requires shell-maker
+  :straight (:host github :repo "xenodium/chatgpt-shell" :files ("chatgpt-shell.el")))
+
+;; security add-generic-password -a $LOGNAME -s openapi-key -w "thekey"
+(setq chatgpt-shell-openai-key
+      (lambda ()
+        (auth-info-password
+         (nth 0
+              (auth-source-macos-keychain-search
+               :backend (auth-source-backend-parse 'macos-keychain-generic)
+               :user "ahobson" :port 'openapi-key
+               :type 'macos-keychain-generic :max 1)))))
+
+
 ;; mostly stolen from the old emacs starter kit
 (setq my-system-config (concat user-emacs-directory system-name ".el")
       my-user-config (concat user-emacs-directory user-login-name ".el")
