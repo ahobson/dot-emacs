@@ -102,7 +102,6 @@
   :hook ((typescript-mode . lsp-deferred)
          (js-mode . lsp-deferred)
          (web-mode . lsp-deferred)
-;         (python-mode . lsp-deferred)
          (go-mode . lsp-deferred)
          (sql-mode .lsp-deferred)
          (sql-interactive-mode . lsp-deferred))
@@ -176,10 +175,13 @@
 (use-package jest)
 
 ;; python
-(use-package jedi)
+;;(use-package jedi)
 ;; not working in emacs 29 nightly
 ;;(use-package python-pytest)
 (use-package python-black)
+;; don't want all of elpy, so maybe?
+(use-package elpy
+  :hook (python-mode . (lambda () (local-set-key (kbd "C-c C-;") 'elpy-test))))
 
 ;; ruby
 

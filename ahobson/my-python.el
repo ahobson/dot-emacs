@@ -21,7 +21,7 @@
 
 ;; (add-hook 'python-mode-hook 'jedi:setup)
 ;; (setq jedi:complete-on-dot t)
-(when (fboundp 'lsp-mode)
-  (add-hook 'python-mode-hook #'lsp-deferred))
+
+(provide 'my-python)
 ;;; my-python.el ends here
 
