@@ -289,7 +289,7 @@
 
 (use-package chatgpt-shell
   :requires shell-maker
-  :straight (:host github :repo "xenodium/chatgpt-shell" :files ("chatgpt-shell.el")))
+  :straight (:host github :repo "xenodium/chatgpt-shell" :files ("chatgpt-shell.el" "dall-e-shell.el")))
 
 ;; security add-generic-password -a $LOGNAME -s openapi-key -w "thekey"
 (setq chatgpt-shell-openai-key
@@ -301,6 +301,7 @@
                :user "ahobson" :port 'openapi-key
                :type 'macos-keychain-generic :max 1)))))
 
+(setq dall-e-shell-openai-key chatgpt-shell-openai-key)
 
 ;; mostly stolen from the old emacs starter kit
 (setq my-system-config (concat user-emacs-directory system-name ".el")
