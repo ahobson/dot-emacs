@@ -184,10 +184,8 @@
 ;; ruby
 
 (use-package inf-ruby)
-(use-package rspec-mode
-  :config
-  (defun rspec-docker-p ()
-    t))
+(use-package rspec-mode)
+(use-package ruby-test-mode)
 
 (use-package idle-highlight-mode)
 

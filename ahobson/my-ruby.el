@@ -48,16 +48,6 @@
 (setq redenv-global-env-prefix
       (expand-file-name (concat "~/.redenv/" my-os-version)))
 
-(defadvice redenv-use (after my-redenv-use nil activate)
-  "When activating redenv, also set LOCAL_VERSION env."
-  (if (and (fboundp 'vc-git-branches)
-           (not (equal "master" (car (vc-git-branches)))))
-      (setenv "LOCAL_VERSION" (car (vc-git-branches)))
-    (setenv "LOCAL_VERSION" nil)))
-(ad-activate 'redenv-use)
-
-(defadvice inf-ruby-console-auto (before activate-redenv-for-robe activate)
-  (redenv-activate-corresponding-ruby))
 
 (defun ruby-interpolate ()
   "In a double quoted string, interpolate."
@@ -80,21 +70,5 @@
 
 (add-hook 'ruby-mode-hook 'my-turn-on-smartparens)
 (add-hook 'ruby-mode-hook 'my-turn-on-whitespace)
-
-(defadvice switch-to-buffer (after my-redenv-switch-to-buffer nil activate)
-  "When switching to a buffer in ruby mode, activate redenv."
-  (when (and (or (eq 'ruby-mode major-mode)
-                 (eq 'enh-ruby-mode major-mode))
-             (not (string-match tramp-file-name-regexp buffer-file-name)))
-    (redenv-activate-corresponding-ruby)
-    (when (and (fboundp 'enh-ruby-mode)
-               (eq 'enh-ruby-mode major-mode)
-               (first redenv--current-ruby-binary-path))
-      ;; to get rid of bytecomp warning
-      (eval-when-compile
-        (defvar enh-ruby-program))
-      (setq enh-ruby-program
-            (concat (first redenv--current-ruby-binary-path) "ruby")))))
-(ad-activate 'switch-to-buffer)
 
 (provide 'my-ruby)
