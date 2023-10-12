@@ -275,7 +275,7 @@
 
   :config
   ;; Load the theme of your choice:
-  (load-theme 'modus-operandi))
+  (load-theme 'modus-operandi t))
 
 (use-package windmove
   :straight (windmove
