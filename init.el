@@ -227,10 +227,6 @@
 (use-package lua-mode)
 (use-package fennel-mode)
 (use-package vue-mode)
-(use-package redenv
-  :straight (redenv
-             :type git :host github
-             :repo "ahobson/redenv.el"))
 ;; editing server
 (use-package edit-server)
 (use-package markdown-mode)
