@@ -77,20 +77,6 @@
 
 (use-package graphql-mode)
 
-;; typescript-language-server checks to see if the client process id
-;; is still alive, and that doesn't work inside a docker container
-(defun my-emacs-pid (orig-emacs-pid &rest args)
-  "Hack for lsp typescript-language-server inside docker or returning ORIG-EMACS-PID (as ARGS)."
-  (if (and lsp--cur-workspace (not (file-exists-p "nix")))
-      1
-    (apply orig-emacs-pid args)))
-
-;; lsp now tries to find the tsserver, which we have in docker
-(defun my-tsserver-path (path)
-  "Hack for lsp tsserver inside docker using PATH."
-  (let ((default-directory (projectile-project-root)))
-    (file-truename path)))
-
 (use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
@@ -109,7 +95,6 @@
   (setq lsp-prefer-flymake nil)
   (setq read-process-output-max (* 1024 1024))
   (setq gc-cons-threshold 1600000)
-  (advice-add 'emacs-pid :around #'my-emacs-pid)
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pre-commit-cache\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.gopath\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.npmglobal\\'")
@@ -128,12 +113,6 @@
   (setq sql-lsp-sqls-workspace-config-path 'workspace)
   (setq lsp-sqls-connections
     '(((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5432 user=postgres dbname=dev_db sslmode=disable"))))
-
-  ;; (eval-after-load 'lsp-clients
-  ;;   '(progn
-  ;;      (plist-put lsp-deps-providers :docker (list :path #'my-tsserver-path))
-  ;;      (lsp-dependency 'typescript `(:docker
-  ;;   "./node_modules/typescript/bin/tsserver"))))
 
   :commands lsp lsp-deferred)
 (use-package lsp-ui
