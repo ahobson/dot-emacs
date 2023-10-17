@@ -241,14 +241,13 @@
 ;;   (load-theme 'mac-classic))
 
 (use-package modus-themes
-  :init
-  ;; Add all your customizations prior to loading the themes
-  (setq modus-themes-lang-checkers '(intense)
-        modus-themes-syntax '(yellow-comments green-strings alt-syntax)
-        modus-themes-paren-match '(bold)
-        modus-themes-links '(neutral-underline))
-
+  :ensure t
   :config
+  ;; Add all your customizations prior to loading the themes
+  (setq modus-themes-common-palette-overrides modus-themes-preset-overrides-intense
+        modus-themes-italic-constructs t
+        modus-themes-mixed-fonts t
+        modus-themes-completions '((t . (extrabold))))
   ;; Load the theme of your choice:
   (load-theme 'modus-operandi t))
 
