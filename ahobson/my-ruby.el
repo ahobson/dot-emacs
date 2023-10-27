@@ -1,7 +1,9 @@
 (require 'ruby-mode)
 ;;(require 'enh-ruby-mode)
-(when (fboundp 'lsp)
-  (add-hook 'ruby-mode-hook #'lsp))
+
+;; disable lsp in favor of robe
+;; (when (fboundp 'lsp)
+;;   (add-hook 'ruby-mode-hook #'lsp))
 
 (when (fboundp 'enh-ruby-mode)
   (add-to-list 'auto-mode-alist
@@ -17,37 +19,10 @@
   (add-hook 'enh-ruby-mode-hook 'my-turn-on-smartparens)
   (add-hook 'enh-ruby-mode-hook 'my-turn-on-whitespace))
 
-;; begin from starter-kit-ruby
-;; We never want to edit Rubinius bytecode or MacRuby binaries
-(add-to-list 'completion-ignored-extensions ".rbc")
-(add-to-list 'completion-ignored-extensions ".rbo")
-
-;; Clear the compilation buffer between test runs.
-(eval-after-load 'ruby-compilation
-  '(progn
-     (defadvice ruby-do-run-w/compilation (before kill-buffer (name cmdlist))
-       (let ((comp-buffer-name (format "*%s*" name)))
-         (when (get-buffer comp-buffer-name)
-           (with-current-buffer comp-buffer-name
-             (delete-region (point-min) (point-max))))))
-     (ad-activate 'ruby-do-run-w/compilation)))
-
-;; Rinari (Minor Mode for Ruby On Rails)
-(setq rinari-major-modes
-      (list 'mumamo-after-change-major-mode-hook 'dired-mode-hook 'ruby-mode-hook
-            'css-mode-hook 'yaml-mode-hook 'javascript-mode-hook))
-
-;; end from starter-kit-ruby
-
 ;; ruby customizations
 (setq ruby-test-ruby-executables '("ruby"))
 (setq ruby-test-rspec-executables '("rspec"))
 ;;(setq ruby-deep-indent-paren nil)
-
-
-(setq redenv-global-env-prefix
-      (expand-file-name (concat "~/.redenv/" my-os-version)))
-
 
 (defun ruby-interpolate ()
   "In a double quoted string, interpolate."
@@ -59,8 +34,17 @@
     (insert "{}")
     (backward-char 1)))
 
+(defun my-inf-ruby-console-rails ()
+  "Run inf-ruby-console-rails with RAILS_ENV set."
+  (interactive)
+  (let* ((default-directory (locate-dominating-file default-directory
+                                                    #'inf-ruby-console-match))
+         (inf-ruby-console-environment (inf-ruby-console-rails-env))
+         (process-environment (cons (format "RAILS_ENV=%s" inf-ruby-console-environment)
+                                    process-environment)))
+    (inf-ruby-console-rails default-directory)))
+
 (define-key ruby-mode-map (kbd "#") 'ruby-interpolate)
-(define-key ruby-mode-map (kbd "s-.") 'xref-find-definitions)
 
 (require 'smartparens-config)
 (require 'smartparens-ruby)
@@ -72,3 +56,5 @@
 (add-hook 'ruby-mode-hook 'my-turn-on-whitespace)
 
 (provide 'my-ruby)
+;;; my-ruby.el ends here
+

@@ -167,6 +167,11 @@
 (use-package inf-ruby)
 (use-package rspec-mode)
 (use-package ruby-test-mode)
+(use-package robe
+  :config
+  (add-hook 'ruby-mode-hook #'robe-mode)
+  (add-hook 'ruby-ts-mode-hook #'robe-mode))
+(use-package projectile-rails)
 
 (use-package idle-highlight-mode)
 
