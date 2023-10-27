@@ -44,6 +44,12 @@
                                     process-environment)))
     (inf-ruby-console-rails default-directory)))
 
+(defun my-robe-start ()
+    "Start robe after calling my-inf-ruby-console-rails."
+  (interactive)
+  (my-inf-ruby-console-rails)
+  (robe-start))
+
 (define-key ruby-mode-map (kbd "#") 'ruby-interpolate)
 
 (require 'smartparens-config)

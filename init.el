@@ -171,7 +171,11 @@
   :config
   (add-hook 'ruby-mode-hook #'robe-mode)
   (add-hook 'ruby-ts-mode-hook #'robe-mode))
-(use-package projectile-rails)
+(use-package projectile-rails
+  :after (projectile)
+  :config
+  (projectile-rails-global-mode)
+  (define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map))
 
 (use-package idle-highlight-mode)
 
