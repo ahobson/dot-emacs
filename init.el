@@ -297,11 +297,12 @@
       my-user-config (concat user-emacs-directory user-login-name ".el")
       my-user-dir (concat user-emacs-directory user-login-name))
 
-(add-to-list 'load-path my-user-dir)
-
 (when (file-exists-p my-system-config) (load my-system-config))
 
-(when (file-exists-p my-user-config) (load my-user-config))
+(add-to-list 'load-path my-user-dir)
+
+(when (file-exists-p my-user-config)
+  (load my-user-config))
 
 (when (file-exists-p my-user-dir)
   (mapc 'load (directory-files my-user-dir nil "^[^#].*el$")))
