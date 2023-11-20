@@ -34,15 +34,17 @@
     (insert "{}")
     (backward-char 1)))
 
+
 (defun my-inf-ruby-console-rails ()
   "Run inf-ruby-console-rails with RAILS_ENV set."
   (interactive)
   (let* ((default-directory (locate-dominating-file default-directory
                                                     #'inf-ruby-console-match))
-         (inf-ruby-console-environment (inf-ruby-console-rails-env))
-         (process-environment (cons (format "RAILS_ENV=%s" inf-ruby-console-environment)
-                                    process-environment)))
-    (inf-ruby-console-rails default-directory)))
+         (inf-ruby-console-environment (inf-ruby-console-rails-env)))
+    (with-environment-variables (("BUNDLE_GEMFILE" "Gemfile_ahobson")
+                                 ("DISABLE_SPRING" "true")
+                                 ("RAILS_ENV" inf-ruby-console-environment))
+      (inf-ruby-console-rails default-directory))))
 
 (defun my-robe-start ()
     "Start robe after calling my-inf-ruby-console-rails."
@@ -60,6 +62,11 @@
 
 (add-hook 'ruby-mode-hook 'my-turn-on-smartparens)
 (add-hook 'ruby-mode-hook 'my-turn-on-whitespace)
+
+(add-hook 'ruby-mode-hook
+  (lambda ()
+    (setq-local flycheck-command-wrapper-function
+                (lambda (command) (append '("bundle" "exec") command)))))
 
 (provide 'my-ruby)
 ;;; my-ruby.el ends here
