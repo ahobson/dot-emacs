@@ -242,44 +242,10 @@
 
 ;; github codespaces
 (use-package codespaces
-  :config (progn
-            (codespaces-setup)
-            (let* ((ghcs (assoc "ghcs" tramp-methods))
-                   (ghcs-methods (cdr ghcs)))
-              ;; orig
-              (setf (cdr (assoc 'tramp-remote-shell ghcs-methods))
-                    '("/bin/sh"))
-              (setf (cdr (assoc 'tramp-remote-shell-login ghcs-methods))
-                    '(("-l")))
-              (setf (cdr (assoc 'tramp-login-args ghcs-methods))
-                    '((("codespace") ("ssh") ("-c") ("%h"))))
-              ;; custom
-              ;; (setf (cdr (assoc 'tramp-remote-shell ghcs-methods))
-              ;;       '("/bin/bash"))
-              ;; (setf (cdr (assoc 'tramp-remote-shell-login ghcs-methods))
-              ;;       '(("-il")))
-              ;; (setf (cdr (assoc 'tramp-login-args ghcs-methods))
-              ;;       '((("codespace")
-              ;;          ("ssh")
-              ;;          ("-c")
-              ;;          ("%h")
-              ;;          ("--")
-              ;;          ("-t")
-              ;;          ("-c")
-              ;;          ("%l"))))
-              )
-            ))
+  :config (codespaces-setup))
 
+;; needed to find ruby in codespaces
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
-
-;; visual themes
-;; (use-package mac-classic-theme
-;;   :disabled
-;;   :straight (mac-classic-theme
-;;              :type git :host github
-;;              :repo "ahobson/mac-classic-theme")
-;;   :config
-;;   (load-theme 'mac-classic))
 
 (use-package modus-themes
   :ensure t
