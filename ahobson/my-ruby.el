@@ -34,6 +34,18 @@
     (insert "{}")
     (backward-char 1)))
 
+(defun my-om-ruby-console-hack ()
+  "Create custom Gemfile and install pry"
+  (interactive)
+  (let ((default-directory (locate-dominating-file default-directory
+                                                   #'inf-ruby-console-match)))
+    (with-temp-file "Gemfile_ahobson"
+      (insert (format "%s\n%s\n%s\n"
+                      "gem \"pry\""
+                      "gem \"robe\", \"0.8.3\", github: \"dgutov/robe\""
+                      "eval_gemfile \"Gemfile\""))))
+    (with-environment-variables (("BUNDLE_GEMFILE" "Gemfile_ahobson"))
+      (shell-command "bundle install")))
 
 (defun my-inf-ruby-console-rails ()
   "Run inf-ruby-console-rails with RAILS_ENV set."
@@ -50,6 +62,8 @@
     "Start robe after calling my-inf-ruby-console-rails."
   (interactive)
   (my-inf-ruby-console-rails)
+  ;; trying robe on codespaces, but it doesn't work well
+  ;; (setq robe-port "25001")
   (robe-start))
 
 (define-key ruby-mode-map (kbd "#") 'ruby-interpolate)
