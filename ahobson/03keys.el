@@ -5,8 +5,8 @@
 
 ;; Distinguish between various Emacs ports to OS X
 (cond
- ;; mac port
- ((setq mac-command-modifier 'super
+ ((eq system-type 'darwin)
+  (setq mac-command-modifier 'super
         mac-option-modifier  'meta)
   (global-set-key (kbd "s-a") 'mark-whole-buffer)
   (global-set-key (kbd "s-c") 'kill-ring-save)
@@ -27,8 +27,8 @@
   (setq mouse-wheel-progressive-speed nil)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))))
 
-;; or grep
-(global-set-key (kbd "C-c g") 'grep-in-project)
+;; haven't used this in a long time
+;; (global-set-key (kbd "C-c g") 'grep-in-project)
 
 ;; Use smex
 (global-set-key (kbd "M-x") 'smex)
