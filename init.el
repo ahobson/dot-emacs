@@ -122,6 +122,7 @@
 (use-package cider)
 (use-package paredit
   :config
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
   (add-hook 'fennel-mode-hook #'paredit-mode))
 (use-package clojure-mode)
 
@@ -151,7 +152,8 @@
   :hook (web-mode . setup-web-jtsx)
   :mode "\\.[jt]sx\\'")
 
-(use-package jest)
+(use-package jest
+  :after (typescript-mode))
 
 ;; python
 ;;(use-package jedi)

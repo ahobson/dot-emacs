@@ -66,9 +66,6 @@
 (add-hook 'prog-mode-hook 'my-turn-on-whitespace)
 (add-hook 'puppet-mode-hook 'my-turn-on-whitespace)
 
-;; Use paredit for emacs lisp
-(add-hook 'emacs-lisp-mode-hook 'my-turn-on-paredit)
-
 (random t) ;; Seed the random-number generator
 
 ;; Hippie expand: at times perhaps too hip
