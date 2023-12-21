@@ -153,7 +153,9 @@
   :mode "\\.[jt]sx\\'")
 
 (use-package jest
-  :after (typescript-mode))
+  :after (typescript-mode)
+  :config
+  (setq jest-executable "jest"))
 
 ;; python
 ;;(use-package jedi)
