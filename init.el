@@ -293,7 +293,7 @@
       '((ruby "https://github.com/tree-sitter/tree-sitter-ruby")))
 
 ;; mostly stolen from the old emacs starter kit
-(setq my-system-config (concat user-emacs-directory system-name ".el")
+(setq my-system-config (concat user-emacs-directory (system-name) ".el")
       my-user-config (concat user-emacs-directory user-login-name ".el")
       my-user-dir (concat user-emacs-directory user-login-name))
 
