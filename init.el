@@ -78,10 +78,20 @@
 (use-package graphql-mode)
 
 (use-package lsp-pyright
-  :ensure t
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp-deferred))))
+
+(use-package lsp-java
+  :hook (java-mode . (lambda ()
+                       (lsp-deferred)))
+  :config
+  (setq lsp-java-server-install-dir "/sshx:clouddesk:/home/hobsoand/src/jdtls")
+  (setq lsp-java-workspace-dir "/sshx:clouddesk:/home/hobsoand/.emacs.d/workspace"))
+
+(use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+
+(use-package lsp-treemacs)
 
 ;; lsp
 (use-package lsp-mode
