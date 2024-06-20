@@ -102,6 +102,8 @@
          (sql-mode .lsp-deferred)
          (sql-interactive-mode . lsp-deferred))
   :config
+  (setq lsp-semgrep-metrics-enabled nil)
+  (setq lsp-disabled-clients '(semgrep-ls))
   (setq lsp-prefer-flymake nil)
   (setq read-process-output-max (* 1024 1024))
   (setq gc-cons-threshold 1600000)
