@@ -215,7 +215,9 @@
 
 ;; terraform
 (use-package terraform-mode
-  :custom (terraform-format-on-save t))
+  :custom (terraform-format-on-save t)
+  :hook (terraform-mode . (lambda ()
+                          (outline-minor-mode))))
 
 ;; Useful for git
 (use-package ibuffer-vc)
