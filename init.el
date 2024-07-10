@@ -49,6 +49,17 @@
 ;; sudo ln -s =mktemp /usr/local/bin
 (use-package vterm)
 
+(use-package eat
+  :straight (eat
+             :type git :host codeberg
+             :repo "akib/emacs-eat"
+             :files ("*.el" ("term" "term/*.el") "*.texi"
+                     "*.ti" ("terminfo/e" "terminfo/e/*")
+                     ("terminfo/65" "terminfo/65/*")
+                     ("integration" "integration/*")
+                     (:exclude ".dir-locals.el" "*-tests.el"))))
+
+
 (use-package smex
   :config
   (setq smex-save-file
@@ -203,7 +214,8 @@
 (use-package nix-mode)
 
 ;; terraform
-(use-package terraform-mode)
+(use-package terraform-mode
+  :custom (terraform-format-on-save t))
 
 ;; Useful for git
 (use-package ibuffer-vc)
