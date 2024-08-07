@@ -44,8 +44,9 @@
                       "gem \"pry\""
                       "gem \"robe\", \"0.8.3\", github: \"dgutov/robe\""
                       "eval_gemfile \"Gemfile\""))))
-    (with-environment-variables (("BUNDLE_GEMFILE" "Gemfile_ahobson"))
-      (shell-command "bundle install")))
+  (copy-file "Gemfile.lock" "Gemfile_ahobson.lock" t)
+  (with-environment-variables (("BUNDLE_GEMFILE" "Gemfile_ahobson"))
+    (shell-command "bundle install")))
 
 (defun my-inf-ruby-console-rails ()
   "Run inf-ruby-console-rails with RAILS_ENV set."
