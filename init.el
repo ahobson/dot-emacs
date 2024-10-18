@@ -97,8 +97,9 @@
   :hook (java-mode . (lambda ()
                        (lsp-deferred)))
   :config
-  (setq lsp-java-server-install-dir "/sshx:clouddesk:/home/hobsoand/src/jdtls")
-  (setq lsp-java-workspace-dir "/sshx:clouddesk:/home/hobsoand/.emacs.d/workspace"))
+  (setq lsp-java-jdt-download-url "https://download.eclipse.org/jdtls/milestones/1.40.0/jdt-language-server-1.40.0-202409261450.tar.gz")
+  (setq lsp-java-server-install-dir "/Users/hobsoand/src/jdtls/")
+  (setq lsp-java-workspace-dir "/Users/hobsoand/.emacs.d/workspace/"))
 
 (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
 
@@ -107,6 +108,8 @@
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
+         (ruby-mode . lsp-deferred)
+         (ruby-ts-mode . lsp-deferred)
          (js-mode . lsp-deferred)
          (web-mode . lsp-deferred)
          (go-mode . lsp-deferred)
@@ -114,7 +117,7 @@
          (sql-interactive-mode . lsp-deferred))
   :config
   (setq lsp-semgrep-metrics-enabled nil)
-  (setq lsp-disabled-clients '(semgrep-ls))
+  (setq lsp-disabled-clients '(semgrep-ls ruby-ls rubocop-ls))
   (setq lsp-prefer-flymake nil)
   (setq read-process-output-max (* 1024 1024))
   (setq gc-cons-threshold 1600000)
@@ -194,10 +197,11 @@
 (use-package inf-ruby)
 (use-package rspec-mode)
 (use-package ruby-test-mode)
-(use-package robe
-  :config
-  (add-hook 'ruby-mode-hook #'robe-mode)
-  (add-hook 'ruby-ts-mode-hook #'robe-mode))
+(use-package ruby-ts-mode)
+;; (use-package robe
+;;   :config
+;;   (add-hook 'ruby-mode-hook #'robe-mode)
+;;   (add-hook 'ruby-ts-mode-hook #'robe-mode))
 (use-package projectile-rails
   :after (projectile)
   :config

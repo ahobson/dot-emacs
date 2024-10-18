@@ -28,3 +28,5 @@ transient
 /dall-e/
 /tree-sitter/
 /.dap-breakpoints
+/eclipse.jdt.ls/
+/workspace/

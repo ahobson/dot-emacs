@@ -5,19 +5,19 @@
 ;; (when (fboundp 'lsp)
 ;;   (add-hook 'ruby-mode-hook #'lsp))
 
-(when (fboundp 'enh-ruby-mode)
-  (add-to-list 'auto-mode-alist
-               '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
-  (setq enh-ruby-bounce-deep-indent t)
-  (setq enh-ruby-deep-indent-paren t)
-  (setq enh-ruby-hanging-brace-deep-indent-level 1)
-  (setq enh-ruby-hanging-brace-indent-level 2)
-  (setq enh-ruby-hanging-indent-level 2)
-  (setq enh-ruby-hanging-paren-deep-indent-level 0)
-  (setq enh-ruby-hanging-paren-indent-level 0)
-  (define-key enh-ruby-mode-map (kbd "#") 'ruby-interpolate)
-  (add-hook 'enh-ruby-mode-hook 'my-turn-on-smartparens)
-  (add-hook 'enh-ruby-mode-hook 'my-turn-on-whitespace))
+;; (when (fboundp 'enh-ruby-mode)
+;;   (add-to-list 'auto-mode-alist
+;;                '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+;;   (setq enh-ruby-bounce-deep-indent t)
+;;   (setq enh-ruby-deep-indent-paren t)
+;;   (setq enh-ruby-hanging-brace-deep-indent-level 1)
+;;   (setq enh-ruby-hanging-brace-indent-level 2)
+;;   (setq enh-ruby-hanging-indent-level 2)
+;;   (setq enh-ruby-hanging-paren-deep-indent-level 0)
+;;   (setq enh-ruby-hanging-paren-indent-level 0)
+;;   (define-key enh-ruby-mode-map (kbd "#") 'ruby-interpolate)
+;;   (add-hook 'enh-ruby-mode-hook 'my-turn-on-smartparens)
+;;   (add-hook 'enh-ruby-mode-hook 'my-turn-on-whitespace))
 
 ;; ruby customizations
 (setq ruby-test-ruby-executables '("ruby"))
@@ -81,7 +81,22 @@
 (add-hook 'ruby-mode-hook
   (lambda ()
     (setq-local flycheck-command-wrapper-function
-                (lambda (command) (append '("bundle" "exec") command)))))
+                (lambda (command)
+                  (if lsp-ruby-lsp-use-bundler
+                      (append '("bundle" "exec") command)
+                    command)))))
+
+(when (fboundp 'ruby-ts-mode)
+  (define-key ruby-ts-mode-map (kbd "#") 'ruby-interpolate)
+  (add-hook 'ruby-ts-mode-hook 'my-turn-on-smartparens)
+  (add-hook 'ruby-ts-mode-hook 'my-turn-on-whitespace)
+  (add-hook 'ruby-ts-mode-hook
+            (lambda ()
+              (setq-local flycheck-command-wrapper-function
+                          (lambda (command)
+                            (if lsp-ruby-lsp-use-bundler
+                                (append '("bundle" "exec") command)
+                              command))))))
 
 (provide 'my-ruby)
 ;;; my-ruby.el ends here
