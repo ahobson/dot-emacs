@@ -88,6 +88,9 @@
 
 (use-package graphql-mode)
 
+;; kotlin for gradle build files
+(use-package kotlin-mode)
+
 (use-package lsp-pyright
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
@@ -197,7 +200,7 @@
 (use-package inf-ruby)
 (use-package rspec-mode)
 (use-package ruby-test-mode)
-(use-package ruby-ts-mode)
+;;(use-package ruby-ts-mode)
 ;; (use-package robe
 ;;   :config
 ;;   (add-hook 'ruby-mode-hook #'robe-mode)
@@ -321,8 +324,10 @@
 (setq dall-e-shell-openai-key chatgpt-shell-openai-key)
 
 ;; treesitter exploration
-(setq treesit-language-source-alist
-      '((ruby "https://github.com/tree-sitter/tree-sitter-ruby")))
+(use-package tree-sitter)
+(use-package tree-sitter-langs)
+;; (setq treesit-language-source-alist
+;;       '((ruby "https://github.com/tree-sitter/tree-sitter-ruby")))
 
 ;; mostly stolen from the old emacs starter kit
 (setq my-system-config (concat user-emacs-directory (system-name) ".el")

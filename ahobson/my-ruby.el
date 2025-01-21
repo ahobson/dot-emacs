@@ -86,7 +86,7 @@
                       (append '("bundle" "exec") command)
                     command)))))
 
-(when (fboundp 'ruby-ts-mode)
+(when (and (fboundp 'ruby-ts-mode) (fboundp 'ruby-ts-mode-map))
   (define-key ruby-ts-mode-map (kbd "#") 'ruby-interpolate)
   (add-hook 'ruby-ts-mode-hook 'my-turn-on-smartparens)
   (add-hook 'ruby-ts-mode-hook 'my-turn-on-whitespace)
