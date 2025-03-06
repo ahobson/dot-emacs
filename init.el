@@ -73,13 +73,9 @@
   (add-to-list 'company-backends 'company-emoji)
   (setq company-tooltip-align-annotations t))
 
-(use-package direnv
-  ;; :straight (direnv
-  ;;            :repo "siddharthverma314/emacs-direnv"
-  ;;            :fetcher git
-  ;;            :branch "master")
-  :config
-  (direnv-mode))
+;; try out envrc mode instead of direnv
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
 
 (use-package flycheck
   :config
