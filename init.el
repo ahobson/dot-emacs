@@ -225,7 +225,8 @@
 
 ;; Useful for git
 (use-package ibuffer-vc)
-(use-package git-commit)
+;; this is part of magit
+;;(use-package git-commit)
 
 (use-package deadgrep
   :bind ("C-c a" . 'deadgrep))
