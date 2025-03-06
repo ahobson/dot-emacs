@@ -91,6 +91,7 @@
 ;; kotlin for gradle build files
 (use-package kotlin-mode)
 
+;;(use-package lsp-mode)
 (use-package lsp-pyright
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
@@ -257,7 +258,9 @@
 (use-package dockerfile-mode)
 (use-package smartparens)
 (use-package yaml-mode)
-(use-package scss-mode)
+
+;; not working in emacs 30, not sure why
+;;(use-package scss-mode)
 (use-package sass-mode)
 (use-package robe-mode
   :disabled)
