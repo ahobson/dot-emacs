@@ -178,10 +178,8 @@
   :hook (web-mode . setup-web-jtsx)
   :mode "\\.[jt]sx\\'")
 
-(use-package jest
-  :after (typescript-mode)
-  :config
-  (setq jest-executable "jest"))
+(use-package jest-test-mode
+  :after (typescript-mode))
 
 ;; python
 ;;(use-package jedi)
