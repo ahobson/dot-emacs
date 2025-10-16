@@ -8,6 +8,9 @@
 (if (file-exists-p (expand-file-name "~/.nix-profile/bin"))
     (add-to-list 'exec-path (expand-file-name "~/.nix-profile/bin")))
 
+(if (file-exists-p (expand-file-name "~/.local/bin"))
+    (add-to-list 'exec-path (expand-file-name "~/.local/bin")))
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -77,6 +80,9 @@
 (use-package envrc
   :hook (after-init . envrc-global-mode))
 
+;; (use-package dot-env
+;;   :config (dot-env-config))
+
 (use-package flycheck
   :config
   :init (global-flycheck-mode))
@@ -91,7 +97,8 @@
 (use-package lsp-pyright
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
-                          (lsp-deferred))))
+                          (lsp-deferred)))
+  :custom (lsp-pyright-langserver-command "basedpyright"))
 
 (use-package lsp-java
   :hook (java-mode . (lambda ()
@@ -243,7 +250,15 @@
 (defun setup-go-mode ()
   "Setup go mode."
   (setq gofmt-command "goimports")
-  (add-hook 'before-save-hook 'gofmt-before-save))
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (flycheck-add-next-checker 'lsp 'golangci-lint))
+
+(use-package go-flycheck
+  :straight (go-flycheck :type git :host github :repo "dougm/goflymake"))
+
+(use-package flycheck-golangci-lint
+  :ensure t
+  :hook (go-mode . flycheck-golangci-lint-setup))
 
 (use-package go-mode
   :hook (go-mode . setup-go-mode))
