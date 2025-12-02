@@ -115,4 +115,4 @@
  ("yaml-mode" . "63b637f846411806ae47e63adc06fe9427be1131")
  ("yaml.el" . "70c4fcead97e9bd6594e418c922ae769818f4245")
  ("yasnippet" . "5cbdbf0d2015540c59ed8ee0fcf4788effdf75b6"))
-:gamma
+:epsilon
