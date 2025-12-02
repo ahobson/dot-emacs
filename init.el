@@ -95,9 +95,6 @@
 
 ;;(use-package lsp-mode)
 (use-package lsp-pyright
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp-deferred)))
   :custom (lsp-pyright-langserver-command "basedpyright"))
 
 (use-package lsp-java
@@ -115,6 +112,7 @@
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
          (ruby-mode . lsp-deferred)
          (ruby-ts-mode . lsp-deferred)
          (js-mode . lsp-deferred)
@@ -196,6 +194,11 @@
 ;; don't want all of elpy, so maybe?
 (use-package elpy
   :hook (python-mode . (lambda () (local-set-key (kbd "C-c C-;") 'elpy-test))))
+(use-package poetry)
+;; pet seems to slow opening files down A LOT
+;; (use-package pet
+;;   :config
+;;   (add-hook 'python-base-mode-hook 'pet-mode -10))
 
 ;; ruby
 
