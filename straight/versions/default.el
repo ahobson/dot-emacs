@@ -100,7 +100,7 @@
  ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")
  ("spinner" . "fa117f0893788f3fe24673715a6b83bb34d238dd")
  ("ssass-mode" . "96f557887ad97a0066a60c54f92b7234b8407016")
- ("straight.el" . "ff63b154bef1ef8d92c141bd189001bff74f6982")
+ ("straight.el" . "4b6289f42a4da0c1bae694ba918b43c72daf0330")
  ("terraform-mode" . "a645c32a8f0f0d04034262ae5fea330d5c7a33c6")
  ("transient" . "7b8f01dff1a345ef93303f2eaaa068630525c60b")
  ("tree-sitter-langs" . "2ff446b4b813543b7a90015808d38f362f039b10")
