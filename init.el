@@ -5,11 +5,16 @@
 (mapc (lambda (dir) (add-to-list 'exec-path dir))
       `("/usr/local/sbin" "/usr/local/bin" ,(expand-file-name "~/bin")))
 
-(if (file-exists-p (expand-file-name "~/.nix-profile/bin"))
-    (add-to-list 'exec-path (expand-file-name "~/.nix-profile/bin")))
+(when (file-exists-p (expand-file-name "~/.nix-profile/bin"))
+  (add-to-list 'exec-path (expand-file-name "~/.nix-profile/bin")))
 
-(if (file-exists-p (expand-file-name "~/.local/bin"))
-    (add-to-list 'exec-path (expand-file-name "~/.local/bin")))
+(when (file-exists-p (expand-file-name "~/.local/bin"))
+  (add-to-list 'exec-path (expand-file-name "~/.local/bin"))
+  (setenv "PATH" (concat (expand-file-name "~/.local/bin") path-separator (getenv "PATH"))))
+
+(when (file-exists-p (expand-file-name "~/.pyenv/shims"))
+  (add-to-list 'exec-path (expand-file-name "~/.pyenv/shims"))
+  (setenv "PATH" (concat (expand-file-name "~/.pyenv/shims") path-separator (getenv "PATH"))))
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -197,6 +202,16 @@
 ;; don't want all of elpy, so maybe?
 (use-package elpy
   :hook (python-mode . (lambda () (local-set-key (kbd "C-c C-;") 'elpy-test))))
+(use-package pyenv-mode)
+(defun projectile-pyenv-mode-set ()
+  "Set pyenv version matching project name."
+  (let ((project (projectile-project-name)))
+    (if (member project (pyenv-mode-versions))
+        (pyenv-mode-set project)
+      (pyenv-mode-unset))))
+
+(add-hook 'projectile-after-switch-project-hook 'projectile-pyenv-mode-set)
+
 (use-package poetry)
 ;; pet seems to slow opening files down A LOT
 ;; (use-package pet
