@@ -134,6 +134,13 @@
 
 (eval-after-load 'magit
   '(define-key magit-mode-map (kbd "C-c v")
-     #'my-visit-pull-request-url))
+               #'my-visit-pull-request-url))
+
+(defun my-vterm ()
+  "Open vterm with new session named for currect directory"
+  (interactive)
+  (vterm (format "*vterm-%s*"
+                 (message (file-name-nondirectory
+                           (directory-file-name default-directory))))))
 
 ;;; 01defuns.el ends here
