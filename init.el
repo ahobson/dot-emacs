@@ -134,8 +134,12 @@
   (setq lsp-prefer-flymake nil)
   (setq read-process-output-max (* 1024 1024))
   (setq gc-cons-threshold 1600000)
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pre-commit-cache\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pre-commit-cache[/\\\\]")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.gopath\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pants.d\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.mypy_cache\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]__pycache__\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.npmglobal\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.log\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.drew\\'")
@@ -156,6 +160,17 @@
   :commands lsp lsp-deferred)
 (use-package lsp-ui
   :commands lsp-ui-mode)
+
+
+;; allow dir-local configuration of lsp ignored directories
+(defvar lsp-file-watch-ignored-directories-additional nil
+  "Additional ignored directories added to lsp-file-watch-ignored-directories.")
+
+(put 'lsp-file-watch-ignored-directories-additional 'safe-local-variable #'lsp--string-listp)
+
+(add-function :around (symbol-function 'lsp-file-watch-ignored-directories)
+              (lambda (orig)
+                (append lsp-file-watch-ignored-directories-additional (funcall orig))))
 
 ;; clojure editing
 (use-package cider)
