@@ -136,6 +136,7 @@
   (setq gc-cons-threshold 1600000)
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pre-commit-cache[/\\\\]")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.gopath\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devbox\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pants.d\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.mypy_cache\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]__pycache__\\'")
