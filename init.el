@@ -150,6 +150,8 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright-report\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright/html-report\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright/results\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]clinical/notebooks\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist/export/python/virtualenvs")
   (setq lsp-completion-provider :capf)
 
   ;; trying out sql
