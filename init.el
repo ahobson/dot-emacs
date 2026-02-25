@@ -54,6 +54,9 @@
   :config
   (flx-ido-mode t))
 
+(use-package hideshowvis
+  :hook (python-mode . hideshowvis-enable))
+
 ;;
 ;; devbox global add cmake libtool mktemp
 ;; ln -s =libtool bin/glibtool

@@ -47,6 +47,7 @@
  ("graphql-mode" . "80e9ac8020f7a4a8a963136698eb97a9fca28f7d")
  ("haml-mode" . "bf5b6c11b1206759d2b28af48765e04882dd1fc4")
  ("hcl-mode" . "37f2cb1bf6fb51fbf99d4fac256298fcd6d1dd24")
+ ("hideshowvis" . "cfae9e1f57804a557b81bb1ad778ef355877bc72")
  ("ht.el" . "1c49aad1c820c86f7ee35bf9fff8429502f60fef")
  ("hydra" . "59a2a45a35027948476d1d7751b0f0215b1e61aa")
  ("ibuffer-vc" . "5fa6aea09bc67f71ea743302d609f459967b1e81")
