@@ -154,7 +154,8 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright/html-report\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright/results\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]clinical/notebooks\\'")
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist/export/python/virtualenvs")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist/export/python/virtualenvs\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]scratch/dev-workspace\\'")
   (setq lsp-completion-provider :capf)
 
   ;; trying out sql
@@ -219,7 +220,10 @@
 ;;(use-package jedi)
 ;; not working in emacs 29 nightly
 ;;(use-package python-pytest)
-(use-package python-black)
+(use-package python-black
+  :after python
+  :hook (python-mode . python-black-on-save-mode-enable-dwim))
+;;
 ;; don't want all of elpy, so maybe?
 (use-package elpy
   :hook (python-mode . (lambda () (local-set-key (kbd "C-c C-;") 'elpy-test))))
