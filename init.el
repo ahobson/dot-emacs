@@ -364,11 +364,11 @@
          ([C-s-down] . (lambda () (interactive) (windmove-down -1)))))
 
 (use-package shell-maker
-  :straight (:host github :repo "xenodium/chatgpt-shell" :files ("shell-maker.el")))
+  :straight (:host github :repo "xenodium/shell-maker"))
 
-(use-package chatgpt-shell
-  :requires shell-maker
-  :straight (:host github :repo "xenodium/chatgpt-shell" :files ("chatgpt-shell.el" "dall-e-shell.el")))
+;; (use-package chatgpt-shell
+;;   :requires shell-maker
+;;   :straight (:host github :repo "xenodium/chatgpt-shell" :files ("chatgpt-shell.el" "dall-e-shell.el")))
 
 ;; security add-generic-password -a $LOGNAME -s openapi-key -w "thekey"
 (setq chatgpt-shell-openai-key
