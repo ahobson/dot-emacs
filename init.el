@@ -106,7 +106,9 @@
 
 ;;(use-package lsp-mode)
 (use-package lsp-pyright
-  :custom (lsp-pyright-langserver-command "basedpyright"))
+  :custom (lsp-pyright-langserver-command "basedpyright")
+  :config
+  (setq lsp-pyright-multi-root nil))
 
 (use-package lsp-java
   :hook (java-mode . (lambda ()
@@ -132,18 +134,19 @@
          (sql-mode .lsp-deferred)
          (sql-interactive-mode . lsp-deferred))
   :config
+  (setq lsp-apply-edits-after-file-operations nil)
   (setq lsp-semgrep-metrics-enabled nil)
   (setq lsp-disabled-clients '(semgrep-ls ruby-ls rubocop-ls))
   (setq lsp-prefer-flymake nil)
   (setq read-process-output-max (* 1024 1024))
   (setq gc-cons-threshold 1600000)
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pre-commit-cache[/\\\\]")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.agent-shell")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.gopath\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devbox\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pants.d\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.mypy_cache\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]__pycache__\\'")
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.npmglobal\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.log\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.drew\\'")
@@ -154,8 +157,10 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright/html-report\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright/results\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]clinical/notebooks\\'")
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist/export/python/virtualenvs\\'")
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]scratch/dev-workspace\\'")
+  ;; (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist/export/python/virtualenvs\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]scratch\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\].databricks\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist/export/python/virtualenvs/python-default/3.12.11\\'")
   (setq lsp-completion-provider :capf)
 
   ;; trying out sql
@@ -175,9 +180,9 @@
 
 (put 'lsp-file-watch-ignored-directories-additional 'safe-local-variable #'lsp--string-listp)
 
-(add-function :around (symbol-function 'lsp-file-watch-ignored-directories)
-              (lambda (orig)
-                (append lsp-file-watch-ignored-directories-additional (funcall orig))))
+;; (add-function :around (symbol-function 'lsp-file-watch-ignored-directories)
+;;               (lambda (orig)
+;;                 (append lsp-file-watch-ignored-directories-additional (funcall orig))))
 
 ;; clojure editing
 (use-package cider)
@@ -222,7 +227,8 @@
 ;;(use-package python-pytest)
 (use-package python-black
   :after python
-  :hook (python-mode . python-black-on-save-mode-enable-dwim))
+  :hook (python-mode . (lambda () (progn
+                               (python-black-on-save-mode)))))
 ;;
 ;; don't want all of elpy, so maybe?
 (use-package elpy
