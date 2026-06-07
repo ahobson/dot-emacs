@@ -5,6 +5,7 @@
   (add-hook 'go-mode-hook #'lsp))
 
 (add-hook 'go-mode-hook '(lambda ()
+                           (envrc-mode)
                            (setq whitespace-line-column 400)))
 
 (defun my-go-test--get-current-subtest-info ()
@@ -30,6 +31,11 @@
 
 (eval-after-load 'go-mode
   '(define-key go-mode-map (kbd "C-c C-c") 'my-gotest-current-test))
+
+(advice-add 'flycheck-golangci-lint--parse-version :around #'envrc-propagate-environment)
+
+;; explicitly set so version parsing seems to work
+(setq flycheck-golangci-lint-executable "golangci-lint")
 
 (provide 'my-golang)
 ;;; my-golang.el ends here

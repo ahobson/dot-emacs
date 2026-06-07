@@ -88,8 +88,22 @@
   (setq company-tooltip-align-annotations t))
 
 ;; try out envrc mode instead of direnv
+;; (use-package envrc
+;;   :hook (after-init . envrc-global-mode))
+
 (use-package envrc
-  :hook (after-init . envrc-global-mode))
+  :straight (envrc
+             :type git :host codeberg
+             :repo "pastor/envrc")
+  :bind
+  (:map
+   envrc-mode-map
+   ("C-c e" . envrc-command-map))
+  :config
+  (setq envrc-indicator '(" [" (:eval (envrc--status)) "]"))
+  :init
+  (add-hook 'after-init-hook #'envrc-global-mode 99))
+
 
 ;; (use-package dot-env
 ;;   :config (dot-env-config))
@@ -297,6 +311,13 @@
 
 ;; golang
 
+(use-package inheritenv
+  :ensure t
+  :config
+  (inheritenv-add-advice #'compilation)
+  (inheritenv-add-advice #'process-lines)
+  (inheritenv-add-advice #'shell-command-to-string))
+
 (defun setup-go-mode ()
   "Setup go mode."
   (setq gofmt-command "goimports")
@@ -387,8 +408,9 @@
 (setq dall-e-shell-openai-key chatgpt-shell-openai-key)
 
 ;; treesitter exploration
-(use-package tree-sitter)
-(use-package tree-sitter-langs)
+;; not needed in emacs 30
+;; (use-package tree-sitter)
+;; (use-package tree-sitter-langs)
 ;; (setq treesit-language-source-alist
 ;;       '((ruby "https://github.com/tree-sitter/tree-sitter-ruby")))
 
