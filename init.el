@@ -156,8 +156,6 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright-report\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright/html-report\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]playwright/results\\'")
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]clinical/notebooks\\'")
-  ;; (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist/export/python/virtualenvs\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]scratch\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\].databricks\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]dist/export/python/virtualenvs/python-default/3.12.11\\'")
@@ -180,9 +178,9 @@
 
 (put 'lsp-file-watch-ignored-directories-additional 'safe-local-variable #'lsp--string-listp)
 
-;; (add-function :around (symbol-function 'lsp-file-watch-ignored-directories)
-;;               (lambda (orig)
-;;                 (append lsp-file-watch-ignored-directories-additional (funcall orig))))
+(add-function :around (symbol-function 'lsp-file-watch-ignored-directories)
+              (lambda (orig)
+                (append lsp-file-watch-ignored-directories-additional (funcall orig))))
 
 ;; clojure editing
 (use-package cider)
