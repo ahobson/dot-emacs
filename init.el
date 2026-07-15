@@ -418,9 +418,6 @@ Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
          ([C-s-right] . (lambda () (interactive) (windmove-right -1)))
          ([C-s-down] . (lambda () (interactive) (windmove-down -1)))))
 
-(use-package shell-maker
-  :straight (:host github :repo "xenodium/shell-maker"))
-
 ;; (use-package chatgpt-shell
 ;;   :requires shell-maker
 ;;   :straight (:host github :repo "xenodium/chatgpt-shell" :files ("chatgpt-shell.el" "dall-e-shell.el")))

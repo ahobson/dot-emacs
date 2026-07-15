@@ -100,7 +100,7 @@
  ("sass-mode" . "247a0d4b509f10b28e4687cd8763492bca03599b")
  ("seq" . "da86da9bf111f68fb81efd466d76d53af5aebc00")
  ("sesman" . "e0f555f963c9f02f8e4a50e06fc353eb4c15ee77")
- ("shell-maker" . "11f4a9913e7625f122625dd89d668ad5c93cf151")
+ ("shell-maker" . "071c6df3ca22a2f4c0daa689848ac9bd21bf4e2b")
  ("smartparens" . "f59a40d54f35299007c396bd667ce3e9ec4714e3")
  ("smex" . "55aaebe3d793c2c990b39a302eb26c184281c42c")
  ("spinner" . "fa117f0893788f3fe24673715a6b83bb34d238dd")
