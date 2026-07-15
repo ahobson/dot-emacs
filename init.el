@@ -437,6 +437,8 @@ Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
 
 (setq dall-e-shell-openai-key chatgpt-shell-openai-key)
 
+(use-package agent-shell)
+
 ;; treesitter exploration
 ;; not needed in emacs 30
 ;; (use-package tree-sitter)

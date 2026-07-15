@@ -1,5 +1,7 @@
 (("Highlight-Indentation-for-Emacs" . "d88db4248882da2d4316e76ed673b4ac1fa99ce3")
  ("ace-window" . "77115afc1b0b9f633084cf7479c767988106c196")
+ ("acp.el" . "5140f4121156707245567b8fc3072d4c3b5c867f")
+ ("agent-shell" . "102ac73a89f13b49b49542e84abfbd1baf3c2573")
  ("avy" . "be612110cb116a38b8603df367942e2bb3d9bdbe")
  ("bind-key" . "ec9d0505febe2556b47457355763f5f1408a35ac")
  ("bui.el" . "f3a137628e112a91910fd33c0cff0948fa58d470")
