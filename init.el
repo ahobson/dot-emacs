@@ -73,6 +73,39 @@
                      ("integration" "integration/*")
                      (:exclude ".dir-locals.el" "*-tests.el"))))
 
+(use-package ghostel
+  :bind (("C-x m" . ghostel)
+         :map ghostel-semi-char-mode-map
+         ("C-s"  . consult-line)
+         ("M-<backspace>" . ghostel-backward-kill-word)
+         ;; ;; I'm used to go up/down the shell history with M-n/p from eshell
+         ;; ;; Simulate this behavior in ghostel by sending C-p and C-n
+         ("M-p" . (lambda () (interactive) (ghostel-send-key "p" "ctrl")))
+         ("M-n" . (lambda () (interactive) (ghostel-send-key "n" "ctrl")))
+         :map project-prefix-map
+         ("t" . ghostel-project)
+         ("M" . ghostel-project-list-buffers))
+  :config
+  (defun ghostel-send-C-k-and-kill ()
+    "Send `C-k' to ghostel.
+Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
+    (interactive)
+    (kill-ring-save (point) (line-end-position))
+    (ghostel-send-key "k" "ctrl"))
+
+  (add-to-list 'project-switch-commands '(ghostel-project "Ghostel") t)
+  (add-to-list 'project-switch-commands '(ghostel-project-list-buffers "Ghostel buffers") t)
+  (add-to-list 'ghostel-eval-cmds '("magit-status-setup-buffer" magit-status-setup-buffer)))
+
+;; (use-package ghostel-eshell
+;;   :hook (eshell-load . ghostel-eshell-visual-command-mode))
+
+;; (use-package ghostel-compile
+;;   :hook (after-init . ghostel-compile-global-mode))
+
+;; (use-package ghostel-comint
+;;   :hook (after-init . ghostel-comint-global-mode))
+
 
 (use-package smex
   :config
@@ -312,7 +345,6 @@
 ;; golang
 
 (use-package inheritenv
-  :ensure t
   :config
   (inheritenv-add-advice #'compilation)
   (inheritenv-add-advice #'process-lines)
@@ -328,7 +360,6 @@
   :straight (go-flycheck :type git :host github :repo "dougm/goflymake"))
 
 (use-package flycheck-golangci-lint
-  :ensure t
   :hook (go-mode . flycheck-golangci-lint-setup))
 
 (use-package go-mode
@@ -369,7 +400,6 @@
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 
 (use-package modus-themes
-  :ensure t
   :config
   ;; Add all your customizations prior to loading the themes
   (setq modus-themes-common-palette-overrides modus-themes-preset-overrides-intense
