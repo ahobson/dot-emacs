@@ -1,3 +1,7 @@
+;;; package -- legacy dev machine init file
+;;; Commentary:
+;;; Trying out config
+;;; Code:
 (setq my-user-config (concat user-emacs-directory "ahobson.el"))
 (setq my-user-dir (concat user-emacs-directory "ahobson"))
 (setenv "SEMGREP_SEND_METRICS" "off")
@@ -17,3 +21,5 @@
    (make-lsp-client :new-connection (lsp-stdio-connection "barium")
                     :activation-fn (lsp-activate-on "brazil-conf")
                     :server-id 'barium)))
+
+;;; 6c7e67c7cf41.el ends here
