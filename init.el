@@ -41,6 +41,8 @@
   :config
   ;; ido-mode is like magic pixie dust!
   (ido-mode t)
+  (ido-everywhere 1)
+  (ido-ubiquitous-mode 1)
   (setq ido-enable-prefix nil
         ido-enable-flex-matching t
         ido-auto-merge-work-directories-length nil
@@ -340,7 +342,8 @@ Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
 ;; git
 (use-package magit-popup)
 (use-package magit
-  :config (global-git-commit-mode))
+  :config
+  (global-git-commit-mode))
 
 ;; golang
 
