@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;;; package -- legacy dev machine init file
 ;;; Commentary:
 ;;; Trying out config

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 ;;; package -- ahobson init file
 ;;; Commentary:
 ;;; Trying out config
