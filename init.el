@@ -154,11 +154,11 @@ Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
 ;; kotlin for gradle build files
 (use-package kotlin-mode)
 
-;;(use-package lsp-mode)
+;; must be set before lsp-pyright is loaded
+(setq lsp-pyright-multi-root nil)
 (use-package lsp-pyright
   :custom (lsp-pyright-langserver-command "basedpyright")
-  :config
-  (setq lsp-pyright-multi-root nil))
+)
 
 (use-package lsp-java
   :hook (java-mode . (lambda ()
