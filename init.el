@@ -172,6 +172,9 @@ Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
 
 (use-package lsp-treemacs)
 
+;; rust
+(use-package rust-mode)
+
 ;; lsp
 (use-package lsp-mode
   :hook ((typescript-mode . lsp-deferred)
@@ -181,6 +184,7 @@ Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
          (js-mode . lsp-deferred)
          (web-mode . lsp-deferred)
          (go-mode . lsp-deferred)
+         (rust-mode . lsp-deferred)
          (sql-mode .lsp-deferred)
          (sql-interactive-mode . lsp-deferred))
   :config
