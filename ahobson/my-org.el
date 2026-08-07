@@ -2,10 +2,14 @@
 ;;; Commentary:
 ;;; my-org
 ;;; Code:
-(when (not org-directory)
-  (setq org-directory "~/Library/Mobile Documents/com~apple~CloudDocs/org"))
+
+(when (boundp 'org-directory)
+  (when (not org-directory)
+    (setq org-directory "~/Library/Mobile Documents/com~apple~CloudDocs/org"))
+  (setq org-agenda-files (concat (file-name-as-directory org-directory) "agenda-files")))
+
+
 (setq org-catch-invisible-edits 'smart)
-(setq org-agenda-files (concat (file-name-as-directory org-directory) "agenda-files"))
 (setq org-agenda-window-setup 'current-window)
 (setq org-todo-keywords '("TODO(t)" "FOLLOWUP(f)" "ICEBOX(i)" "DONE(d)"))
 
