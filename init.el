@@ -198,6 +198,7 @@ Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.agent-shell")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.gopath\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devbox\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.embuild\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.pants.d\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.mypy_cache\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]__pycache__\\'")
