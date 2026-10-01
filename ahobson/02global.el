@@ -18,7 +18,7 @@
         (set-fontset-font "fontset-default" 'unicode
                           "Apple Color Emoji" nil 'prepend))
     (cond ((x-list-fonts "SF Mono")
-           (set-face-attribute 'default nil :font "SF Mono" :height 120))
+           (set-face-attribute 'default nil :font "SF Mono" :height 160))
 
           ((x-list-fonts "Inconsolata")
            (set-face-attribute 'default nil :font "Inconsolata" :height 130))
